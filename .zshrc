@@ -1,6 +1,7 @@
 ## set aliases
-alias ll='ls -laF --color=tty'
-alias ls='ls -l --color=tty'
+alias ll='/bin/ls -laF --color=tty'
+alias ls='/bin/ls -l --color=tty'
+alias l='/bin/ls -F --color=tty'
 alias ..='cd ..'
 alias ...='cd ~'
 alias s='makeScreen'
@@ -9,7 +10,13 @@ alias sr='screen -r'
 alias vi='/usr/bin/vim'
 alias pmversion='perl -le '"'"'for $module (@ARGV) { eval "use $module"; print "$module ", ${"$module\::VERSION"} || "not found" }'"'"
 
-## end aliases
+alias -g G='| grep '
+alias -g L='|less'
+alias -g T='|tail -f'
+
+## set options for zsh
+autoload -U compinit
+setopt COMPLETE_IN_WORD
 setopt AUTO_CD
 
 # set terminal title including current directory
@@ -20,7 +27,6 @@ case "${TERM}" in
     }
     ;;
 esac
-
 
 case ${UID} in
 0)
@@ -36,6 +42,15 @@ case ${UID} in
     }
     ;;
 esac
+
+if [ "$TERM" = "screen" ]
+then
+    preexec(){
+        emulate -L zsh
+        local -a cmd; cmd=(${(z)2})
+        echo -n "^[k$cmd[1]:t^[\\"
+    }
+fi
 
 ## display color
 function pcolor() {
