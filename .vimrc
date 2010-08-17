@@ -22,6 +22,13 @@ set laststatus=2
 set statusline=%y%{GetStatusEx()}\ 0x%B(%b)%F%m%r%=<%c:%l>
 
 imap <C-j> <Esc>
+imap <C-k> <C-m>
+imap <silent> <C-D><C-D> <C-R>=strftime("%Y-%m-%d")<CR>
+
+" set popup color
+hi Pmenu ctermbg=4
+hi PmenuSel ctermbg=4
+hi PMenuSbar ctermbg=4
 
 function! GetStatusEx()
 	let str = ''
@@ -61,6 +68,40 @@ function! PerlCritic()
     set grepformat=%f:%l:%c:m
     set grepprg=perlcritic\ -2\ -verbose\ 1\ %
 endfunction
+
+" " JavaScript setting
+" autocmd BufRead,BufNewFile *.js call MyJavaScriptSettings( )
+" function MyJavaScriptSettings()
+"     set filetype=javascript
+"     set omnifunc=javascriptcomplete#CompleteJS
+"     set smartindent
+"     set tabstop=2
+"     set shiftwidth=2
+" "    let g:AutoComplPop_CompleteOption='.,w,b,u,t,i,k~/.vim/dict/js.dict'
+"     let g:acp_behaviorKeywordLength=3
+"     let g:acp_completeOption='.,w,b,u,t,i,k~/.vim/dict/js.dict' " acp setting
+" endfunction
+" 
+" " css setting
+" autocmd BufRead,BufNewFile *.css call MyCSSSettings()
+" function MyCSSSettings()
+"     set filetype=css
+"     set tabstop=2
+"     set shiftwidth=2
+"     set nocindent
+" "    set omnifunc=acp#meetsForCssOmni
+"     set omnifunc=csscomplete#CompleteCSS
+"     let g:acp_completeOption='.,w,b,u,t,i,k~/.vim/dict/css.dict' " acp setting
+" endfunction
+" 
+" " html setting
+" autocmd BufRead,BufNewFile *.html call MyHTMLSettings()
+" function MyHTMLSettings()
+"     set filetype=html
+"     set omnifunc=htmlcomplete#CompleteTags
+" endfunction
+
+
 
 au BufRead,BufNewFile *.thtml,*.ctp,*.html setfiletype html
 au FileType html call SetHtmlSurround()
