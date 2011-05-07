@@ -12,6 +12,7 @@ Bundle 'surround.vim'
 Bundle 'neocomplcache'
 Bundle 'tlib'
 Bundle 'tSkeleton'
+Bundle 'nginx.vim'
 
 filetype plugin indent on
 
