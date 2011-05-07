@@ -1,13 +1,30 @@
 "********************************************************
+" Vundle Setting
+"********************************************************
+set nocompatible
+filetype off
+set rtp+=~/.vim/vundle.git/
+call vundle#rc()
+
+Bundle 'Align'
+Bundle 'EnhCommentify.vim'
+Bundle 'surround.vim'
+Bundle 'neocomplcache'
+Bundle 'tlib'
+Bundle 'tSkeleton'
+
+filetype plugin indent on
+
+"********************************************************
 " install plugins
 " -------------------------------------------------------
-" Align.vim
+" Align
 "   http://www.vim.org/scripts/script.php?script_id=294
 " EnhCommentify.vim
 "   http://www.vim.org/scripts/script.php?script_id=23
 " surround.vim
 "   http://www.vim.org/scripts/script.php?script_id=1697
-" neocompcache.vim
+" neocomplcache
 "   http://www.vim.org/scripts/script.php?script_id=2620
 "********************************************************
 
@@ -26,6 +43,8 @@ set incsearch
 set hlsearch
 set ambiwidth=double
 set backspace=indent,eol,start
+
+hi Comment ctermfg=lightcyan
 
 "imap <c-k> <c-m>
 imap <c-j> <Esc>
@@ -86,6 +105,14 @@ function MyHTMLSetting()
 endfunction
 
 "********************
+" html setting
+"********************
+autocmd BufRead,BufNewFile *.pl call MyPERLSetting()
+function! MyPERLSetting()
+    set filetype=perl
+endfunction
+
+"********************
 " surround.vim
 "********************
 function! CheckSurroundPlugin()
@@ -103,7 +130,7 @@ let g:tskelUserName="******"
 let g:tskelUserEmail="******"
 
 "********************
-" neocompcache.vim
+" neocomplcache.vim
 "********************
 let g:neocomplcache_enable_at_startup=1
 let g:neocomplcache_enable_smart_case=1
