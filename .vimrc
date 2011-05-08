@@ -52,6 +52,11 @@ hi Comment ctermfg=lightcyan
 imap <c-j> <Esc>
 imap <silent> <c-d><c-d> <c-r>=strftime("%Y-%m-%d")<CR>
 
+onoremap ) t)
+onoremap ( t(
+vnoremap ) t)
+vnoremap ( t(
+
 "********************
 " status line setting
 "********************
