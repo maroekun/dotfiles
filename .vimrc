@@ -45,6 +45,7 @@ set incsearch
 set hlsearch
 set ambiwidth=double
 set backspace=indent,eol,start
+set scrolloff=5
 
 hi Comment ctermfg=lightcyan
 
