@@ -1,28 +1,20 @@
-## set export
-## For macports
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-export MANPATH=/opt/local/man:$MANPATH
-## For android-sdk tools
-export PATH=$PATH:/Applications/android-sdk-mac_x86/tools
-export LSCOLORS="DxGxcxdxCxegedabagacad"
-
 ## set aliases
-alias ll='/bin/ls -laF -G'
-alias ls='/bin/ls -l -G'
-alias l='/bin/ls -F -G'
+alias ll='/bin/ls -laF --color=tty'
+alias ls='/bin/ls -l --color=tty'
+alias l='/bin/ls -F --color=tty'
 alias ..='cd ..'
 alias ...='cd ~'
 alias ms='makeScreen'
 alias sl='screen -ls'
 alias sr='screen -r'
 alias vi='/usr/bin/vim'
-alias github='cd ~/git/github/'
 alias pmversion='perl -le '"'"'for $module (@ARGV) { eval "use $module"; print "$module ", ${"$module\::VERSION"} || "not found" }'"'"
 alias perlsource="PAGER=vim perldoc -m "
 
 alias -g G='| grep --color=auto '
 alias -g L='|less'
 alias -g T='|tail -f'
+alias -g V='|vim -'
 
 ## set options for zsh
 #fpath=($HOME/.zsh/functions(N-) $fpath)
@@ -51,7 +43,7 @@ case ${UID} in
     precmd() {
         PROMPT_COLOR="$[31+(${PROMPT_COLOR}-30)%7]";
         PROMPT="%{[${PROMPT_COLOR}m%}%U%n@$HOST""%u%{[m%} %(!.#.$)";
-        RPROMPT="[%{[${PROMPT_COLOR}m%}%~%{[m%}]";
+        RPROMPT="[`rprompt-git-current-branch`%{[${PROMPT_COLOR}m%}%~%{[m%}]"
     }
     ;;
 esac
@@ -85,26 +77,6 @@ function makeScreen() {
     fi
 }
 
-#function printKnownHosts() {
-#    if [ -f $HOME/.ssh/known_hosts ];then
-#        cat $HOME/.ssh/known_hosts | tr ',' ' ' | cut -d' ' -f1
-#    fi
-#}
-#_cache_hosts=($(printKnownHosts))
-#function choseCompletionSSH() {
-#    if [ -f $HOME/.ssh/config ]; then
-#        cat $HOME/.ssh/config | grep -v '#' | grep 'Host ' | awk '{print $2}'
-#    fi
-#}
-#_cache_hosts=($(choseCompletionSSH))
-#if [ -f $HOME/.ssh/known_hosts ]; then
-#    hostnames=(`perl -ne 'if (/^([a-zA-Z0-9.-]+)/) { print "$1\n";}' ~/.ssh/known_hosts`)
-#elif [ -f /etc/hosts ]; then
-#    hostnames=(`awk '{print $2}' /etc/hosts`)
-#else
-#    hostnames=(localhost)
-#fi
-
 perlpath () {
     for MODULE in $@
     do
@@ -128,5 +100,31 @@ cpan-uninstall() {
     done
 }
 
-source /Users/maroekun/perl5/perlbrew/etc/bashrc
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+autoload -Uz VCS_INFO_get_data_git; VCS_INFO_get_data_git 2> /dev/null
+
+function rprompt-git-current-branch {
+        local name st color gitdir action
+        if [[ "$PWD" =~ '/¥.git(/.*)?$' ]]; then
+                return
+        fi
+        name=$(basename "`git symbolic-ref HEAD 2> /dev/null`")
+        if [[ -z $name ]]; then
+                return
+        fi
+
+        gitdir=`git rev-parse --git-dir 2> /dev/null`
+        action=`VCS_INFO_git_getaction "$gitdir"` && action="($action)"
+
+        st=`git status 2> /dev/null`
+        if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
+                color=%F{green}
+        elif [[ -n `echo "$st" | grep "^nothing added"` ]]; then
+                color=%F{yellow}
+        elif [[ -n `echo "$st" | grep "^# Untracked"` ]]; then
+                color=%B%F{red}
+        else
+                 color=%F{red}
+        fi
+        echo "$color$name$action%f%b "
+}
+setopt prompt_subst
