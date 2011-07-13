@@ -44,8 +44,11 @@ set cindent
 set incsearch
 set hlsearch
 set ambiwidth=double
+set formatoptions+=mM
 set backspace=indent,eol,start
 set scrolloff=5
+
+command Nginx : call Nginx()
 
 hi Comment ctermfg=lightcyan
 
@@ -89,31 +92,31 @@ endfunction
 "********************
 " html setting
 "********************
-autocmd BufRead,BufNewFile *.html call MyHTMLSetting()
+autocmd BufRead,BufNewFile *.html,*.tt call MyHTMLSetting()
 function MyHTMLSetting()
     set filetype=html
     if CheckSurroundPlugin()
-        let b:surround_49 = "<h1>\r</h1>" "49 = 1
-        let b:surround_50 = "<h2>\r</h2>" "50 = 2
-        let b:surround_51 = "<h3>\r</h3>" "51 = 3
-        let b:surround_52 = "<h4>\r</h4>" "52 = 4
-        let b:surround_53 = "<h5>\r</h5>" "53 = 5
-        let b:surround_54 = "<h6>\r</h6>" "54 = 6
-        let b:surround_112 = "<p>\r</p>"  "112 = p
+        let b:surround_49  = "<h1>\r</h1>" "49  = 1
+        let b:surround_50  = "<h2>\r</h2>" "50  = 2
+        let b:surround_51  = "<h3>\r</h3>" "51  = 3
+        let b:surround_52  = "<h4>\r</h4>" "52  = 4
+        let b:surround_53  = "<h5>\r</h5>" "53  = 5
+        let b:surround_54  = "<h6>\r</h6>" "54  = 6
+        let b:surround_112 = "<p>\r</p>"  "112  = p
         let b:surround_117 = "<ul>\r</ul>" "117 = u
         let b:surround_111 = "<ol>\r</ol>" "111 = o
         let b:surround_108 = "<li>\r</li>" "108 = l
         let b:surround_97  = "<a href=\"\">\r</a>" "97 = a
         let b:surround_65  = "<a href=\"\r\"></a>" "65 = A
-        let b:surround_105 = "<img src=\"\r\" alt=\"\" />" "105 = i
-        let b:surround_73  = "<img src=\"\" alt=\"\r\" />" "73 = I
+        let b:surround_105 = "<img src = \"\r\" alt = \"\" />" "105  = i
+        let b:surround_73  = "<img src = \"\" alt   = \"\r\" />" "73 = I
         let b:surround_100 = "<div>\r</div>" "100 = d
         let b:surround_68  = "<div class=\"section\">\r</div>" "68 = D
     endif
 endfunction
 
 "********************
-" html setting
+" perl setting
 "********************
 autocmd BufRead,BufNewFile *.pl call MyPERLSetting()
 function! MyPERLSetting()
@@ -161,4 +164,9 @@ function! GetStatusEx()
     if has('multi_byte') && &fileencoding != ''
         let str = '[' . &fileencoding . ':' . str
     endif
+endfunction
+
+function Nginx()
+    ec "set filetype to nginx!"
+    set filetype=nginx
 endfunction
