@@ -1,7 +1,7 @@
 ## set aliases
+alias ls='/bin/ls -F --color=tty'
 alias ll='/bin/ls -laF --color=tty'
-alias ls='/bin/ls -l --color=tty'
-alias l='/bin/ls -F --color=tty'
+alias l='/bin/ls -lF --color=tty'
 alias ..='cd ..'
 alias ...='cd ~'
 alias ms='makeScreen'
@@ -19,10 +19,12 @@ alias -g V='|vim -'
 ## set options for zsh
 #fpath=($HOME/.zsh/functions(N-) $fpath)
 #typeset -U fpath
+
 autoload -U compinit
 compinit -u
 setopt COMPLETE_IN_WORD
 setopt AUTO_CD
+setopt prompt_subst
 
 # set terminal title including current directory
 case "${TERM}" in
@@ -47,6 +49,17 @@ case ${UID} in
     }
     ;;
 esac
+
+###
+# ssh setting 
+###
+if [ -f $HOME/.ssh/knows_hosts ]; then
+    hostnames=(`perl -ne 'if (/^([a-zA-Z0-9.-]+)/) { print "$1\n";}' ~/.ssh/known_hosts`)
+elif [ -f /etc/hosts ]; then
+    hostnames=(`awk '{print $2}' /etc/hosts`)
+else
+    hostnames=(localhost)
+fi
 
 #if [ "$TERM" = "screen" ]
 #then
@@ -127,4 +140,3 @@ function rprompt-git-current-branch {
         fi
         echo "$color$name$action%f%b "
 }
-setopt prompt_subst
