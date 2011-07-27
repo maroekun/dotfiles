@@ -138,19 +138,19 @@ perlversion () {
     MODULE=
 }
 
-cpan-uninstall() {
-    for MODULE in $@
-    do
-        ${_SUDO} perl -MConfig -MExtUtils::Install -e '($FULLEXT=shift)=~s{::}{/}g;uninstall "$Config{sitearchexp}/auto/$FULLEXT/.packlist",1' $MODULE
-    done
-}
+# cpan-uninstall() {
+#     for MODULE in $@
+#     do
+#         ${_SUDO} perl -MConfig -MExtUtils::Install -e '($FULLEXT=shift)=~s{::}{/}g;uninstall "$Config{sitearchexp}/auto/$FULLEXT/.packlist",1' $MODULE
+#     done
+# }
 
-functions locallib () {
-    INSTALL_BASE=$1
-    if [ -d $INSTALL_BASE ] ; then
-        eval $(~/bin/use-locallib $INSTALL_BASE)
-    fi
-}
+# functions locallib () {
+#     INSTALL_BASE=$1
+#     if [ -d $INSTALL_BASE ] ; then
+#         eval $(~/bin/use-locallib $INSTALL_BASE)
+#     fi
+# }
 
 # autoload -Uz VCS_INFO_get_data_git; VCS_INFO_get_data_git 2> /dev/null
 
