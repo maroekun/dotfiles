@@ -1,11 +1,13 @@
 #source $HOME/screen.d/encode
 
-shell $SHELL
+shell /bin/zsh
 
 #shelltitle "$ |shell"
 
 escape ^z^z
 #bind . source $HOME/screen.d/encode
+
+#aaaaaaaaaaaaaaaaaaaa
 
 caption always "%{= wk} %-w%{=bu dg}%n %t%{-}%+w %= %{=b wb}%y/%m/%d(%D) %{=b wb}%c"
 defhstatus "[^En:^Et]"
