@@ -1,7 +1,7 @@
 ## set aliases
-alias ll='/bin/ls -laF --color=tty'
-alias ls='/bin/ls -l --color=tty'
-alias l='/bin/ls -F --color=tty'
+alias ll='/bin/ls -laF -G'
+alias ls='/bin/ls -l -G'
+alias l='/bin/ls -F -G'
 alias ..='cd ..'
 alias ...='cd ~'
 alias ms='makeScreen'
@@ -23,6 +23,7 @@ autoload -U compinit
 compinit -u
 setopt COMPLETE_IN_WORD
 setopt AUTO_CD
+setopt long_list_jobs
 
 # set terminal title including current directory
 case "${TERM}" in
