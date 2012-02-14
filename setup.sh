@@ -8,5 +8,6 @@ do
     echo $file is exist.
   else
     ln -s $HOME/dotfiles/$file $HOME/$file
+    echo $file sym create.
   fi
 done
