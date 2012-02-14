@@ -46,7 +46,7 @@ alias ..='cd ..'
 alias ...='cd ~'
 alias vi='vim'
 alias rsync_ex_svn="rsync -avz --exclude=\".svn\""
-alias rsync_ex_svn="rsync -avz --exclude=\".git\""
+alias rsync_ex_git="rsync -avz --exclude=\".git\""
 alias ss='screen -U'
 alias sl='screen -ls'
 alias sr='screen -r'
