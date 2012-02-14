@@ -1,0 +1,4 @@
+alias ls='/bin/ls -F --color=tty'
+alias ll='/bin/ls -laF --color=tty'
+alias la='/bin/ls -a --color=tty'
+alias l='/bin/ls -lF --color=tty'

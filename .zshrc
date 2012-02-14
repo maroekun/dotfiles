@@ -33,10 +33,15 @@ setopt cdable_vars sh_word_split auto_param_keys
 #####
 # Set aliases
 #####
-alias ls='/bin/ls -F --color=tty'
-alias ll='/bin/ls -laF --color=tty'
-alias la='/bin/ls -a --color=tty'
-alias l='/bin/ls -lF --color=tty'
+case ${OSTYPE} in
+    darwin*)
+        [ -f ~/dotfiles/.zshrc.osx ] && source ~/dotfiles/.zshrc.osx
+        ;;
+    linux*)
+        [ -f ~/dotfiles/.zshrc.linux ] && source ~/dotfiles/.zshrc.linux
+        ;;
+esac
+
 alias ..='cd ..'
 alias ...='cd ~'
 alias vi='vim'
@@ -46,7 +51,7 @@ alias ss='screen -U'
 alias sl='screen -ls'
 alias sr='screen -r'
 
-alias -g G='|grep -v grep | grep --color=auto '
+alias -g G='| grep -v grep | grep --color=auto '
 alias -g V='| vim -'
 alias -g L='| less'
 alias -g T='| tail -f'

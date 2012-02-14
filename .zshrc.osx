@@ -1,0 +1,4 @@
+alias ls='/bin/ls -F   -G'
+alias ll='/bin/ls -laF -G'
+alias la='/bin/ls -a   -G'
+alias l='/bin/ls -lF   -G'
