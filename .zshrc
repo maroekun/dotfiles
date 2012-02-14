@@ -166,10 +166,3 @@ elif [ -f /etc/hosts ]; then
 else
     hostnames=(localhost)
 fi
-
-###
-# perlbrew setting 
-###
-if [ -e ~/perl5/perlbrew/etc/bashrc ] ; then
-    source ~/perl5/perlbrew/etc/bashrc
-fi

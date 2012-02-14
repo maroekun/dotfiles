@@ -1,3 +1,9 @@
+# macports
+export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+export PATH=$HOME/bin:$PATH
+export MANPATH=/opt/local/man:$MANPATH
+export LSCOLORS="DxGxcxdxCxegedabagacad"
+
 alias ls='/bin/ls -F   -G'
 alias ll='/bin/ls -laF -G'
 alias la='/bin/ls -a   -G'
