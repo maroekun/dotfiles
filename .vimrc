@@ -65,6 +65,8 @@ hi Comment ctermfg=lightcyan
 imap <c-j> <Esc>
 imap <silent> <c-d><c-d> <c-r>=strftime("%Y-%m-%d")<CR>
 
+nmap <ESC><ESC> :nohlsearch<CR><ESC>
+
 onoremap ) t)
 onoremap ( t(
 vnoremap ) t)
