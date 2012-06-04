@@ -50,6 +50,7 @@ alias rsync_ex_git="rsync -avz --exclude=\".git\""
 alias ss='screen -U'
 alias sl='screen -ls'
 alias sr='screen -r'
+alias be='bundle exec '
 
 alias -g G='| grep -v grep | grep --color=auto '
 alias -g V='| vim -'
