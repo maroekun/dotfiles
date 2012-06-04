@@ -13,13 +13,21 @@ Bundle 'neocomplcache'
 Bundle 'snipMate'
 Bundle 'tlib'
 Bundle 'tSkeleton'
-Bundle 'nginx.vim'
 Bundle 'kchmck/vim-coffee-script'
-Bundle 'Perldoc.vim'
+"Bundle 'Perldoc.vim'
 Bundle 'unite.vim'
 Bundle 'unite-colorscheme'
 Bundle 'quickhl.vim'
 Bundle 'Color-Sampler-Pack'
+Bundle 'smartword'
+Bundle 'thinca/vim-ref'
+
+"***********
+" Syntax
+"***********
+Bundle 'nginx.vim'
+Bundle 'haml.zip'
+Bundle 'kchmck/vim-coffee-script'
 
 let g:colors_name = "default"
 colorscheme default
