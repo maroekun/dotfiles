@@ -15,6 +15,7 @@ Bundle 'tlib'
 Bundle 'tSkeleton'
 Bundle 'kchmck/vim-coffee-script'
 "Bundle 'Perldoc.vim'
+Bundle 'hotchpotch/perldoc-vim'
 Bundle 'unite.vim'
 Bundle 'unite-colorscheme'
 Bundle 'quickhl.vim'
@@ -111,7 +112,7 @@ endfunction
 "********************
 " css setting
 "********************
-autocmd BufRead,BufNewFile *.css call MyCSSSetting()
+autocmd BufRead,BufNewFile *.css,*.scss call MyCSSSetting()
 function! MyCSSSetting()
     set filetype=css
     set tabstop=2
@@ -149,11 +150,23 @@ endfunction
 "********************
 " ruby setting
 "********************
-autocmd BufRead,BufNewFile *.rb call MyRubySetting()
+autocmd BufRead,BufNewFile *.rb,Gemfile call MyRubySetting()
 function! MyRubySetting()
     set filetype=ruby
     set tabstop=2
     set shiftwidth=2
+    colorscheme wombat256
+endfunction
+
+"********************
+" haml setting
+"********************
+autocmd BufRead,BufNewFile *.haml call MyHamlSetting()
+function! MyHamlSetting()
+    set filetype=haml
+    set tabstop=2
+    set shiftwidth=2
+    colorscheme wombat256
 endfunction
 
 "********************
@@ -178,8 +191,8 @@ endfunction
 "********************
 " tSkeleton
 "********************
-let g:tskelUserName="******"
-let g:tskelUserEmail="******"
+let g:tskelUserName="Yu.Shimizu"
+let g:tskelUserEmail="you05232050@gmail.com"
 
 "********************
 " neocomplcache.vim
@@ -210,7 +223,7 @@ let g:quickhl_keywords = [
             \]
 
 "********************
-" Perldoc.vim
+" perldoc-vim
 "********************
 noremap K :Perldoc<CR>
 setlocal iskeyword-=/

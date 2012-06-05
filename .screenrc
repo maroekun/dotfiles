@@ -29,7 +29,7 @@ bind -c REGION w focus
 bind ^w command -c REGION
 bind w windowlist -b
 
-defscrollback 3000
+defscrollback 5000
 
 screen
 screen

@@ -30,6 +30,12 @@ setopt pushd_ignore_dups rm_star_silent sun_keyboard_hack
 setopt extended_glob list_types no_beep always_last_prompt
 setopt cdable_vars sh_word_split auto_param_keys
 
+HISTFILE=$HOME/.zsh-history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt extended_history
+function history-all { history -E 1 }
+
 #####
 # Set aliases
 #####
