@@ -22,6 +22,7 @@ Bundle 'quickhl.vim'
 Bundle 'Color-Sampler-Pack'
 Bundle 'smartword'
 Bundle 'thinca/vim-ref'
+Bundle 'mattn/zencoding-vim'
 
 "***********
 " Syntax

@@ -4,6 +4,13 @@ export PATH=$HOME/bin:$PATH
 export MANPATH=/opt/local/man:$MANPATH
 export LSCOLORS="DxGxcxdxCxegedabagacad"
 
+# if [ -n "$DYLD_LIBRARY_PATH" ]; then
+#   DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/usr/local/lib
+# else
+#   DYLD_LIBRARY_PATH=/usr/local/lib
+# fi
+# export DYLD_LIBRARY_PATH
+
 alias ls='/bin/ls -F   -G'
 alias ll='/bin/ls -laF -G'
 alias la='/bin/ls -a   -G'
