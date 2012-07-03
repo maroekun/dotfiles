@@ -63,6 +63,10 @@ alias -g V='| vim -'
 alias -g L='| less'
 alias -g T='| tail -f'
 
+alias -g CD='| colorize diff | less -R'
+
+alias be='bundle exec '
+
 function mscreen() {
     if [ $# -lt 1 ]
     then
@@ -135,19 +139,20 @@ r() {
 }
 
 setopt COMPLETE_IN_WORD
-export EDITOR=vi
+export EDITOR=/usr/bin/vim
 
 ###
 # Perl setting
 ###
-alias perlsource="PAGER=/usr/local/vim-7.3/bin/vim perldoc -m "
+alias perlsource="PAGER=/usr/bin/vim perldoc -m "
 
 perlpath () {
-    for MODULE in $@
-    do
-        perl -MClass::Inspector -le "print Class::Inspector->resolved_filename(qq{$MODULE})"
-    done
-    MODULE=
+    perldoc -l $@
+#     for MODULE in $@
+#     do
+#         perl -MClass::Inspector -le "print Class::Inspector->resolved_filename(qq{$MODULE})"
+#     done
+#     MODULE=
 }
 perlversion () {
     for MODULE in $@

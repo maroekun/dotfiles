@@ -23,6 +23,7 @@ Bundle 'Color-Sampler-Pack'
 Bundle 'smartword'
 Bundle 'thinca/vim-ref'
 Bundle 'mattn/zencoding-vim'
+Bundle 'tpope/vim-fugitive'
 
 "***********
 " Syntax
@@ -156,7 +157,7 @@ function! MyRubySetting()
     set filetype=ruby
     set tabstop=2
     set shiftwidth=2
-    colorscheme wombat256
+    colorscheme jellybeans
 endfunction
 
 "********************
@@ -167,7 +168,7 @@ function! MyHamlSetting()
     set filetype=haml
     set tabstop=2
     set shiftwidth=2
-    colorscheme wombat256
+    colorscheme jellybeans
 endfunction
 
 "********************
