@@ -54,6 +54,7 @@ filetype plugin indent on
 " defult line setting
 "********************
 syntax on
+set modelines=5
 set number
 set tabstop=4
 set expandtab
