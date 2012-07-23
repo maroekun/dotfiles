@@ -1,0 +1,13 @@
+[alias]
+    logg = log --graph
+    st = status
+    sh = show
+    di = diff
+    dic = diff --cached
+    ci = commit -a
+    co = checkout
+    b = branch
+    ba = branch -a
+    su = submodule
+    suu = submodule update
+    sua = submodule add
