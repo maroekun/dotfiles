@@ -10,6 +10,7 @@ Bundle 'Align'
 Bundle 'EnhCommentify.vim'
 Bundle 'surround.vim'
 Bundle 'neocomplcache'
+Bundle 'Shougo/neocomplcache-snippets-complete'
 Bundle 'snipMate'
 Bundle 'tlib'
 Bundle 'tSkeleton'
@@ -158,7 +159,7 @@ function! MyRubySetting()
     set filetype=ruby
     set tabstop=2
     set shiftwidth=2
-    colorscheme jellybeans
+    colorscheme tir_black
 endfunction
 
 "********************
@@ -169,7 +170,7 @@ function! MyHamlSetting()
     set filetype=haml
     set tabstop=2
     set shiftwidth=2
-    colorscheme jellybeans
+    colorscheme tir_black
 endfunction
 
 "********************
