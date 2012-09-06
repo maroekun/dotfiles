@@ -1,8 +1,7 @@
 #!/usr/bin/zsh
 
 CURRENT=$(cd $(dirname $0); pwd)
-
-DOT_FILES=(.zshrc .vimrc .screenrc .bashrc .tmux.conf .railsrc .gitconfig.local)
+DOT_FILES=(.zshrc .vimrc .screenrc .bashrc .tmux.conf .railsrc .gitconfig.local .gemrc)
 
 for file in ${DOT_FILES[@]}
 do
