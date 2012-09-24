@@ -1,6 +1,6 @@
 #!/usr/bin/zsh
 
-DOT_FILES=(.zshrc .vimrc .screenrc .bashrc .tmux.conf .railsrc .gitconfig.local)
+DOT_FILES=(.zshrc .vimrc .screenrc .bashrc .tmux.conf .railsrc .gitconfig.local zsh.d)
 
 CURRENT=`pwd`
 
