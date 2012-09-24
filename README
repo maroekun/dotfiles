@@ -1,14 +1,3 @@
-$ git clone git@github.com:maroekun/dotfiles.git
+$ cd ./dotfiles
 
-$ cd ./dotfiles && git submodule update --init
-
--------------------------------------------------------
-vim setting
--------------------------------------------------------
-$ cd ~ && mkdir .vim && cd ~/.vim 
-
-$ ln -s /path/to/dotfiles/.vimrc ~/.vimrc
-
-$ ln -s /path/to/dotfiles/dot.vim/vundle.git vundle.git
-
-# vim:set et sw=4 ts=4 si:
+$ sh ./setup.sh
