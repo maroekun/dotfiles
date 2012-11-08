@@ -25,7 +25,7 @@ fi
 if [ ! -e $HOME/.vim ] ; then
   mkdir $HOME/.vim
   echo $HOME/.vim create.
-  ln -s $CURRENT/dot.vim $HOME/.vim/vundle.git
+  ln -s $CURRENT/dot.vim/vundle.git $HOME/.vim/vundle.git
 else
   echo $HOME/.vim is exist.
 fi
