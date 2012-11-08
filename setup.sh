@@ -29,3 +29,18 @@ if [ ! -e $HOME/.vim ] ; then
 else
   echo $HOME/.vim is exist.
 fi
+
+if [ ! -e $HOME/bin ]; then
+  mkdir $HOME/bin
+  echo $HOME/bin create.
+fi
+
+ln -s $CURRENT/bin $HOME/bin/bin
+
+cat <<END
+-------------------------------------------------
+
+add "export PATH=\$HOME/bin/bin:\$PATH" in your .zshenv or .bash_profile
+
+-------------------------------------------------
+END
