@@ -10,7 +10,7 @@ Bundle 'Align'
 Bundle 'EnhCommentify.vim'
 Bundle 'surround.vim'
 Bundle 'neocomplcache'
-Bundle 'Shougo/neocomplcache-snippets-complete'
+"Bundle 'Shougo/neocomplcache-snippets-complete'
 Bundle 'snipMate'
 Bundle 'tlib'
 Bundle 'tSkeleton'
@@ -25,6 +25,11 @@ Bundle 'smartword'
 Bundle 'thinca/vim-ref'
 Bundle 'mattn/zencoding-vim'
 Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-endwise'
+Bundle 'desert256.vim'
+Bundle 'mrkn256.vim'
+Bundle 'tomasr/molokai'
+Bundle 'yuroyoro/yuroyoro256.vim'
 Bundle 'motemen/xslate-vim'
 
 "***********
@@ -33,6 +38,7 @@ Bundle 'motemen/xslate-vim'
 Bundle 'nginx.vim'
 Bundle 'haml.zip'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'taq/vim-rspec'
 
 let g:colors_name = "default"
 colorscheme default
@@ -284,6 +290,10 @@ let ColorRoller.colors = [
     \'softblue',
     \'tir_black',
     \'wombat256',
+    \'yuroyoro256',
+    \'molokai',
+    \'desert256',
+    \'mrkn256',
     \'wuye',
     \ ]
 function! ColorRoller.change()

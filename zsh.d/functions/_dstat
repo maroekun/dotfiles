@@ -1,0 +1,70 @@
+#compdef dstat _dstat
+
+_list_cpu () {
+    local _cpus
+    _cpus=(total 0 3)
+    compadd "$@" -a _cpus
+}
+
+_list_disk () {
+    local _disks
+    _disks=(total hda) 
+    compadd "$@" -a _disks
+}
+
+_dstat () {
+	local curcontext="$curcontext" state line expl ret=1
+	local dstat_version=`dstat --version | head -n 1 | awk '{print $2}'`
+#[delay [count]]
+	_arguments -C \
+		'(-)--help[print help information]' \
+		'(- *)--version[print client version information]' \
+		'(-c --cpu)'{-c,--cpu}'[enable cpu stats]' \
+		'(-C)-C[include cpu0, cpu3 and total]:cpu list:_list_cpu' \
+        '(-d --disk)'{-d,--disk}'[enable disk stats]' \
+        '(-D)-D[include hda and total]:disk list:_list_disk' \
+        '(-g --page)'{-g,--page}'[enable page stats]' \
+        '(-i --int)'{-i,--int}'[enable interrupt stats]' \
+        '(-I)-I[5,eth2 include int5 and interrupt used by eth2]' \
+        '(-l --load)'{-l,--load}'[enable load stats]' \
+		'(-m --mem)'{-m,--mem}'[enable memory stats]' \
+		'(-n --net)'{-n,--net}'[enable network stats]' \
+		'(-N)-N[eth1,total include eth1 and total]' \
+		'(-p --proc)'{-p,--proc}'[enable process stats]' \
+		'(-r --io)'{-r,--io}'[enable io stats (I/O requests completed)]' \
+		'(-s --swap)'{-s,--swap}'[enable swap stats]' \
+		'(-S)-S[swap1,total include swap1 and total]' \
+		'(-t --time)'{-t,--time}'[enable time/date output]' \
+		'(-T --epoch)'{-T,--epoch}'[enable time counter (seconds since epoch)]' \
+		'(-y --sys)'{-y,--sys}'[enable system stats]' \
+		'(--aio)--aio[enable aio stats]' \
+		'(--fs --filesystem)'{--fs,--filesystem}'[enable fs stats]' \
+		'(--ipc)--ipc[enable ipc stats]' \
+		'(--lock)--lock[enable lock stats]' \
+		'(--raw)--raw[enable raw stats]' \
+		'(--socket)--socket[enable socket stats]' \
+		'(--tcp)--tcp[enable tcp stats]' \
+		'(--udp)--udp[enable udp stats]' \
+		'(--unix)--unix[enable unix stats]' \
+		'(--vm)--vm[enable vm stats]' \
+		'(--plugin-name)--plugin-name[enable plugins by plugin name (see manual)]' \
+		'(--list)--list[list all available plugins]' \
+		'(-a --all -c --cpu -d --disk -n --net -g --page -y --sys)'{-a,--all}'[equals -cdngy (default)]' \
+		'(-f --full)'{-f,--full}'[automatically expand -C, -D, -I, -N and -S lists]' \
+		'(-v --vmstat -p --proc -m --mem -g --page -d --disk -s --swap -c --cpu -D)'{-v,--vmstat}'[equals -pmgdsc -D total]' \
+		'(--float)--float[force float values on screen]' \
+		'(--integer)--integer[force integer values on screen]' \
+		'(--bw --blackonwhite)'{--bw,--blackonwhite}'[change colors for white background terminal]' \
+		'(--nocolor)--nocolor[disable colors (implies --noupdate)]' \
+		'(--noheaders)--noheaders[disable repetitive headers]' \
+		'(--noupdate)--noupdate[disable intermediate updates]' \
+		'(--output)--output[write CSV output to file]:output file:' \
+		'1: :->cmds' \
+		'*:: :->args' && ret=0
+#
+#delay is the delay in seconds between each update (default: 1)
+#count is the number of updates to display before exiting (default: unlimited)
+#
+}
+
+_dstat "$@"
