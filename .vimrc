@@ -25,6 +25,7 @@ Bundle 'smartword'
 Bundle 'thinca/vim-ref'
 Bundle 'mattn/zencoding-vim'
 Bundle 'tpope/vim-fugitive'
+Bundle 'motemen/xslate-vim'
 
 "***********
 " Syntax
@@ -127,9 +128,24 @@ endfunction
 "********************
 " html setting
 "********************
-autocmd BufRead,BufNewFile *.html,*.tt,*.tx call MyHTMLSetting()
-function! MyHTMLSetting()
+autocmd BufRead,BufNewFile *.html,*.tt,*.tx call HTMLSetting()
+function! HTMLSetting()
     set filetype=html
+    call HTMLTags()
+endfunction
+
+"********************
+" html setting
+"********************
+autocmd BufRead,BufNewFile *.tx call XslateSetting()
+
+function! XslateSetting()
+    set filetype=xslate
+    colorscheme ironman
+    call HTMLTags()
+endfunction
+
+function! HTMLTags()
     set tabstop=2
     set shiftwidth=2
 
@@ -150,6 +166,8 @@ function! MyHTMLSetting()
     let b:surround_100 = "<div>\r</div>" "100 = d
     let b:surround_68  = "<div class=\"section\">\r</div>" "68 = D
 endfunction
+
+
 
 "********************
 " ruby setting
@@ -304,4 +322,6 @@ endfunction
 function! Nginx()
     ec "set filetype to nginx!"
     set filetype=nginx
+    colorscheme dante
+    redraw
 endfunction
