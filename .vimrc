@@ -82,10 +82,10 @@ command! Nginx : call Nginx()
 hi Comment ctermfg=lightcyan
 
 "imap <c-k> <c-m>
-imap <c-j> <Esc>
+imap <c-j> <ESC>
 imap <silent> <c-d><c-d> <c-r>=strftime("%Y-%m-%d")<CR>
 
-nmap <ESC><ESC> :nohlsearch<CR><ESC>
+nmap <silent> <ESC><ESC> :nohlsearch<CR><ESC>
 
 onoremap ) t)
 onoremap ( t(

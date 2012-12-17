@@ -41,10 +41,10 @@ function history-all { history -E 1 }
 #####
 case ${OSTYPE} in
     darwin*)
-        [ -f ~/dotfiles/.zshrc.osx ] && source ~/dotfiles/.zshrc.osx
+        [ -f ~/.zshrc.osx ] && source ~/.zshrc.osx
         ;;
     linux*)
-        [ -f ~/dotfiles/.zshrc.linux ] && source ~/dotfiles/.zshrc.linux
+        [ -f ~/.zshrc.linux ] && source ~/.zshrc.linux
         ;;
 esac
 
@@ -144,7 +144,9 @@ export EDITOR=/usr/bin/vim
 ###
 # Perl setting
 ###
-alias perlsource="PAGER=/usr/bin/vim perldoc -m "
+perlsource() {
+    perldoc -m $@ | vim -R -
+}
 
 perlpath () {
     perldoc -l $@
