@@ -180,3 +180,4 @@ elif [ -f /etc/hosts ]; then
 else
     hostnames=(localhost)
 fi
+

@@ -35,3 +35,8 @@ dashboard-toggle() {
   fi
   killall Dock
 }
+
+. `brew --prefix`/etc/profile.d/z.sh
+function precmd () {
+    z --add "$(pwd -P)"
+}
