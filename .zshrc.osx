@@ -16,3 +16,22 @@ alias ll='/bin/ls -laF -G'
 alias la='/bin/ls -a   -G'
 alias l='/bin/ls -lF   -G'
 alias netstat_osx='lsof -iTCP -sTCP:LISTEN -P'
+
+dashboad-off() {
+  echo "DASHBOARD OFF"
+  dashboard-toggle "true"
+}
+
+dashboad-on() {
+  echo "DASHBOARD ON"
+  dashboard-toggle "false"
+}
+
+dashboard-toggle() {
+  if $@ = "true" ; then
+    defaults write com.apple.dashboard mcx-disabled -boolean true
+  else
+    defaults write com.apple.dashboard mcx-disabled -boolean false
+  fi
+  killall Dock
+}

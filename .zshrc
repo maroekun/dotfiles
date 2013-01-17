@@ -144,8 +144,8 @@ export EDITOR=/usr/bin/vim
 ###
 # Perl setting
 ###
-perlsource() {
-    perldoc -m $@ | vim -R -
+perlsource () {
+    perldoc m $@ | vim -R -
 }
 
 perlpath () {
