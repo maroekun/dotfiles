@@ -35,7 +35,10 @@ if [ ! -e $HOME/bin ]; then
   echo $HOME/bin create.
 fi
 
-ln -s $CURRENT/bin $HOME/bin/bin
+if [ ! -e $HOME/bin/bin ]; then
+  ln -s $CURRENT/bin $HOME/bin/bin
+fi
+
 
 cat <<END
 -------------------------------------------------
