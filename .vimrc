@@ -31,6 +31,7 @@ Bundle 'mrkn256.vim'
 Bundle 'tomasr/molokai'
 Bundle 'yuroyoro/yuroyoro256.vim'
 Bundle 'motemen/xslate-vim'
+Bundle 'taglist.vim'
 
 "***********
 " Syntax
@@ -257,6 +258,11 @@ noremap K :Perldoc<CR>
 setlocal iskeyword-=/
 setlocal iskeyword+=:
 au FileType perl let g:perldoc_program='/Users/maroekun/perl5/perlbrew/perls/current/bin/perldoc'
+
+"********************
+" taglist.vim
+"********************
+let Tlist_Exit_OnlyWindow = 1
 
 "********************
 " Unite file

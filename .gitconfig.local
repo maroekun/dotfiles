@@ -1,6 +1,7 @@
 [alias]
     logg = log --graph
     logo = log --oneline
+    loggg = log --pretty=format:'%h %s' --graph
     st = status
     sh = show
     di = diff
