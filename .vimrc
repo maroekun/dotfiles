@@ -356,3 +356,4 @@ function! Nginx()
     redraw
 endfunction
 
+source $HOME/.selfvim/perlbrew.vim

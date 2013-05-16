@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 
 CURRENT=$(cd $(dirname $0); pwd)
-DOT_FILES=(.zshrc .vimrc .screenrc .bashrc .tmux.conf .perltidyrc .railsrc .gitconfig.local .gemrc zsh.d .zshrc.osx .zshrc.linux)
+DOT_FILES=(.zshrc .vimrc .screenrc .bashrc .tmux.conf .perltidyrc .railsrc .gitconfig.local .gemrc zsh.d .zshrc.osx .zshrc.linux .selfvim)
 
 for file in ${DOT_FILES[@]}
 do
@@ -28,6 +28,12 @@ if [ ! -e $HOME/.vim ] ; then
   ln -s $CURRENT/dot.vim/vundle.git $HOME/.vim/vundle.git
 else
   echo $HOME/.vim is exist.
+fi
+
+if [ ! -e $HOME/.selfvim ] ; then
+  ln -s $CURRENT/.selfvim $HOME/.selfvim
+else
+  echo $HOME/.selfvim is exist.
 fi
 
 if [ ! -e $HOME/bin ]; then
