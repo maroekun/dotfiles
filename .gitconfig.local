@@ -2,6 +2,7 @@
     logg = log --graph
     logo = log --oneline
     loggg = log --pretty=format:'%h %s' --graph
+    logog = log --oneline --graph
     st = status
     sh = show
     di = diff

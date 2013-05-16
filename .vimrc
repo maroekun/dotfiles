@@ -10,17 +10,19 @@ Bundle 'Align'
 Bundle 'EnhCommentify.vim'
 Bundle 'surround.vim'
 Bundle 'neocomplcache'
-"Bundle 'Shougo/neocomplcache-snippets-complete'
+Bundle 'Shougo/neosnippet'
 Bundle 'snipMate'
 Bundle 'tlib'
-Bundle 'tSkeleton'
+"Bundle 'tSkeleton'
+Bundle 'vim-scripts/tSkeleton'
 Bundle 'kchmck/vim-coffee-script'
 "Bundle 'Perldoc.vim'
 Bundle 'hotchpotch/perldoc-vim'
 Bundle 'unite.vim'
 Bundle 'unite-colorscheme'
 Bundle 'quickhl.vim'
-Bundle 'Color-Sampler-Pack'
+"Bundle 'Color-Sampler-Pack'
+Bundle 'vim-scripts/Colour-Sampler-Pack'
 Bundle 'smartword'
 Bundle 'thinca/vim-ref'
 Bundle 'mattn/zencoding-vim'
@@ -32,6 +34,10 @@ Bundle 'tomasr/molokai'
 Bundle 'yuroyoro/yuroyoro256.vim'
 Bundle 'motemen/xslate-vim'
 Bundle 'taglist.vim'
+Bundle 'tpope/vim-rails'
+Bundle 'scrooloose/nerdtree'
+Bundle 'dbext.vim'
+Bundle 'scrooloose/syntastic'
 
 "***********
 " Syntax
@@ -40,9 +46,9 @@ Bundle 'nginx.vim'
 Bundle 'haml.zip'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'taq/vim-rspec'
+Bundle 'jelera/vim-javascript-syntax'
 
-let g:colors_name = "default"
-colorscheme default
+colorscheme yuroyoro256
 
 filetype plugin indent on
 
@@ -82,16 +88,26 @@ command! Nginx : call Nginx()
 
 hi Comment ctermfg=lightcyan
 
-"imap <c-k> <c-m>
+"********************
+" key mapping
+"********************
+
+"** General
 imap <c-j> <ESC>
 imap <silent> <c-d><c-d> <c-r>=strftime("%Y-%m-%d")<CR>
-
+imap <silent> <c-d><c-f> <c-r>=strftime("%Y/%m/%d")<CR>
 nmap <silent> <ESC><ESC> :nohlsearch<CR><ESC>
-
 onoremap ) t)
 onoremap ( t(
 vnoremap ) t)
 vnoremap ( t(
+
+"** PerlTidy
+"map ,ptv :'<,'>! perltidy
+map ,ptv :! perltidy
+
+"** NERDtree
+nmap <silent> <c-e> :NERDTreeToggle<CR>
 
 "********************
 " status line setting
@@ -119,6 +135,7 @@ function! MyJSSetting()
     set smartindent
     set tabstop=2
     set shiftwidth=2
+    call JavaScriptFold()
 endfunction
 
 "********************
@@ -148,7 +165,6 @@ autocmd BufRead,BufNewFile *.tx call XslateSetting()
 
 function! XslateSetting()
     set filetype=xslate
-    colorscheme ironman
     call HTMLTags()
 endfunction
 
@@ -184,7 +200,6 @@ function! MyRubySetting()
     set filetype=ruby
     set tabstop=2
     set shiftwidth=2
-    colorscheme tir_black
 endfunction
 
 "********************
@@ -195,13 +210,12 @@ function! MyHamlSetting()
     set filetype=haml
     set tabstop=2
     set shiftwidth=2
-    colorscheme tir_black
 endfunction
 
 "********************
 " perl setting
 "********************
-autocmd BufRead,BufNewFile *.pl,*.pm call MyPERLSetting()
+autocmd BufRead,BufNewFile *.psgi,*.t,*.pl,*.pm call MyPERLSetting()
 function! MyPERLSetting()
     set filetype=perl
     set tabstop=4
@@ -287,6 +301,7 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 let ColorRoller = {}
 let ColorRoller.colors = [
     \'default',
+    \'solarized',
     \'moss',
     \'dante',
     \'golden',
@@ -338,6 +353,6 @@ endfunction
 function! Nginx()
     ec "set filetype to nginx!"
     set filetype=nginx
-    colorscheme dante
     redraw
 endfunction
+

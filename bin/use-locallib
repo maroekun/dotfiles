@@ -1,0 +1,72 @@
+#!/usr/bin/env perl
+#----------------------------------------------------------------------------
+# NOTE: when use this script, you write bellow setting in your ".[bz]shrc"
+#   function  locallib() {
+#       INSTALL_BASE=$1
+#       if [ -d $INSTALL_BASE ] ; then
+#           eval $(~/bin/use-locallib $INSTALL_BASE)
+#       fi
+#   }
+#----------------------------------------------------------------------------
+
+use strict;
+use warnings;
+use Carp;
+
+sub main {
+    my $local_module_path = shift @ARGV;
+    my $tmp_path = $ENV{PATH};
+
+    if (defined $local_module_path && $local_module_path ne '' && -e $local_module_path) {
+        my $context_export;
+        $context_export = `perl -Mlocal::lib=$local_module_path`;
+
+        my $divied_export = &devide_context($context_export);
+
+        if (defined $divied_export->{PATH}){
+            my $path = $divied_export->{PATH};
+            my $added_bin;
+            if($path =~/^([^:]+).*/){
+                $added_bin = $1;
+            }
+            my @hoge = ();
+            if( &check_added_bin_exist($tmp_path, $added_bin) ){
+                for ( split /:/, $tmp_path) {
+                    if ( $_ ne $added_bin ) {
+                        push @hoge, $_;
+                    }
+                }
+                $ENV{PATH} = join ":", @hoge;
+            }
+        }
+        &execute_export($divied_export);
+    }
+}
+
+sub execute_export {
+    my $exec = shift;
+    for (keys %$exec) {
+        print qq[ export $_="$exec->{$_}"\n ];
+    }
+}
+
+sub devide_context {
+    my $context = shift;
+    my $rtn = {};
+    for ( split /\n/, $context) {
+        if($_ =~ /^export\s([^=]+)="([^"]+)";$/){
+            $rtn->{$1} = $2;
+        }
+    }
+    return $rtn;
+}
+
+sub check_added_bin_exist {
+    my ($path, $added_bin) = @_;
+    for ( split /:/, $path ) {
+        return 1 if ($_ eq $added_bin);
+    }
+    return 0;
+}
+
+&main();

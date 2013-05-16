@@ -8,7 +8,7 @@ bindkey -e
 functions locallib () {
     INSTALL_BASE=$1
     if [ -d $INSTALL_BASE ] ; then
-        eval $(~/bin/use-locallib $INSTALL_BASE)
+        eval $(~/bin/bin/use-locallib $INSTALL_BASE)
     fi
 }
 
