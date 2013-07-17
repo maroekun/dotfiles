@@ -47,6 +47,11 @@ Bundle 'haml.zip'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'taq/vim-rspec'
 Bundle 'jelera/vim-javascript-syntax'
+Bundle 'tpope/vim-markdown'
+
+" Haskell
+Bundle 'dag/vim2hs'
+"Bundle 'eagletmt/ghcmod-vim'
 
 colorscheme yuroyoro256
 
