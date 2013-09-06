@@ -6,6 +6,9 @@ filetype off
 set rtp+=~/.vim/vundle.git/
 call vundle#rc()
 
+"Bundle 'tSkeleton'
+"Bundle 'Perldoc.vim'
+"Bundle 'Color-Sampler-Pack'
 Bundle 'Align'
 Bundle 'EnhCommentify.vim'
 Bundle 'surround.vim'
@@ -13,15 +16,11 @@ Bundle 'neocomplcache'
 Bundle 'Shougo/neosnippet'
 Bundle 'snipMate'
 Bundle 'tlib'
-"Bundle 'tSkeleton'
 Bundle 'vim-scripts/tSkeleton'
-Bundle 'kchmck/vim-coffee-script'
-"Bundle 'Perldoc.vim'
 Bundle 'hotchpotch/perldoc-vim'
 Bundle 'unite.vim'
 Bundle 'unite-colorscheme'
 Bundle 'quickhl.vim'
-"Bundle 'Color-Sampler-Pack'
 Bundle 'vim-scripts/Colour-Sampler-Pack'
 Bundle 'smartword'
 Bundle 'thinca/vim-ref'
@@ -38,10 +37,12 @@ Bundle 'tpope/vim-rails'
 Bundle 'scrooloose/nerdtree'
 Bundle 'dbext.vim'
 Bundle 'scrooloose/syntastic'
+Bundle 'bigfish/vim-nodelint'
 
-"***********
+" StatusLine
+Bundle 'itchyny/lightline.vim'
+
 " Syntax
-"***********
 Bundle 'nginx.vim'
 Bundle 'haml.zip'
 Bundle 'kchmck/vim-coffee-script'
@@ -53,7 +54,8 @@ Bundle 'tpope/vim-markdown'
 Bundle 'dag/vim2hs'
 "Bundle 'eagletmt/ghcmod-vim'
 
-colorscheme yuroyoro256
+"colorscheme yuroyoro256
+colorscheme ironman
 
 filetype plugin indent on
 
@@ -74,6 +76,7 @@ filetype plugin indent on
 " defult line setting
 "********************
 syntax on
+set nobackup
 set modelines=5
 set number
 set tabstop=4
@@ -118,7 +121,8 @@ nmap <silent> <c-e> :NERDTreeToggle<CR>
 " status line setting
 "********************
 set laststatus=2
-set statusline=%y%{GetStatusEx()}\ 0x%B(%b)%F%m%r%=<%c:%l>
+"set statusline=%y%{GetStatusEx()}\ 0x%B(%b)%F%m%r%=<%c:%l>
+set statusline=%y%{GetStatusEx()}%{fugitive#statusline()}\ 0x%B(%b)%F%m%r%=<%c:%l>
 
 "********************
 " bash setting
@@ -200,7 +204,7 @@ endfunction
 "********************
 " ruby setting
 "********************
-autocmd BufRead,BufNewFile *.rb,Gemfile call MyRubySetting()
+autocmd BufRead,BufNewFile *.rb,Gemfile,Vagrantfile call MyRubySetting()
 function! MyRubySetting()
     set filetype=ruby
     set tabstop=2
@@ -268,7 +272,61 @@ nmap <Space>j <Plug>(quickhl-match)
 
 let g:quickhl_keywords = [
             \ "TODO",
+            \ "CAUTION",
             \]
+"********************
+" lightline.vim
+"********************
+let g:lightline = {
+  \ 'colorscheme': 'wombat',
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'fugitive', 'filename'] ]
+  \ },
+  \ 'component_function': {
+  \   'fugitive': 'MyFugitive',
+  \   'readonly': 'MyReadonly',
+  \   'modified': 'MyModified',
+  \   'filename': 'MyFilename'
+  \ },
+  \ 'separator': { 'left': '⮀', 'right': '⮂' },
+  \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+  \ }
+function! MyFugitive()
+  return exists('*fugitive#head') && strlen(fugitive#head()) ? '⭠ '.fugitive#head() : ''
+endfunction
+
+function! MyReadonly()
+    if &filetype == "help"
+        return ""
+    elseif &readonly
+        return "⭤"
+    else
+        return ""
+    endif
+endfunction
+
+function! MyModified()
+    if &filetype == "help"
+        return ""
+    elseif &modified
+        return "+"
+    else
+        return ""
+    endif
+endfunction
+
+function! MyFilename()
+  return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+       \ ('' != expand('%t') ? expand('%t') : '[No Name]') .
+       \ ('' != MyModified() ? ' ' . MyModified() : '')
+endfunction
+
+""""""""""""""""""""""""""""""
+" vim-nodelint
+""""""""""""""""""""""""""""""
+let g:NodelintConfig = $HOME . '/.vim/bundle/vim-nodelint/nodelint-config.js'
+let g:NodelintReporter = 'vim'
 
 "********************
 " perldoc-vim
@@ -282,6 +340,16 @@ au FileType perl let g:perldoc_program='/Users/maroekun/perl5/perlbrew/perls/cur
 " taglist.vim
 "********************
 let Tlist_Exit_OnlyWindow = 1
+
+"********************
+" syntastic.vim
+"********************
+let g:syntastic_mode_map = {
+      \ 'mode': 'passive',
+      \ 'active_filetypes': ['ruby']
+      \ }
+let g:syntastic_ruby_checkers = ['rubocop']
+let g:syntastic_quiet_warnings = 0
 
 "********************
 " Unite file
@@ -362,3 +430,40 @@ function! Nginx()
 endfunction
 
 source $HOME/.selfvim/perlbrew.vim
+
+"-------------------------------------------------------------------------------
+" カラー関連 Colors
+"-------------------------------------------------------------------------------
+" colorscheme mrkn256
+"colorscheme yuroyoro256
+
+" ターミナルタイプによるカラー設定
+if &term =~ "xterm-256color" || "screen-256color"
+  " 256色
+  set t_Co=256
+  set t_Sf=[3%dm
+  set t_Sb=[4%dm
+elseif &term =~ "xterm-debian" || &term =~ "xterm-xfree86"
+  set t_Co=16
+  set t_Sf=[3%dm
+  set t_Sb=[4%dm
+elseif &term =~ "xterm-color"
+  set t_Co=8
+  set t_Sf=[3%dm
+  set t_Sb=[4%dm
+endif
+
+"ポップアップメニューのカラーを設定
+"hi Pmenu guibg=#666666
+"hi PmenuSel guibg=#8cd0d3 guifg=#666666
+"hi PmenuSbar guibg=#333333
+
+" ハイライト on
+syntax enable
+" 補完候補の色づけ for vim7
+" hi Pmenu ctermbg=255 ctermfg=0 guifg=#000000 guibg=#999999
+" hi PmenuSel ctermbg=blue ctermfg=black
+hi PmenuSel cterm=reverse ctermfg=33 ctermbg=222 gui=reverse guifg=#3399ff guibg=#f0e68c
+" hi PmenuSbar ctermbg=0 ctermfg=9
+" hi PmenuSbar ctermbg=255 ctermfg=0 guifg=#000000 guibg=#FFFFFF
+

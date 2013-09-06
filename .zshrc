@@ -181,3 +181,5 @@ else
     hostnames=(localhost)
 fi
 
+# aws_completion
+[[ -e $(which aws_zsh_completer.sh) ]] && source $(which aws_zsh_completer.sh)
