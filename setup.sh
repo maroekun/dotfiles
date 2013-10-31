@@ -13,19 +13,19 @@ do
   fi
 done
 
-file_num=`expr $(/bin/ls $CURRENT/dot.vim/vundle.git | wc -l)`
+file_num=`expr $(/bin/ls $CURRENT/dot.vim/neobundle.vim | wc -l)`
 if [ $file_num -eq 0 ] ; then
-  echo $CURRENT/dot.vim/vundle.git is empty
+  echo $CURRENT/dot.vim/neobundle.vim is empty
   cd $CURRENT
   git submodule update --init
 else
-  echo $CURRENT/dot.vim/vundle.git already initialize.
+  echo $CURRENT/dot.vim/neobundle.vim already initialize.
 fi
 
 if [ ! -e $HOME/.vim ] ; then
-  mkdir $HOME/.vim
+  mkdir -p $HOME/.vim/bundle
   echo $HOME/.vim create.
-  ln -s $CURRENT/dot.vim/vundle.git $HOME/.vim/vundle.git
+  ln -s $CURRENT/dot.vim/neobundle.vim $HOME/.vim/bundle/neobundle.vim
 else
   echo $HOME/.vim is exist.
 fi

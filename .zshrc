@@ -121,6 +121,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' use-cache true
 
 fpath=($HOME/zsh.d/functions(N-/) $fpath)
+fpath=($HOME/trunk/github/zsh-completions/src $fpath)
 typeset -U FPATH
 typeset -U PATH
 

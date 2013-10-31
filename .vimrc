@@ -1,76 +1,76 @@
-"********************************************************
-" Vundle Setting
-"********************************************************
 set nocompatible
-filetype off
-set rtp+=~/.vim/vundle.git/
-call vundle#rc()
+
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+call neobundle#rc(expand('~/.vim/bundle/'))
+
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+NeoBundle 'Shougo/vimproc', {
+      \ 'build' : {
+      \     'windows' : 'make -f make_mingw32.mak',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
 
 "Bundle 'tSkeleton'
 "Bundle 'Perldoc.vim'
 "Bundle 'Color-Sampler-Pack'
-Bundle 'Align'
-Bundle 'EnhCommentify.vim'
-Bundle 'surround.vim'
-Bundle 'neocomplcache'
-Bundle 'Shougo/neosnippet'
-Bundle 'snipMate'
-Bundle 'tlib'
-Bundle 'vim-scripts/tSkeleton'
-Bundle 'hotchpotch/perldoc-vim'
-Bundle 'unite.vim'
-Bundle 'unite-colorscheme'
-Bundle 'quickhl.vim'
-Bundle 'vim-scripts/Colour-Sampler-Pack'
-Bundle 'smartword'
-Bundle 'thinca/vim-ref'
-Bundle 'mattn/zencoding-vim'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-endwise'
-Bundle 'desert256.vim'
-Bundle 'mrkn256.vim'
-Bundle 'tomasr/molokai'
-Bundle 'yuroyoro/yuroyoro256.vim'
-Bundle 'motemen/xslate-vim'
-Bundle 'taglist.vim'
-Bundle 'tpope/vim-rails'
-Bundle 'scrooloose/nerdtree'
-Bundle 'dbext.vim'
-Bundle 'scrooloose/syntastic'
-Bundle 'bigfish/vim-nodelint'
+NeoBundle 'Align'
+NeoBundle 'EnhCommentify.vim'
+NeoBundle 'surround.vim'
+NeoBundle 'neocomplcache'
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'snipMate'
+NeoBundle 'tlib'
+"NeoBundle 'vim-scripts/tSkeleton'
+NeoBundle 'hotchpotch/perldoc-vim'
+NeoBundle 'unite.vim'
+NeoBundle 'unite-colorscheme'
+NeoBundle 'quickhl.vim'
+NeoBundle 'vim-scripts/Colour-Sampler-Pack'
+NeoBundle 'smartword'
+NeoBundle 'thinca/vim-ref'
+NeoBundle 'mattn/zencoding-vim'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-endwise'
+NeoBundle 'desert256.vim'
+NeoBundle 'mrkn256.vim'
+NeoBundle 'tomasr/molokai'
+NeoBundle 'yuroyoro/yuroyoro256.vim'
+NeoBundle 'motemen/xslate-vim'
+NeoBundle 'taglist.vim'
+NeoBundle 'tpope/vim-rails'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'dbext.vim'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'bigfish/vim-nodelint'
+NeoBundle 'airblade/vim-gitgutter'
 
 " StatusLine
-Bundle 'itchyny/lightline.vim'
+NeoBundle 'itchyny/lightline.vim'
 
 " Syntax
-Bundle 'nginx.vim'
-Bundle 'haml.zip'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'taq/vim-rspec'
-Bundle 'jelera/vim-javascript-syntax'
-Bundle 'tpope/vim-markdown'
+NeoBundle 'nginx.vim'
+NeoBundle 'haml.zip'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'jelera/vim-javascript-syntax'
+NeoBundle 'tpope/vim-markdown'
+NeoBundle 'elzr/vim-json'
 
 " Haskell
-Bundle 'dag/vim2hs'
+NeoBundle 'dag/vim2hs'
 "Bundle 'eagletmt/ghcmod-vim'
 
 "colorscheme yuroyoro256
 colorscheme ironman
 
 filetype plugin indent on
-
-"********************************************************
-" install plugins
-" -------------------------------------------------------
-" Align
-"   http://www.vim.org/scripts/script.php?script_id=294
-" EnhCommentify.vim
-"   http://www.vim.org/scripts/script.php?script_id=23
-" surround.vim
-"   http://www.vim.org/scripts/script.php?script_id=1697
-" neocomplcache
-"   http://www.vim.org/scripts/script.php?script_id=2620
-"********************************************************
+NeoBundleCheck
 
 "********************
 " defult line setting
@@ -327,6 +327,14 @@ endfunction
 """"""""""""""""""""""""""""""
 let g:NodelintConfig = $HOME . '/.vim/bundle/vim-nodelint/nodelint-config.js'
 let g:NodelintReporter = 'vim'
+
+""""""""""""""""""""""""""""""
+" vim-gitgutter
+""""""""""""""""""""""""""""""
+nnoremap <silent> ,gg :<C-u>GitGutterToggle<CR>
+nnoremap <silent> ,gh :<C-u>GitGutterLineHighlightsToggle<CR>
+let g:gitgutter_enabled = 0
+let g:gitgutter_highlight_lines = 0
 
 "********************
 " perldoc-vim
