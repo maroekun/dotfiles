@@ -17,54 +17,54 @@ NeoBundle 'Shougo/vimproc', {
       \    },
       \ }
 
-"Bundle 'tSkeleton'
-"Bundle 'Perldoc.vim'
-"Bundle 'Color-Sampler-Pack'
-NeoBundle 'Align'
-NeoBundle 'EnhCommentify.vim'
-NeoBundle 'surround.vim'
-NeoBundle 'neocomplcache'
+"NeoBundle 'Color-Sampler-Pack'
+    NeoBundle 'Align'
+    NeoBundle 'EnhCommentify.vim'
+    NeoBundle 'surround.vim'
+"NeoBundle 'neocomplcache'
+NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/neosnippet'
-NeoBundle 'snipMate'
+"NeoBundle 'snipMate'
 NeoBundle 'tlib'
-"NeoBundle 'vim-scripts/tSkeleton'
-NeoBundle 'hotchpotch/perldoc-vim'
-NeoBundle 'unite.vim'
-NeoBundle 'unite-colorscheme'
-NeoBundle 'quickhl.vim'
-NeoBundle 'vim-scripts/Colour-Sampler-Pack'
-NeoBundle 'smartword'
-NeoBundle 'thinca/vim-ref'
-NeoBundle 'mattn/zencoding-vim'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-endwise'
-NeoBundle 'desert256.vim'
-NeoBundle 'mrkn256.vim'
-NeoBundle 'tomasr/molokai'
-NeoBundle 'yuroyoro/yuroyoro256.vim'
-NeoBundle 'motemen/xslate-vim'
+    NeoBundle 'hotchpotch/perldoc-vim'
+    NeoBundle 'unite.vim'
+    NeoBundle 'unite-colorscheme'
+    NeoBundle 'quickhl.vim'
+    NeoBundle 'vim-scripts/Colour-Sampler-Pack'
+    NeoBundle 'smartword'
+    NeoBundle 'thinca/vim-ref'
+    NeoBundle 'mattn/zencoding-vim'
+    NeoBundle 'tpope/vim-fugitive'
+    NeoBundle 'tpope/vim-rails'
+    NeoBundle 'tpope/vim-endwise'
+
+" colors
+    NeoBundle 'desert256.vim'
+    NeoBundle 'mrkn256.vim'
+    NeoBundle 'tomasr/molokai'
+    NeoBundle 'yuroyoro/yuroyoro256.vim'
+    NeoBundle 'motemen/xslate-vim'
+
 NeoBundle 'taglist.vim'
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'dbext.vim'
-NeoBundle 'scrooloose/syntastic'
 NeoBundle 'bigfish/vim-nodelint'
-NeoBundle 'airblade/vim-gitgutter'
+    NeoBundle 'scrooloose/nerdtree'
+    NeoBundle 'scrooloose/syntastic'
+    NeoBundle 'airblade/vim-gitgutter'
 
 " StatusLine
-NeoBundle 'itchyny/lightline.vim'
+    NeoBundle 'itchyny/lightline.vim'
 
 " Syntax
-NeoBundle 'nginx.vim'
-NeoBundle 'haml.zip'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'jelera/vim-javascript-syntax'
-NeoBundle 'tpope/vim-markdown'
-NeoBundle 'elzr/vim-json'
+    NeoBundle 'elzr/vim-json'
+    NeoBundle 'haml.zip'
+    NeoBundle 'nginx.vim'
+    NeoBundle 'kchmck/vim-coffee-script'
+    NeoBundle 'jelera/vim-javascript-syntax'
+    NeoBundle 'tpope/vim-markdown'
 
 " Haskell
-NeoBundle 'dag/vim2hs'
-"Bundle 'eagletmt/ghcmod-vim'
+    NeoBundle 'dag/vim2hs'
 
 "colorscheme yuroyoro256
 colorscheme ironman
@@ -246,20 +246,20 @@ endfunction
 let g:tskelUserName="Yu.Shimizu"
 let g:tskelUserEmail="you05232050@gmail.com"
 
-"********************
-" neocomplcache.vim
-"********************
-let g:neocomplcache_enable_at_startup=1
-let g:neocomplcache_enable_smart_case=1
-let g:neocomplcache_enable_undebar_completion=1
-let g:neocomplcache_min_syntax_length=1
-"let g:neocomplcache_dictionary_filetype_lists={ array }
-imap <c-k> <Plug>(neocomplcache_snippets_expand)
-inoremap <expr><C-g> neocomplcache#undo_completion()
-inoremap <expr><C-l> neocomplcache#complete_common_string()
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y> neocomplcache#close_popup()
-inoremap <expr><C-e> neocomplcache#cancel_popup()
+" "********************
+" " neocomplcache.vim
+" "********************
+" let g:neocomplcache_enable_at_startup=1
+" let g:neocomplcache_enable_smart_case=1
+" let g:neocomplcache_enable_undebar_completion=1
+" let g:neocomplcache_min_syntax_length=1
+" "let g:neocomplcache_dictionary_filetype_lists={ array }
+" imap <c-k> <Plug>(neocomplcache_snippets_expand)
+" inoremap <expr><C-g> neocomplcache#undo_completion()
+" inoremap <expr><C-l> neocomplcache#complete_common_string()
+" inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+" inoremap <expr><C-y> neocomplcache#close_popup()
+" inoremap <expr><C-e> neocomplcache#cancel_popup()
 
 "********************
 " quickhl.vim
@@ -382,6 +382,8 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 let ColorRoller = {}
 let ColorRoller.colors = [
     \'default',
+    \'adaryn',
+    \'anotherdark',
     \'solarized',
     \'moss',
     \'dante',
