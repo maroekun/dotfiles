@@ -179,6 +179,14 @@ function! RubySetting()
     set shiftwidth=2
 endfunction
 
+" ** json
+autocmd BUfRead,BufNewFile *.json call JsonSetting()
+function! JsonSetting()
+    set ts=2
+    set sw=2
+    set ft=json
+endfunction
+
 "********************
 " variables
 "********************
