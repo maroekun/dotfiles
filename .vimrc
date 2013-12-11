@@ -205,12 +205,17 @@ endfunction
 " variables
 "********************
 
+" ** vim-indent-guides
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size  = 1
+
 " ** neosnippet
 let s:bundle = neobundle#get('neosnippet')
 function! s:bundle.hooks.on_source(bundle)
 "    let g:neosnippet#snippets_directory = '~/.vim/bundle/vim-snippets/snippets'
     let g:neosnippet#snippets_directory = '~/.vim/hoge/snippets'
 endfunction
+unlet s:bundle
 
 " ** neocomplete
 let s:bundle = neobundle#get('neocomplete.vim')
