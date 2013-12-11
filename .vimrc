@@ -31,7 +31,7 @@ NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'scrooloose/syntastic'
-NeoBundle 'osyo-manga/vim-over'
+NeoBundle 'nathanaelkane/vim-indent-guides'
 
 NeoBundleLazy 'Shougo/neocomplete.vim',   { 'autoload': { 'insert': 1 } }
 NeoBundleLazy 'Shougo/neosnippet',        { 'autoload': { 'insert': 1 } }
@@ -48,6 +48,9 @@ NeoBundleLazy 'airblade/vim-gitgutter', {
 NeoBundleLazy 'dag/vim2hs', {
             \ 'autoload': {
             \     'filetypes': ['haskell'] } }
+NeoBundleLazy 'osyo-manga/vim-over', {
+            \ 'autoload': {
+            \     'commands': ['OverCommandLine'] } }
 
 " Color syntax
 NeoBundle 'yuroyoro/yuroyoro256.vim'
@@ -191,9 +194,11 @@ endfunction
 " ** json
 autocmd BUfRead,BufNewFile *.json call JsonSetting()
 function! JsonSetting()
+    set ft=json
     set ts=2
     set sw=2
-    set ft=json
+    set list
+    set listchars=trail:-,eol:↲
 endfunction
 
 "********************
