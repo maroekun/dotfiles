@@ -3,6 +3,7 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 export PATH=$HOME/bin:$PATH
 export MANPATH=/opt/local/man:$MANPATH
 export LSCOLORS="DxGxcxdxCxegedabagacad"
+export PAGER="less -q -R"
 
 # if [ -n "$DYLD_LIBRARY_PATH" ]; then
 #   DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/usr/local/lib

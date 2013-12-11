@@ -31,6 +31,7 @@ NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'scrooloose/syntastic'
+NeoBundle 'osyo-manga/vim-over'
 
 NeoBundleLazy 'Shougo/neocomplete.vim',   { 'autoload': { 'insert': 1 } }
 NeoBundleLazy 'Shougo/neosnippet',        { 'autoload': { 'insert': 1 } }
@@ -56,6 +57,9 @@ NeoBundle 'vim-scripts/desert256.vim'
 NeoBundle 'vim-scripts/Colour-Sampler-Pack'
 NeoBundle 'vim-scripts/nginx.vim'
 NeoBundle 'elzr/vim-json'
+NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'vim-scripts/twilight'
+NeoBundle 'jonathanfilip/vim-lucius'
 
 NeoBundleLazy 'kchmck/vim-coffee-script', { 'autoload': {'filetypes': ['coffee']} }
 NeoBundleLazy 'motemen/xslate-vim', { 'autoload': {'filetypes': ['xslate']} }
@@ -105,6 +109,11 @@ onoremap ( t(
 vnoremap ) t)
 vnoremap ( t(
 map ,ptv :! perltidy
+
+" ** vim-over
+nnoremap <silent> <Leader>m :OverCommandLine<CR>
+nnoremap sub :OverCommandLine<CR>%s/<C-r><C-w>//g<Left><Left>
+nnoremap subp y:OverCommandLine<CR>%s!<C-r>=substitute(@0, '!', '\\!', 'g')<CR>!!gI<Left><Left><Left>
 
 " ** neocomplete
 inoremap <expr><C-g> neocomplete#undo_completion()
@@ -190,6 +199,13 @@ endfunction
 "********************
 " variables
 "********************
+
+" ** neosnippet
+let s:bundle = neobundle#get('neosnippet')
+function! s:bundle.hooks.on_source(bundle)
+"    let g:neosnippet#snippets_directory = '~/.vim/bundle/vim-snippets/snippets'
+    let g:neosnippet#snippets_directory = '~/.vim/hoge/snippets'
+endfunction
 
 " ** neocomplete
 let s:bundle = neobundle#get('neocomplete.vim')
@@ -277,6 +293,8 @@ let ColorRoller.colors = [
             \'desert256',
             \'mrkn256',
             \'wuye',
+            \'lucius',
+            \'twilight',
             \ ]
 
 " ** quickhl

@@ -48,6 +48,10 @@ case ${OSTYPE} in
         ;;
 esac
 
+if [ -e ~/.zshrc.local ]; then
+    source ~/.zshrc.local
+fi
+
 alias ..='cd ..'
 alias ...='cd ~'
 alias vi='vim'
@@ -112,6 +116,15 @@ colors
 ###
 # Set compinit 
 ###
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*:descriptions' format '%B%d%b'
+zstyle ':completion:*:messages' format '%d'
+zstyle ':completion:*:warnings' format 'No matches for: %d'
+zstyle ':completion:*:default' menu select=1
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' use-cache true
+
 fpath=($HOME/zsh.d/functions(N-/) $fpath)
 fpath=($HOME/trunk/github/zsh-completions/src $fpath)
 typeset -U FPATH
@@ -123,15 +136,6 @@ if [ "$CYGWIN" ] ; then
 else
     compinit
 fi
-
-zstyle ':completion:*' verbose yes
-zstyle ':completion:*:descriptions' format '%B%d%b'
-zstyle ':completion:*:messages' format '%d'
-zstyle ':completion:*:warnings' format 'No matches for: %d'
-zstyle ':completion:*:default' menu select=1
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' use-cache true
 
 r() {
     local f
