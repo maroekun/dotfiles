@@ -16,8 +16,13 @@ NeoBundle 'Shougo/vimproc', {
     \    },
     \ }
 
+" ** search plugin
 " NeoBundle 'rking/ag.vim'
-NeoBundle 'vim-scripts/EnhCommentify.vim'
+
+" ** comment out utility
+"NeoBundle 'vim-scripts/EnhCommentify.vim'
+NeoBundle 'scrooloose/nerdcommenter'
+
 NeoBundle 'vim-scripts/quickhl.vim'
 NeoBundle 'hotchpotch/perldoc-vim'
 NeoBundle 'kana/vim-smartword'
@@ -30,8 +35,10 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'mattn/emmet-vim'
-NeoBundle 'scrooloose/syntastic'
 NeoBundle 'nathanaelkane/vim-indent-guides'
+
+NeoBundle 'scrooloose/syntastic'
+"NeoBundleLazy 'scrooloose/syntastic', { 'autoload': { 'filetypes': ['ruby'] } }
 
 NeoBundleLazy 'Shougo/neocomplete.vim',   { 'autoload': { 'insert': 1 } }
 NeoBundleLazy 'Shougo/neosnippet',        { 'autoload': { 'insert': 1 } }
@@ -63,6 +70,7 @@ NeoBundle 'elzr/vim-json'
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'vim-scripts/twilight'
 NeoBundle 'jonathanfilip/vim-lucius'
+NeoBundle 'slim-template/vim-slim'
 
 NeoBundleLazy 'kchmck/vim-coffee-script', { 'autoload': {'filetypes': ['coffee']} }
 NeoBundleLazy 'motemen/xslate-vim', { 'autoload': {'filetypes': ['xslate']} }
@@ -102,7 +110,7 @@ hi Comment ctermfg=lightcyan
 " key mapping
 "********************
 
-"** General
+" ** General
 imap <c-j> <ESC>
 imap <silent> <c-d><c-d> <c-r>=strftime("%Y-%m-%d")<CR>
 imap <silent> <c-d><c-f> <c-r>=strftime("%Y/%m/%d")<CR>
@@ -112,6 +120,10 @@ onoremap ( t(
 vnoremap ) t)
 vnoremap ( t(
 map ,ptv :! perltidy
+
+" ** nerdcommenter
+nmap <Leader>x <Plug>NERDCommenterToggle
+vmap <Leader>x <Plug>NERDCommenterToggle
 
 " ** vim-over
 nnoremap <silent> <Leader>m :OverCommandLine<CR>
@@ -205,6 +217,17 @@ endfunction
 " variables
 "********************
 
+" ** nerdcommenter
+let g:NERDSpaceDelims = 1
+
+" ** syntastic
+let g:syntastic_mode_map = {
+            \ 'mode': 'passive',
+            \ 'active_filetypes': ['ruby']
+            \ }
+let g:syntastic_ruby_checkers  = ['rubocop']
+let g:syntastic_quiet_warnings = 0
+
 " ** vim-indent-guides
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size  = 1
@@ -270,17 +293,16 @@ endfunction
 unlet s:bundle
 
 " ** syntastic
-let s:bundle = neobundle#get('syntastic')
-function! s:bundle.hooks.on_source(bundle)
-"    let g:syntastic_check_on_wa=0
-    let g:syntastic_mode_map = {
-                \ 'mode': 'passive',
-                \ 'active_filetypes': ['ruby']
-                \ }
-    let g:syntastic_ruby_checkers  = ['rubocop']
-    let g:syntastic_quiet_warnings = 0
-endfunction
-unlet s:bundle
+"let s:bundle = neobundle#get('syntastic')
+"function! s:bundle.hooks.on_source(bundle)
+"    let g:syntastic_mode_map = {
+"                \ 'mode': 'passive',
+"                \ 'active_filetypes': ['ruby']
+"                \ }
+"    let g:syntastic_ruby_checkers  = ['rubocop']
+"    let g:syntastic_quiet_warnings = 0
+"endfunction
+"unlet s:bundle
 
 " color roller
 let ColorRoller = {}
@@ -311,6 +333,7 @@ let ColorRoller.colors = [
 let g:quickhl_keywords = [
             \ 'TODO',
             \ 'CAUTION',
+            \ 'DELETED',
             \ ]
 
 "********************
