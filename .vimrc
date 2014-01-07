@@ -170,11 +170,11 @@ nnoremap <silent><F9> : <C-u>call ColorRoller.roll()<CR>
 nnoremap <silent><F8> : <C-u>call ColorRoller.unroll()<CR>
 
 " ** quickhl.vim
-nmap <Space>m <Plug>(quickhl-toggle)
-xmap <Space>m <Plug>(quickhl-toggle)
-nmap <Space>M <Plug>(quickhl-reset)
-xmap <Space>M <Plug>(quickhl-reset)
-nmap <Space>j <Plug>(quickhl-match)
+nmap <Space>m <Plug>(quickhl-manual-this)
+xmap <Space>m <Plug>(quickhl-manual-this)
+nmap <Space>M <Plug>(quickhl-manual-reset)
+xmap <Space>M <Plug>(quickhl-manual-reset)
+nmap <Space>j <Plug>(quickhl-cword-toggle)
 
 " ** perldoc-vim
 setlocal iskeyword-=/
