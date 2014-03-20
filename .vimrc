@@ -36,6 +36,7 @@ NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'AndrewRadev/switch.vim'
 
 NeoBundle 'scrooloose/syntastic'
 "NeoBundleLazy 'scrooloose/syntastic', { 'autoload': { 'filetypes': ['ruby'] } }
@@ -121,6 +122,9 @@ vnoremap ) t)
 vnoremap ( t(
 map ,ptv :! perltidy
 
+" ** swithc.vim
+nmap <silent> ,s :<C-u>:Switch<CR>
+
 " ** nerdcommenter
 nmap <Leader>x <Plug>NERDCommenterToggle
 vmap <Leader>x <Plug>NERDCommenterToggle
@@ -164,6 +168,8 @@ nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
 nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
 nnoremap <silent> ,ua :<C-u>UniteWithBufferDir -buffer-name=files file buffer file_mru bookmark<CR>
+nnoremap <silent> ,uA :<C-u>Unite bookmark<CR>
+nnoremap <silent> ,A  :<C-u>UniteBookmarkAdd<CR>
 
 " ** color roller
 nnoremap <silent><F9> : <C-u>call ColorRoller.roll()<CR>
@@ -198,6 +204,14 @@ call unite#custom#profile('source/file', 'ignorecase', 1)
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 
+" ** slim
+autocmd BufRead,BufNewFile *.slim call SlimSetting()
+function! SlimSetting()
+  set ft=slim
+  set ts=2
+  set ts=2
+endfunction
+
 " ** ruby
 autocmd BufRead,BufNewFile *.rb,Gemfile,Vagrantfile call RubySetting()
 function! RubySetting()
@@ -225,10 +239,15 @@ let g:NERDSpaceDelims = 1
 " ** syntastic
 let g:syntastic_mode_map = {
             \ 'mode': 'passive',
-            \ 'active_filetypes': ['ruby']
-            \ }
+            \ 'active_filetypes': ['ruby'] }
 let g:syntastic_ruby_checkers  = ['rubocop']
-let g:syntastic_quiet_warnings = 0
+" let g:syntastic_debug = 1
+" let g:syntastic_quiet_warnings = 0 " >> deprecated option
+" let g:syntastic_quiet_messages = {'level': 'warnings'}
+" let g:syntastic_quiet_messages = { "level": "warnings",
+"                                  \ "type":  "style",
+"                                  \ "regex": '\m\[C03\d\d\]',
+"                                  \ "file":  ['\m^/usr/include/', '\m\c\.h$'] }
 
 " ** vim-indent-guides
 let g:indent_guides_start_level = 2
