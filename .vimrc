@@ -219,8 +219,16 @@ function! RubySetting()
     set shiftwidth=2
 endfunction
 
+" ** slim
+autocmd BufRead,BufNewFile *.slim call SlimSetting()
+function! SlimSetting()
+    set ft=slim
+    set ts=2
+    set sw=2
+endfunction
+
 " ** json
-autocmd BUfRead,BufNewFile *.json call JsonSetting()
+autocmd BufRead,BufNewFile *.json call JsonSetting()
 function! JsonSetting()
     set ft=json
     set ts=2
