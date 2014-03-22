@@ -1,0 +1,159 @@
+# vim:ft=zsh ts=2 sw=2
+
+autoload -Uz vcs_info
+autoload -Uz is-at-least
+autoload -Uz add-zsh-hook
+autoload -Uz colors
+colors
+
+zstyle ':vcs_info:*' max-exports 3
+zstyle ':vcs_info:*' enable git svn
+
+# General format (for SVN)
+zstyle ':vcs_info:*' formats '(%s)-[%b]'
+zstyle ':vcs_info:*' actionformats '(%s)-[%b]' '%m' '<!%a>'
+zstyle ':vcs_info:svn:*' branchformat '%b:r%r'
+
+zstyle ':vcs_info:git:*' formats '%s ⭠ %b'
+
+setopt prompt_subst
+
+function _update_vcs_info_msg() {
+    local -a messages
+    local prompt
+
+    LANG=en_US.UTF-8 vcs_info
+
+    if [[ -z ${vcs_info_msg_0_} ]]; then
+        prompt=""
+    else
+        [[ -n "$vcs_info_msg_0_" ]] && messages[1]="%F{green}${vcs_info_msg_0_}%{$reset_color%}"
+        prompt="${(j: :)messages}"
+    fi
+    # psvar[1]=$prompt
+    HOGEE=$prompt
+}
+
+p_init() { CURRENT_BG='NONE' }
+SEGMENT_SEPARATOR='⮀'
+
+prompt_segment() {
+  local bg fg
+  [[ -n $1 ]] && bg="%K{$1}" || bg="%k"
+  [[ -n $2 ]] && fg="%F{$2}" || fg="%f"
+  if [[ $CURRENT_BG != 'NONE' && $1 != $CURRENT_BG  ]]; then
+    echo -n " %{$bg%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR%{$fg%} "
+  else
+    echo -n "%{$bg%}%{$fg%} "
+  fi
+  CURRENT_BG=$1
+  [[ -n $3 ]] && echo -n $3
+}
+
+prompt_context() {
+  prompt_segment black default "%(!.%{%F{yellow}%}.)${USER}⟲ ${HOST}"
+  prompt_status
+}
+
+prompt_dir() {
+  prompt_segment blue black '%~'
+}
+
+prompt_vcs() {
+  local -a messages
+  local prompt
+
+  LANG=en_US.UTF-8 vcs_info
+
+  if [[ -z ${vcs_info_msg_0_} ]]; then
+    prompt=""
+  else
+    [[ -n "$vcs_info_msg_0_" ]] && messages[1]="${vcs_info_msg_0_}"
+    prompt="${(j: :)messages}"
+  fi
+
+  [[ -n "$prompt" ]] && prompt_segment green black "$prompt"
+}
+
+prompt_status() {
+  local -a symbol
+  symbols+="%(?,%{$fg[green]%},%{$fg[red]%})%(?,✔ ,✖ )"
+
+  [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{F{cyan}%}⚙"
+
+  # [[ -n "$symbols" ]] && prompt_segment black default "$symbols"
+  [[ -n "$symbols" ]] && prompt_segment default default "$symbols"
+}
+
+prompt_end() {
+  local sep
+  [[ -n $1 ]] && sep="$1" || sep="$SEGMENT_SEPARATOR"
+
+  if [[ -n $CURRENT_BG ]]; then
+    # echo -n " %{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
+    echo -n " %{%k%F{$CURRENT_BG}%}$sep"
+  else
+    echo -n "%{%k%}"
+  fi
+  echo -n "%{%f%}"
+  CURRENT_BG=''
+}
+
+build_prompt() {
+  RETVAL=$?
+  p_init
+  prompt_dir
+  prompt_vcs
+  prompt_end
+  p_init
+  echo -n $'\n'
+
+  prompt_context
+  prompt_end '⮁'
+}
+
+case ${UID} in
+    0)
+        ;;
+    *)
+        # add-zsh-hook precmd _update_vcs_info_msg
+        # line return -> $'\n'
+
+        # local p_cdir="[%B♘ :%{$fg[cyan]%}%~%{$reset_color%}]"
+        # local p_cdir="%{$bg[cyan]%}%~ %{$reset_color%}%{$fg[cyan]%}⮀%{$reset_color%} "
+
+        # local p_vcs="%1v"$'\n'
+
+        # local p_info="${USER}⟲ ${HOST}"
+
+        # local p_mark="%B%(?,%{$fg[green]%},%{$fg[red]%})%(!,#,%(?,✔ ,✖ ))%{$reset_color%}"
+
+        # PROMPT="$p_cdir$p_vcs$p_info $p_mark "
+        PROMPT='%{%f%b%k%}$(build_prompt) '
+
+        # RPROMPTいらない。
+        RPROMPT=""
+        ;;
+esac
+
+# case ${UID} in
+# 0)
+#     ;;
+# *)
+#     PROMPT_COLOR=31
+#     precmd(){
+#         PROMPT_COLOR="$[31+(${PROMPT_COLOR}-30)%7]"
+#         psvar=()
+#         LANG=en_US.UTF-8 vcs_info
+#         [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+#         [[ -n "$PERLBREW_PERL" ]] && psvar[2]="$PERLBREW_PERL"
+#         [[ -n "$PERL_LOCAL_LIB_ROOT" ]] && psvar[3]="$PERL_LOCAL_LIB_ROOT"
+#     }
+# # ⮁
+# # ⭠
+
+#     PROMPT='%{[${PROMPT_COLOR}m%}%B%U[%n@%m]%b%u%{[m%}%1(v|%F{green}%1v%f|)%2(v|%F{yellow}[perlversion:%2v]%f|)%3(v|%F{magenta}(locallib:%3v%)%f|)'"
+# %(!.#.$)"
+#     RPROMPT='[%F{cyan}%~%{[m%}$f]'
+#     ;;
+# esac

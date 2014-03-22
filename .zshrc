@@ -83,35 +83,8 @@ function mscreen() {
 ###
 # Set prompt
 ###
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' formats '(%s)-[%b]'
-zstyle ':vcs_info:*' actionformats '(%s)-[%b|%a]'
 
-setopt prompt_subst
-case ${UID} in
-0)
-    ;;
-*)
-    PROMPT_COLOR=31
-    precmd(){
-        PROMPT_COLOR="$[31+(${PROMPT_COLOR}-30)%7]"
-        psvar=()
-        LANG=en_US.UTF-8 vcs_info
-        [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
-        [[ -n "$PERLBREW_PERL" ]] && psvar[2]="$PERLBREW_PERL"
-        [[ -n "$PERL_LOCAL_LIB_ROOT" ]] && psvar[3]="$PERL_LOCAL_LIB_ROOT"
-    }
-    PROMPT='%{[${PROMPT_COLOR}m%}%B%U[%n@%m]%b%u%{[m%}%1(v|%F{green}%1v%f|)%2(v|%F{yellow}[perlversion:%2v]%f|)%3(v|%F{magenta}(locallib:%3v%)%f|)'"
-%(!.#.$)"
-    RPROMPT='[%F{cyan}%~%{[m%}$f]'
-    ;;
-esac
-
-###
-# Set colors
-###
-autoload -U colors
-colors
+[ -f ~/zsh.d/.zshrc.prompt ] && source ~/zsh.d/.zshrc.prompt
 
 ###
 # Set compinit 
