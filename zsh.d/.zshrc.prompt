@@ -14,24 +14,87 @@ zstyle ':vcs_info:*' formats '(%s)-[%b]'
 zstyle ':vcs_info:*' actionformats '(%s)-[%b]' '%m' '<!%a>'
 zstyle ':vcs_info:svn:*' branchformat '%b:r%r'
 
-zstyle ':vcs_info:git:*' formats '%s ⭠ %b'
+zstyle ':vcs_info:git:*' formats '%s ⭠ %b' '%c%u %m'
+zstyle ':vcs_info:git:*' actionformats '%s ⭠ %b' '%c%u %m' '<!%a>'
+zstyle ':vcs_info:git:*' check-for-changes true
+# zstyle ':vcs_info:git:*' stagedstr "+"
+# zstyle ':vcs_info:git:*' unstagedstr "-"
+zstyle ':vcs_info:git:*' stagedstr "✚ "
+zstyle ':vcs_info:git:*' unstagedstr "⚠ "
 
 setopt prompt_subst
 
-function _update_vcs_info_msg() {
-    local -a messages
-    local prompt
+zstyle ':vcs_info:git+set-message:*' hooks \
+  git-hook-begin \
+  git-untracked \
+  git-push-status \
+  git-push-nomerge-branch \
+  git-stash-count
 
-    LANG=en_US.UTF-8 vcs_info
+function +vi-git-hook-begin() {
+  if [[ $(command git rev-parse --is-inside-work-tree 2> /dev/null) != 'true' ]]; then
+    return 1
+  fi
+  return 0
+}
 
-    if [[ -z ${vcs_info_msg_0_} ]]; then
-        prompt=""
-    else
-        [[ -n "$vcs_info_msg_0_" ]] && messages[1]="%F{green}${vcs_info_msg_0_}%{$reset_color%}"
-        prompt="${(j: :)messages}"
-    fi
-    # psvar[1]=$prompt
-    HOGEE=$prompt
+function +vi-git-untracked() {
+  if [[ "$1" != "1" ]]; then
+    return 0
+  fi
+
+  if command git status --porcelain 2> /dev/null \
+    | awk '{print $1}' \
+    | command grep -F '??' > /dev/null 2>&1 ; then
+    # hook_com[unstaged]+='?'
+    hook_com[unstaged]+='☢ '
+  fi
+}
+
+function +vi-git-push-status() {
+  if [[ "$1" != "1" ]]; then
+    return 0
+  fi
+
+  # if [[ "${hook_com[branch]}" != "master" ]]; then
+  #   return 0
+  # fi
+
+  local ahead
+  ahead=$(command git rev-list origin/${hook_com[branch]}..${hook_com[branch]} 2> /dev/null | wc -l | tr -d ' ')
+
+  if [[ "$ahead" -gt 0 ]]; then
+    hook_com[misc]+="(p${ahead})"
+  fi
+}
+
+function +vi-git-nomerge-branch() {
+  if [[ "$1" != "1" ]]; then
+    return 0
+  fi
+
+  if [[ "${hook_com[branch]}" == "master" ]]; then
+    return 0
+  fi
+
+  local nomerged
+  nomerged=$(command git rev-list master..${hook_com[branch]} 2> /dev/null | wc -l | tr -d ' ')
+
+  if [[ "$nomerged" -gt 0 ]]; then
+    hook_com[misc]+="(m${nomerged})"
+  fi
+}
+
+function +vi-git-stash-count() {
+  if [[ "$1" != "1" ]]; then
+    return 0
+  fi
+
+  local stash
+  stash=$(command git stash list 2> /dev/null | wc -l | tr -d ' ')
+  if [[ "${stash}" -gt 0 ]]; then
+    hook_com[misc]+="S:${stash}"
+  fi
 }
 
 p_init() { CURRENT_BG='NONE' }
@@ -61,18 +124,20 @@ prompt_dir() {
 
 prompt_vcs() {
   local -a messages
-  local prompt
+  local prompt fg bg
 
   LANG=en_US.UTF-8 vcs_info
 
   if [[ -z ${vcs_info_msg_0_} ]]; then
     prompt=""
   else
-    [[ -n "$vcs_info_msg_0_" ]] && messages[1]="${vcs_info_msg_0_}"
+    [[ -n "$vcs_info_msg_0_" ]] && messages+="${vcs_info_msg_0_}" && fg="green"   && bg="black"
+    [[ -n "$vcs_info_msg_1_" ]] && [[ "$vcs_info_msg_1_" != " " ]] && messages+="${vcs_info_msg_1_}" && fg="yellow"  && bg="black"
+    [[ -n "$vcs_info_msg_2_" ]] && messages+="${vcs_info_msg_2_}" && fg="magenta" && bg="black"
     prompt="${(j: :)messages}"
   fi
 
-  [[ -n "$prompt" ]] && prompt_segment green black "$prompt"
+  [[ -n "$prompt" ]] && prompt_segment "$fg" "$bg" "$prompt"
 }
 
 prompt_clock() {
@@ -122,44 +187,9 @@ case ${UID} in
     0)
         ;;
     *)
-        # add-zsh-hook precmd _update_vcs_info_msg
-        # line return -> $'\n'
-
-        # local p_cdir="[%B♘ :%{$fg[cyan]%}%~%{$reset_color%}]"
-        # local p_cdir="%{$bg[cyan]%}%~ %{$reset_color%}%{$fg[cyan]%}⮀%{$reset_color%} "
-
-        # local p_vcs="%1v"$'\n'
-
-        # local p_info="${USER}⟲ ${HOST}"
-
-        # local p_mark="%B%(?,%{$fg[green]%},%{$fg[red]%})%(!,#,%(?,✔ ,✖ ))%{$reset_color%}"
-
-        # PROMPT="$p_cdir$p_vcs$p_info $p_mark "
         PROMPT='%{%f%b%k%}$(build_prompt) '
 
         # RPROMPTいらない。
         RPROMPT=""
         ;;
 esac
-
-# case ${UID} in
-# 0)
-#     ;;
-# *)
-#     PROMPT_COLOR=31
-#     precmd(){
-#         PROMPT_COLOR="$[31+(${PROMPT_COLOR}-30)%7]"
-#         psvar=()
-#         LANG=en_US.UTF-8 vcs_info
-#         [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
-#         [[ -n "$PERLBREW_PERL" ]] && psvar[2]="$PERLBREW_PERL"
-#         [[ -n "$PERL_LOCAL_LIB_ROOT" ]] && psvar[3]="$PERL_LOCAL_LIB_ROOT"
-#     }
-# # ⮁
-# # ⭠
-
-#     PROMPT='%{[${PROMPT_COLOR}m%}%B%U[%n@%m]%b%u%{[m%}%1(v|%F{green}%1v%f|)%2(v|%F{yellow}[perlversion:%2v]%f|)%3(v|%F{magenta}(locallib:%3v%)%f|)'"
-# %(!.#.$)"
-#     RPROMPT='[%F{cyan}%~%{[m%}$f]'
-#     ;;
-# esac
