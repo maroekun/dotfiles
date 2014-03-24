@@ -75,6 +75,11 @@ prompt_vcs() {
   [[ -n "$prompt" ]] && prompt_segment green black "$prompt"
 }
 
+prompt_clock() {
+  now=`date +"%x %T"`
+  prompt_segment cyan black "⌚ $now"
+}
+
 prompt_status() {
   local -a symbol
   symbols+="%(?,%{$fg[green]%},%{$fg[red]%})%(?,✔ ,✖ )"
@@ -103,6 +108,7 @@ build_prompt() {
   RETVAL=$?
   p_init
   prompt_dir
+  prompt_clock
   prompt_vcs
   prompt_end
   p_init
