@@ -39,6 +39,10 @@ function history-all { history -E 1 }
 #####
 # Set aliases
 #####
+if [ -e ~/.zshrc.local ]; then
+    source ~/.zshrc.local
+fi
+
 case ${OSTYPE} in
     darwin*)
         [ -f ~/.zshrc.osx ] && source ~/.zshrc.osx
@@ -47,10 +51,6 @@ case ${OSTYPE} in
         [ -f ~/.zshrc.linux ] && source ~/.zshrc.linux
         ;;
 esac
-
-if [ -e ~/.zshrc.local ]; then
-    source ~/.zshrc.local
-fi
 
 alias ..='cd ..'
 alias ...='cd ~'
@@ -99,7 +99,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' use-cache true
 
 fpath=($HOME/zsh.d/functions(N-/) $fpath)
-fpath=($HOME/trunk/github/zsh-completions/src $fpath)
+fpath=($HOME/git/github/zsh-completions/src $fpath)
 typeset -U FPATH
 typeset -U PATH
 
