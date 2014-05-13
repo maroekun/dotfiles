@@ -44,6 +44,7 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundleLazy 'Shougo/neocomplete.vim',   { 'autoload': { 'insert': 1 } }
 NeoBundleLazy 'Shougo/neosnippet',        { 'autoload': { 'insert': 1 } }
 NeoBundleLazy 'vim-scripts/ruby-matchit', { 'autoload': { 'filetypes': ['ruby'] } }
+NeoBundleLazy 'groenewege/vim-less', { 'autoload': { 'filetypes': ['less'] } }
 NeoBundleLazy 'vim-scripts/Align', {
             \ 'autoload': {
             \     'commands': ['Align'] } }
@@ -140,6 +141,7 @@ inoremap <expr><C-l> neocomplete#complete_common_string()
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 "inoremap <expr><C-y> neocomplete#close_popup()
 inoremap <expr><C-e> neocomplete#close_popup()
+nnoremap <silent> ,nt :<C-u>NeoCompleteToggle<CR>
 
 " ** neosnippet
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
