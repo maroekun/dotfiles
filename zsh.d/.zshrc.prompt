@@ -149,7 +149,7 @@ prompt_status() {
   local -a symbol
   symbols+="%(?,%{$fg[green]%},%{$fg[red]%})%(?,✔ ,✖ )"
 
-  [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{F{cyan}%}⚙"
+  [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{$fg[cyan]%}⚙"
 
   # [[ -n "$symbols" ]] && prompt_segment black default "$symbols"
   [[ -n "$symbols" ]] && prompt_segment default default "$symbols"
