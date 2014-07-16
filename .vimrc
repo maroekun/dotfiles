@@ -73,6 +73,7 @@ NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'vim-scripts/twilight'
 NeoBundle 'jonathanfilip/vim-lucius'
 NeoBundle 'slim-template/vim-slim'
+NeoBundle '29decibel/codeschool-vim-theme'
 
 NeoBundleLazy 'kchmck/vim-coffee-script', { 'autoload': {'filetypes': ['coffee']} }
 NeoBundleLazy 'motemen/xslate-vim', { 'autoload': {'filetypes': ['xslate']} }
@@ -148,6 +149,7 @@ imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
 xmap <C-l> <Plug>(neosnippet_start_unite_snipet_target)
+nnoremap <silent> ,ne :<C-u>NeoSnippetEdit<CR>
 
 if has('conceal')
     set conceallevel=2 concealcursor=i
