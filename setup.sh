@@ -1,7 +1,8 @@
 #!/usr/bin/zsh
 
 CURRENT=$(cd $(dirname $0); pwd)
-DOT_FILES=(.zshrc .vimrc .screenrc .bashrc .tmux.conf .perltidyrc .railsrc .gitconfig.local .gemrc zsh.d .zshrc.osx .zshrc.linux .selfvim)
+DOT_FILES=(.zshrc .vimrc .screenrc .bashrc .tmux.conf .perltidyrc .railsrc .gitconfig.local .gemrc zsh.d .zshrc.osx .zshrc.linux)
+DOT_DIRS=(zsh.d .selfvim)
 
 if test ! -e $HOME/dotfiles ; then
     echo 'dotfiles not exists!!'
@@ -9,15 +10,31 @@ if test ! -e $HOME/dotfiles ; then
     ln -s $CURRENT $HOME/dotfiles
 fi
 
+cat <<END
+
++ ----------------------------------------------- +
+  Create rc file
++ ----------------------------------------------- +
+
+END
+
 for file in ${DOT_FILES[@]}
 do
   if test -e $HOME/$file ;then
-    echo $file is exist.
+    echo Skip: $HOME/$file is exist.
   else
     ln -s $CURRENT/$file $HOME/$file
    echo $file sym-link create.
   fi
 done
+
+cat <<END
+
++ ----------------------------------------------- +
+  Submodule Initialize.
++ ----------------------------------------------- +
+
+END
 
 file_num=`expr $(/bin/ls $CURRENT/dot.vim/neobundle.vim | wc -l)`
 if [ $file_num -eq 0 ] ; then
@@ -25,22 +42,33 @@ if [ $file_num -eq 0 ] ; then
   cd $CURRENT
   git submodule update --init
 else
-  echo $CURRENT/dot.vim/neobundle.vim already initialize.
+  echo Skip: $CURRENT/dot.vim/neobundle.vim already initialize.
 fi
+
+cat <<END
+
++ ----------------------------------------------- +
+  Create directory
++ ----------------------------------------------- +
+
+END
 
 if [ ! -e $HOME/.vim ] ; then
   mkdir -p $HOME/.vim/bundle
   echo $HOME/.vim create.
   ln -s $CURRENT/dot.vim/neobundle.vim $HOME/.vim/bundle/neobundle.vim
 else
-  echo $HOME/.vim is exist.
+  echo Skip: $HOME/.vim is exist.
 fi
 
-if [ ! -e $HOME/.selfvim ] ; then
-  ln -s $CURRENT/.selfvim $HOME/.selfvim
-else
-  echo $HOME/.selfvim is exist.
-fi
+for d in ${DOT_DIRS[@]}
+do
+  if [ ! -e $HOME/$d ] ; then
+    ln -s $CURRENT/$d $HOME/$d
+  else
+    echo Skip: $HOME/$d is exist.
+  fi
+done
 
 if [ ! -e $HOME/bin ]; then
   mkdir $HOME/bin
@@ -53,9 +81,11 @@ fi
 
 
 cat <<END
+
 -------------------------------------------------
 
 add "export PATH=\$HOME/bin/bin:\$PATH" in your .zshenv or .bash_profile
 
 -------------------------------------------------
+
 END
