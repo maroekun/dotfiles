@@ -61,6 +61,7 @@ alias ss='screen -U'
 alias sl='screen -ls'
 alias sr='screen -r'
 alias be='bundle exec '
+alias gs='git status'
 
 alias -g G='| grep -v grep | grep --color=auto '
 alias -g V='| vim -'
