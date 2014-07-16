@@ -1,0 +1,40 @@
+snippet case
+abbr    case .. when ... else ... end
+  case ${1:condition}
+  when ${2:expr}
+    ${3:TARGET}
+  else
+    ${4:TARGET}
+  end
+  ${5}
+
+snippet blockvar
+abbr    { |var| ... }
+  { |${1:#:var}| ${2:TARGET} }
+
+snippet berescue
+abbr    begin ... rescue ... end
+  begin
+    ${1:TARGET}
+  rescue => e
+    ${2:TARGET}
+  end
+  ${3}
+
+snippet class
+abbr    class ... end
+  class ${1:#:class_name}
+    ${1:#:CONTENT}
+  end
+
+snippet initialize
+alias   init
+abbr    def initialize ... end
+  def initialize(${1:#:PARAM})
+    ${2:TARGET}
+  end
+
+snippet rloggerd
+alias   rlogd
+abbr    Rails.logger.debug(...)
+  Rails.logger.debug(${1:#:message})

@@ -1,0 +1,31 @@
+snippet envperl
+    #!/usr/bin/env perl
+
+    use 5.20.0;
+    use strict;
+    use warnings;
+    use utf8;
+
+    ${1}
+
+snippet optarg
+    use Getopt::Long qw(:config posix_default no_ignore_case gnu_compat bundling auto_version);
+    ${1}
+
+snippet dump
+    use Data::Dumper; print Dumper ${1}
+
+snippet udumper
+    use Data::Dumper;
+
+snippet n
+abbr    constructor subroutine
+    sub new {
+        my $class = shift;
+        my $args = ref $_[0] ? $_[0] : +{@_};
+
+        ${1:code}
+
+        bless $args, $class;
+    }
+

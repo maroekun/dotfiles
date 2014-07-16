@@ -3,13 +3,19 @@
 CURRENT=$(cd $(dirname $0); pwd)
 DOT_FILES=(.zshrc .vimrc .screenrc .bashrc .tmux.conf .perltidyrc .railsrc .gitconfig.local .gemrc zsh.d .zshrc.osx .zshrc.linux .selfvim)
 
+if test ! -e $HOME/dotfiles ; then
+    echo 'dotfiles not exists!!'
+    echo 'create sym-link to your $HOME'
+    ln -s $CURRENT $HOME/dotfiles
+fi
+
 for file in ${DOT_FILES[@]}
 do
   if test -e $HOME/$file ;then
     echo $file is exist.
   else
     ln -s $CURRENT/$file $HOME/$file
-   echo $file sym create.
+   echo $file sym-link create.
   fi
 done
 

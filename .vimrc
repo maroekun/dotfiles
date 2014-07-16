@@ -268,8 +268,7 @@ let g:indent_guides_guide_size  = 1
 " ** neosnippet
 let s:bundle = neobundle#get('neosnippet')
 function! s:bundle.hooks.on_source(bundle)
-"    let g:neosnippet#snippets_directory = '~/.vim/bundle/vim-snippets/snippets'
-    let g:neosnippet#snippets_directory = '~/.vim/hoge/snippets'
+    let g:neosnippet#snippets_directory = '~/dotfiles/snippets'
 endfunction
 unlet s:bundle
 
