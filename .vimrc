@@ -201,6 +201,9 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 call unite#custom#profile('source/buffer', 'ignorecase', 1)
 call unite#custom#profile('source/file', 'ignorecase', 1)
 
+" ** syntastic
+nnoremap <silent> ,sc :<C-u>SyntasticReset<CR>
+
 "********************
 " filse setting
 "********************
@@ -251,7 +254,7 @@ let g:NERDSpaceDelims = 1
 " ** syntastic
 let g:syntastic_mode_map = {
             \ 'mode': 'passive',
-            \ 'active_filetypes': ['ruby'] }
+            \ 'active_filetypes': ['ruby', 'perl'] }
 let g:syntastic_ruby_checkers  = ['rubocop']
 " let g:syntastic_debug = 1
 " let g:syntastic_quiet_warnings = 0 " >> deprecated option
@@ -438,6 +441,19 @@ function! s:my_cr_function()
     return neocomplete#smart_close_popup() . "\<CR>"
     " return neocomplete#smart_close_popup() . "\<C-h>"   "# 前はこの設定で使ってた
 endfunction
+
+"-------------------------------------------------------------------------------
+" Tab
+"-------------------------------------------------------------------------------
+nnoremap <silent> ,sc :<C-u>SyntasticReset<CR>
+" tc 新しいタブを一番右に作る
+nnoremap <silent> ,tc :tablast <bar> tabnew<CR>
+" tx タブを閉じる
+nnoremap <silent> ,tx :tabclose<CR>
+" tn 次のタブ
+nnoremap <silent> ,tn :tabnext<CR>
+" tp 前のタブ
+nnoremap <silent> ,tp :tabprevious<CR>
 
 "-------------------------------------------------------------------------------
 " カラー関連 Colors

@@ -1,7 +1,8 @@
 snippet envperl
+alias   #!
     #!/usr/bin/env perl
 
-    use 5.20.0;
+    use 5.${1:20}.0;
     use strict;
     use warnings;
     use utf8;
@@ -15,17 +16,41 @@ snippet optarg
 snippet dump
     use Data::Dumper; print Dumper ${1}
 
-snippet udumper
+snippet udump
+abbr    use Data::Dumper
     use Data::Dumper;
 
-snippet n
+snippet sayd
+    say Dumper ${1}
+
+snippet ufsay
+abbr    use feature import say
+    use feature qw/say/;
+
+snippet new
 abbr    constructor subroutine
     sub new {
         my $class = shift;
         my $args = ref $_[0] ? $_[0] : +{@_};
 
-        ${1:code}
+        ${1:awesome code}
 
         bless $args, $class;
     }
 
+# OO interface
+snippet self
+    my ($self${1:#:args}) = @_;
+    ${2}
+
+snippet package
+    package ${1:#:package name};
+
+    use v5.${2:20}.0;
+    use strict;
+    use warnings;
+    use utf8;
+
+    ${3}
+
+    1;
