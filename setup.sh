@@ -2,6 +2,7 @@
 
 CURRENT=$(cd $(dirname $0); pwd)
 DOT_FILES=(.zshrc .vimrc .screenrc .bashrc .tmux.conf .perltidyrc .railsrc .gitconfig.local .gemrc zsh.d .zshrc.osx .zshrc.linux)
+DOTT_FILES=(perlcriticrc replyrc rubocop.yml)
 DOT_DIRS=(zsh.d .selfvim)
 
 if test ! -e $HOME/dotfiles ; then
@@ -24,6 +25,16 @@ do
     echo Skip: $HOME/$file is exist.
   else
     ln -s $CURRENT/$file $HOME/$file
+   echo $file sym-link create.
+  fi
+done
+
+for file in ${DOTT_FILES[@]}
+do
+  if test -e $HOME/.$file ;then
+    echo Skip: $HOME/$file is exist.
+  else
+    ln -s $CURRENT/$file $HOME/.$file
    echo $file sym-link create.
   fi
 done

@@ -1,0 +1,34 @@
+#[-ControlStructures::ProhibitPostfixControls]
+#[-Documentation::RequirePodAtEnd]
+#[-Documentation::RequirePodSections]
+#[-Miscellanea::RequireRcsKeywords]
+#[-Modules::RequireVersionVar]
+#[-References::ProhibitDoubleSigils]
+#[-RegularExpressions::RequireExtendedFormatting]
+#[-RegularExpressions::RequireLineBoundaryMatching]
+#[-TestingAndDebugging::RequirePackageWarnings]
+#[-TestingAndDebugging::RequireUseWarnings]
+[-ValuesAndExpressions::ProhibitConstantPragma]
+#[-ValuesAndExpressions::ProhibitEmptyQuotes]
+#[-ValuesAndExpressions::ProhibitInterpolationOfLiterals]
+#[-ValuesAndExpressions::ProhibitNoisyQuotes]
+#[-ValuesAndExpressions::ProhibitLongChainsOfMethodCalls]
+#[-Variables::ProhibitPackageVars]
+#[-Variables::ProhibitPunctuationVars]
+#[-ValuesAndExpressions::ProhibitMagicNumbers]
+[-Subroutines::RequireFinalReturn]
+[-Subroutines::ProhibitBuiltinHomonyms]
+[-ValuesAndExpressions::ProhibitMixedBooleanOperators]
+
+
+
+[TestingAndDebugging::RequireUseStrict]
+equivalent_modules = Moo Moo::Role MooseX::MethodAttributes::Role Any::Moose
+[TestingAndDebugging::ProhibitNoStrict]
+allow=refs
+[Subroutines::ProhibitExcessComplexity]
+severity   = 5
+#max_mccabe = 30
+[Modules::ProhibitExcessMainComplexity]
+severity   = 5
+#max_mccabe = 30
