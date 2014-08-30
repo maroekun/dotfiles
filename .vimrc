@@ -74,12 +74,14 @@ NeoBundle 'vim-scripts/twilight'
 NeoBundle 'jonathanfilip/vim-lucius'
 NeoBundle 'slim-template/vim-slim'
 NeoBundle '29decibel/codeschool-vim-theme'
+NeoBundle 'honza/dockerfile.vim'
 
 NeoBundleLazy 'kchmck/vim-coffee-script', { 'autoload': {'filetypes': ['coffee']} }
 NeoBundleLazy 'motemen/xslate-vim', { 'autoload': {'filetypes': ['xslate']} }
 NeoBundleLazy 'tpope/vim-haml',     { 'autoload': {'filetypes': ['haml']} }
 NeoBundleLazy 'tpope/vim-markdown', { 'autoload': { 'filetypes': ['markdown'] } }
 NeoBundleLazy 'jelera/vim-javascript-syntax', { 'autoload': { 'filetypes': ['javascript'] } }
+NeoBundleLazy 'honza/dockerfile.vim', { 'autoload': { 'filetypes': ['dockerfile'] } }
 
 filetype plugin indent on
 
