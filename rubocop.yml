@@ -1,6 +1,17 @@
+Encoding:
+  Enabled: true
 LineLength:
     Enabled: false
     Max: 100
 MethodLength:
     Enabled: true
     Max: 50
+MethodAndVariableSnakeCase:
+  Enabled: false
+Documentation:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  EnforcedStyle: nested
+    SupportedStyles:
+      - nested
+      - compact

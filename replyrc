@@ -7,6 +7,8 @@ script_line3 = use 5.018002
 [DataDumper]
 [Colors]
 [ReadLine]
+history_file = '.hist'
+history_length = 1000
 [Hints]
 [Packages]
 [LexicalPersistence]

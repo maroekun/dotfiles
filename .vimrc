@@ -104,6 +104,8 @@ set scrolloff=5
 set laststatus=2
 " set statusline=%y%{GetStatusEx()}\ 0x%B(%b)%F%m%r%=<%c:%l>
 set statusline=%y%{GetStatusEx()}%{fugitive#statusline()}\ 0x%B(%b)%F%m%r%=<%c:%l>
+set list
+set listchars=tab:✓\ 
 
 command! Nginx : call Nginx()
 
@@ -166,14 +168,16 @@ nmap <silent> <c-e> :NERDTreeToggle<CR>
 noremap K :Perldoc<CR>
 
 " ** unite
-nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
-nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
-nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
-nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
-nnoremap <silent> ,ua :<C-u>UniteWithBufferDir -buffer-name=files file buffer file_mru bookmark<CR>
-nnoremap <silent> ,uA :<C-u>Unite bookmark<CR>
-nnoremap <silent> ,A  :<C-u>UniteBookmarkAdd<CR>
+nnoremap [unite] <Nop>
+nmap ,u [unite]
+nnoremap <silent> [unite]b :<C-u>Unite buffer<CR>
+nnoremap <silent> [unite]f :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
+nnoremap <silent> [unite]m :<C-u>Unite file_mru<CR>
+nnoremap <silent> [unite]u :<C-u>Unite buffer file_mru<CR>
+nnoremap <silent> [unite]a :<C-u>UniteWithBufferDir -buffer-name=files file buffer file_mru bookmark<CR>
+nnoremap <silent> [unite]c :<C-u>Unite bookmark<CR>
+nnoremap <silent> [unite]A :<C-u>UniteBookmarkAdd<CR>
 
 " ** color roller
 nnoremap <silent><F9> : <C-u>call ColorRoller.roll()<CR>
@@ -211,12 +215,19 @@ nnoremap <silent> ,sc :<C-u>SyntasticReset<CR>
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 
+autocmd BufRead,BufNewFile *.tt call HtmlSetting()
+function! HtmlSetting()
+    set ft=html
+    set ts=2
+    set sw=2
+endfunction
+
 " ** slim
 autocmd BufRead,BufNewFile *.slim call SlimSetting()
 function! SlimSetting()
   set ft=slim
   set ts=2
-  set ts=2
+  set sw=2
 endfunction
 
 " ** ruby

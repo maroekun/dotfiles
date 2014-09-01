@@ -54,3 +54,22 @@ snippet package
     ${3}
 
     1;
+
+# Moo
+
+snippet Moo
+    use Moo;
+    use MooX::Types::MooseLike::Base qw(:all);
+    use namespace::clean;
+    ${1}
+
+snippet has
+    has ${1} => ( ${2} );
+snippet extends
+    extends '${1:#:parent class}';
+    ${2}
+
+# Catalyst
+
+snippet clog
+    $c->log->debug(${1});
