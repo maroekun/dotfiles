@@ -40,8 +40,8 @@ NeoBundle 'AndrewRadev/switch.vim'
 
 NeoBundle 'scrooloose/syntastic'
 "NeoBundleLazy 'scrooloose/syntastic', { 'autoload': { 'filetypes': ['ruby'] } }
+NeoBundle 'Shougo/neocomplete.vim'
 
-NeoBundleLazy 'Shougo/neocomplete.vim',   { 'autoload': { 'insert': 1 } }
 NeoBundleLazy 'Shougo/neosnippet',        { 'autoload': { 'insert': 1 } }
 NeoBundleLazy 'vim-scripts/ruby-matchit', { 'autoload': { 'filetypes': ['ruby'] } }
 NeoBundleLazy 'groenewege/vim-less', { 'autoload': { 'filetypes': ['less'] } }
@@ -81,11 +81,17 @@ NeoBundleLazy 'tpope/vim-haml',     { 'autoload': {'filetypes': ['haml']} }
 NeoBundleLazy 'tpope/vim-markdown', { 'autoload': { 'filetypes': ['markdown'] } }
 NeoBundleLazy 'jelera/vim-javascript-syntax', { 'autoload': { 'filetypes': ['javascript'] } }
 
+" for golang {{{
+filetype off
+filetype plugin indent off
+set runtimepath+=$GOROOT/misc/vim
+" }}}
+
 filetype plugin indent on
+syntax on
 
 NeoBundleCheck
 
-syntax on
 set nobackup
 set modelines=5
 set number
@@ -110,6 +116,12 @@ set listchars=tab:✓\
 command! Nginx : call Nginx()
 
 hi Comment ctermfg=lightcyan
+
+" for golang {{{
+autocmd FileType go autocmd BufWritePre <buffer> Fmt
+exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
+set completeopt=menu,preview
+" }}}
 
 "********************
 " key mapping
@@ -286,32 +298,30 @@ function! s:bundle.hooks.on_source(bundle)
 endfunction
 unlet s:bundle
 
-" ** neocomplete
-let s:bundle = neobundle#get('neocomplete.vim')
-function! s:bundle.hooks.on_source(bundle)
-    let g:acp_enableAtStartup = 0           " Disable AutoComplPop.
-    let g:neocomplete#enable_at_startup = 1 " Use neocomplete.
-    let g:neocomplete#enable_smart_case = 1 " Use smartcase.
-    let g:neocomplete#sources#syntax#min_keyword_length = 1 " Set minimum syntax keyword length.
-    let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'   " 前は使ってなかった **  必要？？？ **
+" neocomplete {{{
+let g:acp_enableAtStartup = 0           " Disable AutoComplPop.
+let g:neocomplete#enable_at_startup  = 1 " Use neocomplete.
+let g:neocomplete#enable_ignore_case = 1 " Use smartcase.
+let g:neocomplete#enable_smart_case  = 1 " Use smartcase.
+let g:neocomplete#sources#syntax#min_keyword_length = 1 " Set minimum syntax keyword length.
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'   " 前は使ってなかった **  必要？？？ **
 
-    " Resolve error, caused by vim-rails. >>  https://github.com/tpope/vim-rails/issues/283
-    let g:neocomplete#force_overwrite_completefunc = 1
+" Resolve error, caused by vim-rails. >>  https://github.com/tpope/vim-rails/issues/283
+let g:neocomplete#force_overwrite_completefunc = 1
 
-    let g:neocomplete#sources#dictionary#dictionaries = { 'default' : '', } " Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = { 'default' : '', } " Define dictionary.
 
-    " Define keyword.
-    if !exists('g:neocomplete#keyword_patterns')
-        let g:neocomplete#keyword_patterns = {}
-    endif
-    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-    " Enable heavy omni completion.
-    if !exists('g:neocomplete#sources#omni#input_patterns')
-        let g:neocomplete#sources#omni#input_patterns = {}
-    endif
-endfunction
-unlet s:bundle
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+endif
+" }}}
 
 " ** lightline
 let g:lightline = {
