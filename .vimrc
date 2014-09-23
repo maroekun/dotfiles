@@ -485,6 +485,7 @@ nnoremap <silent> ,tp :tabprevious<CR>
 " ターミナルタイプによるカラー設定
 if &term =~ "xterm-256color" || "screen-256color"
   " 256色
+  set t_ut=
   set t_Co=256
   set t_Sf=[3%dm
   set t_Sb=[4%dm
