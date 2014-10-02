@@ -37,6 +37,7 @@ NeoBundle 'thinca/vim-ref'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'AndrewRadev/switch.vim'
+NeoBundle 'rking/ag.vim'
 
 NeoBundle 'scrooloose/syntastic'
 "NeoBundleLazy 'scrooloose/syntastic', { 'autoload': { 'filetypes': ['ruby'] } }
@@ -48,9 +49,9 @@ NeoBundleLazy 'groenewege/vim-less', { 'autoload': { 'filetypes': ['less'] } }
 NeoBundleLazy 'vim-scripts/Align', {
             \ 'autoload': {
             \     'commands': ['Align'] } }
-NeoBundleLazy 'scrooloose/nerdtree', {
+NeoBundleLazy 'Shougo/vimfiler.vim', {
             \ 'autoload': {
-            \     'commands': ['NERDTreeToggle'] } }
+            \     'commands': ['VimFiler'] } }
 NeoBundleLazy 'airblade/vim-gitgutter', {
             \ 'autoload': {
             \     'commands': ['GitGutterToggle'] } }
@@ -173,8 +174,8 @@ endif
 nnoremap <silent> ,gg :<C-u>GitGutterToggle<CR>
 nnoremap <silent> ,gh :<C-u>GitGutterLineHighlightsToggle<CR>
 
-" ** nerdtree
-nmap <silent> <c-e> :NERDTreeToggle<CR>
+" ** VimFiler
+nmap <silent> <c-e> :VimFiler<CR>
 
 " ** perldoc-vim
 noremap K :Perldoc<CR>
@@ -227,6 +228,13 @@ nnoremap <silent> ,sc :<C-u>SyntasticReset<CR>
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 
+autocmd BufREad,BufNewFile *.yml,*.yaml call YAMLSetting()
+function! YAMLSetting()
+    set ft=yaml
+    set ts=2
+    set sw=2
+endfunction
+
 autocmd BufRead,BufNewFile *.tt call HtmlSetting()
 function! HtmlSetting()
     set ft=html
@@ -271,6 +279,9 @@ endfunction
 " variables
 "********************
 
+" ** VimFiler
+let g:vimfiler_ignore_pattern = '^\%(\.DS_Store\)$'
+
 " ** nerdcommenter
 let g:NERDSpaceDelims = 1
 
@@ -299,11 +310,11 @@ endfunction
 unlet s:bundle
 
 " neocomplete {{{
-let g:acp_enableAtStartup = 0           " Disable AutoComplPop.
+let g:acp_enableAtStartup = 0            " Disable AutoComplPop.
 let g:neocomplete#enable_at_startup  = 1 " Use neocomplete.
-let g:neocomplete#enable_ignore_case = 1 " Use smartcase.
+let g:neocomplete#enable_ignore_case = 1 " Use ignorecase.
 let g:neocomplete#enable_smart_case  = 1 " Use smartcase.
-let g:neocomplete#sources#syntax#min_keyword_length = 1 " Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length.
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'   " 前は使ってなかった **  必要？？？ **
 
 " Resolve error, caused by vim-rails. >>  https://github.com/tpope/vim-rails/issues/283
