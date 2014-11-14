@@ -1,9 +1,9 @@
-set nocompatible
-
+" for Neobundle {{{
 if has('vim_starting')
    set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
+set nocompatible
 call neobundle#rc(expand('~/.vim/bundle/'))
 
 NeoBundleFetch 'Shougo/neobundle.vim'
@@ -16,35 +16,37 @@ NeoBundle 'Shougo/vimproc', {
     \    },
     \ }
 
-" ** search plugin
-" NeoBundle 'rking/ag.vim'
-
-" ** comment out utility
-"NeoBundle 'vim-scripts/EnhCommentify.vim'
-NeoBundle 'scrooloose/nerdcommenter'
-
-NeoBundle 'vim-scripts/quickhl.vim'
-NeoBundle 'hotchpotch/perldoc-vim'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'kana/vim-smartword'
+NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-rails'
-NeoBundle 'tpope/vim-endwise'
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'thinca/vim-ref'
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'AndrewRadev/switch.vim'
-NeoBundle 'rking/ag.vim'
-
-NeoBundle 'scrooloose/syntastic'
-"NeoBundleLazy 'scrooloose/syntastic', { 'autoload': { 'filetypes': ['ruby'] } }
+NeoBundle 'vim-scripts/taglist.vim'
 NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'scrooloose/nerdcommenter'
 
+NeoBundleLazy 'hotchpotch/perldoc-vim', {
+            \ 'autoload': {
+            \   'commands': ['Perldoc'],
+            \   'filetypes': ['perl']
+            \ } }
+NeoBundleLazy 'vim-scripts/quickhl.vim', {
+            \ 'autoload': {
+            \     'mappings': ['<Plug>(quickhl-manual-this)',
+            \                  '<Plug>(quickhl-manual-reset)',
+            \                  '<Plug>(quickhl-cword-toggle)' ]
+            \ } }
+NeoBundleLazy 'rking/ag.vim', { 'autoload': { 'commands': ['Ag'] } }
+NeoBundleLazy 'scrooloose/syntastic',     { 'autoload': { 'filetypes': ['ruby', 'perl'] } }
 NeoBundleLazy 'Shougo/neosnippet',        { 'autoload': { 'insert': 1 } }
+NeoBundleLazy 'mattn/emmet-vim', { 'autoload': { 'filetypes': ['html', 'tt2'] } }
 NeoBundleLazy 'vim-scripts/ruby-matchit', { 'autoload': { 'filetypes': ['ruby'] } }
+NeoBundleLazy 'tpope/vim-endwise', { 'autoload': { 'filetypes': ['ruby'] } }
 NeoBundleLazy 'groenewege/vim-less', { 'autoload': { 'filetypes': ['less'] } }
 NeoBundleLazy 'vim-scripts/Align', {
             \ 'autoload': {
@@ -69,13 +71,13 @@ NeoBundle 'mrkn/mrkn256.vim'
 NeoBundle 'vim-scripts/desert256.vim'
 NeoBundle 'vim-scripts/Colour-Sampler-Pack'
 NeoBundle 'vim-scripts/nginx.vim'
-NeoBundle 'elzr/vim-json'
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'vim-scripts/twilight'
 NeoBundle 'jonathanfilip/vim-lucius'
 NeoBundle 'slim-template/vim-slim'
 NeoBundle '29decibel/codeschool-vim-theme'
 
+NeoBundleLazy 'elzr/vim-json',            { 'autoload': { 'filetypes': ['json'] } }
 NeoBundleLazy 'kchmck/vim-coffee-script', { 'autoload': {'filetypes': ['coffee']} }
 NeoBundleLazy 'motemen/xslate-vim', { 'autoload': {'filetypes': ['xslate']} }
 NeoBundleLazy 'tpope/vim-haml',     { 'autoload': {'filetypes': ['haml']} }
@@ -90,8 +92,15 @@ set runtimepath+=$GOROOT/misc/vim
 
 filetype plugin indent on
 syntax on
-
 NeoBundleCheck
+" }}}
+
+
+" for golang {{{
+autocmd FileType go autocmd BufWritePre <buffer> Fmt
+exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
+set completeopt=menu,preview
+" }}}
 
 set nobackup
 set modelines=5
@@ -118,11 +127,137 @@ command! Nginx : call Nginx()
 
 hi Comment ctermfg=lightcyan
 
-" for golang {{{
-autocmd FileType go autocmd BufWritePre <buffer> Fmt
-exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
-set completeopt=menu,preview
+"********************
+" variables
+"********************
+
+" ** VimFiler
+let s:bundle = neobundle#get("vimfiler.vim")
+function! s:bundle.hooks.on_source(bundle)
+  let g:vimfiler_ignore_pattern = '^\%(\.DS_Store\)$'
+endfunction
+unlet s:bundle
+
+" ** nerdcommenter
+let s:bundle = neobundle#get("nerdcommenter")
+function! s:bundle.hooks.on_source(bundle)
+  let g:NERDSpaceDelims = 1
+endfunction
+unlet s:bundle
+
+" ** syntastic
+let s:bundle = neobundle#get('syntastic')
+function! s:bundle.hooks.on_source(bundle)
+ let g:syntastic_mode_map = {
+               \ 'mode': 'passive',
+               \ 'active_filetypes': ['ruby', 'perl'] }
+ let g:syntastic_ruby_checkers  = ['rubocop']
+ " let g:syntastic_quiet_warnings = 0
+endfunction
+unlet s:bundle
+
+" ** vim-indent-guides
+let s:bundle = neobundle#get('vim-indent-guides')
+function! s:bundle.hooks.on_source(bundle)
+  let g:indent_guides_start_level = 2
+  let g:indent_guides_guide_size  = 1
+endfunction
+unlet s:bundle
+
+" ** quickhl
+let s:bundle = neobundle#get('quickhl.vim')
+function! s:bundle.hooks.on_source(bundle)
+  let g:quickhl_keywords = [
+              \ 'TODO',
+              \ 'CAUTION',
+              \ 'DELETED',
+              \ ]
+endfunction
+unlet s:bundle
+
+" ** neosnippet
+let s:bundle = neobundle#get('neosnippet')
+function! s:bundle.hooks.on_source(bundle)
+    let g:neosnippet#snippets_directory = '~/dotfiles/snippets'
+endfunction
+unlet s:bundle
+
+" neocomplete {{{
+let g:acp_enableAtStartup = 0            " Disable AutoComplPop.
+let g:neocomplete#enable_at_startup  = 1 " Use neocomplete.
+let g:neocomplete#enable_ignore_case = 1 " Use ignorecase.
+let g:neocomplete#enable_smart_case  = 1 " Use smartcase.
+let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length.
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'   " 前は使ってなかった **  必要？？？ **
+
+" Resolve error, caused by vim-rails. >>  https://github.com/tpope/vim-rails/issues/283
+let g:neocomplete#force_overwrite_completefunc = 1
+
+let g:neocomplete#sources#dictionary#dictionaries = { 'default' : '', } " Define dictionary.
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+endif
 " }}}
+
+" ** lightline
+let g:lightline = {
+            \ 'colorscheme': 'wombat',
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ],
+            \             [ 'fugitive', 'filename'] ]
+            \ },
+            \ 'component_function': {
+            \   'fugitive': 'MyFugitive',
+            \   'readonly': 'MyReadonly',
+            \   'modified': 'MyModified',
+            \   'filename': 'MyFilename'
+            \ },
+            \ 'separator': { 'left': '⮀', 'right': '⮂' },
+            \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+            \ }
+
+" ** vim-gitgutter
+let s:bundle = neobundle#get('vim-gitgutter')
+function! s:bundle.hooks.on_source(bundle)
+    let g:gitgutter_enabled         = 0
+    let g:gitgutter_highlight_lines = 0
+endfunction
+unlet s:bundle
+
+
+" color roller
+let ColorRoller = {}
+let ColorRoller.colors = [
+            \'default',
+            \'adaryn',
+            \'anotherdark',
+            \'solarized',
+            \'moss',
+            \'dante',
+            \'golden',
+            \'ironman',
+            \'jellybeans',
+            \'mustang',
+            \'softblue',
+            \'tir_black',
+            \'wombat256',
+            \'yuroyoro256',
+            \'molokai',
+            \'desert256',
+            \'mrkn256',
+            \'wuye',
+            \'lucius',
+            \'twilight',
+            \ ]
+
 
 "********************
 " key mapping
@@ -225,8 +360,15 @@ nnoremap <silent> ,sc :<C-u>SyntasticReset<CR>
 " filse setting
 "********************
 
+autocmd FileType perl colorscheme hybrid
+autocmd BufRead,BufNewFile *.pl,*.pm call PerlSetting()
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+
+function! PerlSetting()
+    set ts=4
+    set sw=4
+endfunction
 
 autocmd BufREad,BufNewFile *.yml,*.yaml call YAMLSetting()
 function! YAMLSetting()
@@ -274,134 +416,6 @@ function! JsonSetting()
     set list
     set listchars=trail:-,eol:↲
 endfunction
-
-"********************
-" variables
-"********************
-
-" ** VimFiler
-let g:vimfiler_ignore_pattern = '^\%(\.DS_Store\)$'
-
-" ** nerdcommenter
-let g:NERDSpaceDelims = 1
-
-" ** syntastic
-let g:syntastic_mode_map = {
-            \ 'mode': 'passive',
-            \ 'active_filetypes': ['ruby', 'perl'] }
-let g:syntastic_ruby_checkers  = ['rubocop']
-" let g:syntastic_debug = 1
-" let g:syntastic_quiet_warnings = 0 " >> deprecated option
-" let g:syntastic_quiet_messages = {'level': 'warnings'}
-" let g:syntastic_quiet_messages = { "level": "warnings",
-"                                  \ "type":  "style",
-"                                  \ "regex": '\m\[C03\d\d\]',
-"                                  \ "file":  ['\m^/usr/include/', '\m\c\.h$'] }
-
-" ** vim-indent-guides
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size  = 1
-
-" ** neosnippet
-let s:bundle = neobundle#get('neosnippet')
-function! s:bundle.hooks.on_source(bundle)
-    let g:neosnippet#snippets_directory = '~/dotfiles/snippets'
-endfunction
-unlet s:bundle
-
-" neocomplete {{{
-let g:acp_enableAtStartup = 0            " Disable AutoComplPop.
-let g:neocomplete#enable_at_startup  = 1 " Use neocomplete.
-let g:neocomplete#enable_ignore_case = 1 " Use ignorecase.
-let g:neocomplete#enable_smart_case  = 1 " Use smartcase.
-let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length.
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'   " 前は使ってなかった **  必要？？？ **
-
-" Resolve error, caused by vim-rails. >>  https://github.com/tpope/vim-rails/issues/283
-let g:neocomplete#force_overwrite_completefunc = 1
-
-let g:neocomplete#sources#dictionary#dictionaries = { 'default' : '', } " Define dictionary.
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-endif
-" }}}
-
-" ** lightline
-let g:lightline = {
-            \ 'colorscheme': 'wombat',
-            \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'fugitive', 'filename'] ]
-            \ },
-            \ 'component_function': {
-            \   'fugitive': 'MyFugitive',
-            \   'readonly': 'MyReadonly',
-            \   'modified': 'MyModified',
-            \   'filename': 'MyFilename'
-            \ },
-            \ 'separator': { 'left': '⮀', 'right': '⮂' },
-            \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
-            \ }
-
-" ** vim-gitgutter
-let s:bundle = neobundle#get('vim-gitgutter')
-function! s:bundle.hooks.on_source(bundle)
-    let g:gitgutter_enabled         = 0
-    let g:gitgutter_highlight_lines = 0
-endfunction
-unlet s:bundle
-
-" ** syntastic
-"let s:bundle = neobundle#get('syntastic')
-"function! s:bundle.hooks.on_source(bundle)
-"    let g:syntastic_mode_map = {
-"                \ 'mode': 'passive',
-"                \ 'active_filetypes': ['ruby']
-"                \ }
-"    let g:syntastic_ruby_checkers  = ['rubocop']
-"    let g:syntastic_quiet_warnings = 0
-"endfunction
-"unlet s:bundle
-
-" color roller
-let ColorRoller = {}
-let ColorRoller.colors = [
-            \'default',
-            \'adaryn',
-            \'anotherdark',
-            \'solarized',
-            \'moss',
-            \'dante',
-            \'golden',
-            \'ironman',
-            \'jellybeans',
-            \'mustang',
-            \'softblue',
-            \'tir_black',
-            \'wombat256',
-            \'yuroyoro256',
-            \'molokai',
-            \'desert256',
-            \'mrkn256',
-            \'wuye',
-            \'lucius',
-            \'twilight',
-            \ ]
-
-" ** quickhl
-let g:quickhl_keywords = [
-            \ 'TODO',
-            \ 'CAUTION',
-            \ 'DELETED',
-            \ ]
 
 "********************
 " functions
