@@ -161,5 +161,12 @@ else
     hostnames=(localhost)
 fi
 
+###
+# peco setting
+###
+if whence -p peco >/dev/null ; then
+    for f (~/zsh.d/peco/*.zsh) source ${f}
+fi
+
 # aws_completion
 [[ -e $(which aws_zsh_completer.sh) ]] && source $(which aws_zsh_completer.sh)

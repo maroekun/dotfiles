@@ -72,6 +72,13 @@ else
   echo Skip: $HOME/.vim is exist.
 fi
 
+if [ ! -e $HOME/.pecl ] ; then
+  mkdir -p $HOME/.peco
+  ln -snf $CURRENT/peco-config.json $HOME/.peco/config.json
+else
+  echo Skip: $HOME/.peco is exist.
+fi
+
 for d in ${DOT_DIRS[@]}
 do
   if [ ! -e $HOME/$d ] ; then
