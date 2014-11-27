@@ -29,6 +29,8 @@ NeoBundle 'vim-scripts/taglist.vim'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 'vim-jp/vim-go-extra'
+NeoBundle 'google/vim-ft-go'
 
 NeoBundleLazy 'hotchpotch/perldoc-vim', {
             \ 'autoload': {
@@ -85,9 +87,7 @@ NeoBundleLazy 'tpope/vim-markdown', { 'autoload': { 'filetypes': ['markdown'] } 
 NeoBundleLazy 'jelera/vim-javascript-syntax', { 'autoload': { 'filetypes': ['javascript'] } }
 
 " for golang {{{
-filetype off
-filetype plugin indent off
-set runtimepath+=$GOROOT/misc/vim
+set rtp^=$GOPATH/src/github.com/nsf/gocode/vim
 " }}}
 
 filetype plugin indent on
@@ -97,9 +97,11 @@ NeoBundleCheck
 
 
 " for golang {{{
-autocmd FileType go autocmd BufWritePre <buffer> Fmt
-exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
-set completeopt=menu,preview
+set path+=$GOPATH/src/**
+let g:gofmt_command = 'goimports'
+au BufWritePre *.go Fmt
+au BufNewFile,BufRead *.go set sw=4 noexpandtab ts=4 completeopt=menu,preview
+au FileType go compiler go
 " }}}
 
 set nobackup
