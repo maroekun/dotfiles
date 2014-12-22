@@ -31,42 +31,57 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'vim-jp/vim-go-extra'
 NeoBundle 'google/vim-ft-go'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'szw/vim-tags'
 
 NeoBundleLazy 'hotchpotch/perldoc-vim', {
             \ 'autoload': {
             \   'commands': ['Perldoc'],
             \   'filetypes': ['perl']
             \ } }
+
 NeoBundleLazy 'vim-scripts/quickhl.vim', {
             \ 'autoload': {
             \     'mappings': ['<Plug>(quickhl-manual-this)',
             \                  '<Plug>(quickhl-manual-reset)',
             \                  '<Plug>(quickhl-cword-toggle)' ]
             \ } }
+
 NeoBundleLazy 'rking/ag.vim', { 'autoload': { 'commands': ['Ag'] } }
+
 NeoBundleLazy 'scrooloose/syntastic',     { 'autoload': { 'filetypes': ['ruby', 'perl'] } }
+
 NeoBundleLazy 'Shougo/neosnippet',        { 'autoload': { 'insert': 1 } }
+
 NeoBundleLazy 'mattn/emmet-vim', { 'autoload': { 'filetypes': ['html', 'tt2'] } }
+
 NeoBundleLazy 'vim-scripts/ruby-matchit', { 'autoload': { 'filetypes': ['ruby'] } }
+
 NeoBundleLazy 'tpope/vim-endwise', { 'autoload': { 'filetypes': ['ruby'] } }
+
 NeoBundleLazy 'groenewege/vim-less', { 'autoload': { 'filetypes': ['less'] } }
+
 NeoBundleLazy 'vim-scripts/Align', {
             \ 'autoload': {
             \     'commands': ['Align'] } }
+
 NeoBundleLazy 'Shougo/vimfiler.vim', {
             \ 'autoload': {
             \     'commands': ['VimFiler'] } }
+
 NeoBundleLazy 'airblade/vim-gitgutter', {
             \ 'autoload': {
             \     'commands': ['GitGutterToggle'] } }
+
 NeoBundleLazy 'dag/vim2hs', {
             \ 'autoload': {
             \     'filetypes': ['haskell'] } }
+
 NeoBundleLazy 'osyo-manga/vim-over', {
             \ 'autoload': {
             \     'commands': ['OverCommandLine'] } }
 
-" Color syntax
+" Color syntax {{{
 NeoBundle 'yuroyoro/yuroyoro256.vim'
 NeoBundle 'tomasr/molokai'
 NeoBundle 'mrkn/mrkn256.vim'
@@ -78,6 +93,8 @@ NeoBundle 'vim-scripts/twilight'
 NeoBundle 'jonathanfilip/vim-lucius'
 NeoBundle 'slim-template/vim-slim'
 NeoBundle '29decibel/codeschool-vim-theme'
+NeoBundle 'derekwyatt/vim-scala'
+" }}}
 
 NeoBundleLazy 'elzr/vim-json',            { 'autoload': { 'filetypes': ['json'] } }
 NeoBundleLazy 'kchmck/vim-coffee-script', { 'autoload': {'filetypes': ['coffee']} }
@@ -195,7 +212,11 @@ let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'   " 前は使ってなか�
 " Resolve error, caused by vim-rails. >>  https://github.com/tpope/vim-rails/issues/283
 let g:neocomplete#force_overwrite_completefunc = 1
 
-let g:neocomplete#sources#dictionary#dictionaries = { 'default' : '', } " Define dictionary.
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+            \ 'default' : '',
+            \ 'scala': $HOME.'/.vim/dict/scala.dict'
+            \ } 
 
 " Define keyword.
 if !exists('g:neocomplete#keyword_patterns')
@@ -259,6 +280,25 @@ let ColorRoller.colors = [
             \'lucius',
             \'twilight',
             \ ]
+
+" tagbar
+nnoremap <silent><F7> :TagbarToggle<CR>
+let g:tagbar_ctags_bin  = '/usr/local/bin/ctags'
+let g:tagbar_type_scala = {
+    \ 'ctagstype' : 'Scala',
+    \ 'kinds'     : [
+        \ 'p:packages:1',
+        \ 'V:values',
+        \ 'v:variables',
+        \ 'T:types',
+        \ 't:traits',
+        \ 'o:objects',
+        \ 'a:aclasses',
+        \ 'c:classes',
+        \ 'r:cclasses',
+        \ 'm:methods'
+    \ ]
+\ }
 
 
 "********************

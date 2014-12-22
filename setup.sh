@@ -72,7 +72,11 @@ else
   echo Skip: $HOME/.vim is exist.
 fi
 
-if [ ! -e $HOME/.pecl ] ; then
+if [ ! -e $HOME/.vim/dict ] ; then
+  ln -s $CURRENT/dict $HOME/.vim/dict
+fi
+
+if [ ! -e $HOME/.peco ] ; then
   mkdir -p $HOME/.peco
   ln -snf $CURRENT/peco-config.json $HOME/.peco/config.json
 else
@@ -95,6 +99,10 @@ fi
 
 if [ ! -e $HOME/bin/bin ]; then
   ln -s $CURRENT/bin $HOME/bin/bin
+fi
+
+if [ ! -e $HOME/.ctags ]; then
+  ln -s $CURRENT/_ctags $HOME/.ctags
 fi
 
 
