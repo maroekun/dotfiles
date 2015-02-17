@@ -33,6 +33,8 @@ NeoBundle 'vim-jp/vim-go-extra'
 NeoBundle 'google/vim-ft-go'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'szw/vim-tags'
+NeoBundle 'airblade/vim-rooter'
+NeoBundle 'thinca/vim-localrc'
 
 NeoBundleLazy 'hotchpotch/perldoc-vim', {
             \ 'autoload': {
@@ -53,7 +55,7 @@ NeoBundleLazy 'scrooloose/syntastic',     { 'autoload': { 'filetypes': ['ruby', 
 
 NeoBundleLazy 'Shougo/neosnippet',        { 'autoload': { 'insert': 1 } }
 
-NeoBundleLazy 'mattn/emmet-vim', { 'autoload': { 'filetypes': ['html', 'tt2'] } }
+NeoBundleLazy 'mattn/emmet-vim', { 'autoload': { 'filetypes': ['html', 'tt2', 'xslate'] } }
 
 NeoBundleLazy 'vim-scripts/ruby-matchit', { 'autoload': { 'filetypes': ['ruby'] } }
 
@@ -116,9 +118,12 @@ NeoBundleCheck
 " for golang {{{
 set path+=$GOPATH/src/**
 let g:gofmt_command = 'goimports'
-au BufWritePre *.go Fmt
-au BufNewFile,BufRead *.go set sw=4 noexpandtab ts=4 completeopt=menu,preview
-au FileType go compiler go
+augroup _golang
+    autocmd!
+    autocmd BufWritePre *.go Fmt
+    autocmd BufNewFile,BufRead *.go set sw=4 noexpandtab ts=4 completeopt=menu,preview
+    autocmd FileType go compiler go
+augroup END
 " }}}
 
 set nobackup
@@ -141,6 +146,12 @@ set laststatus=2
 set statusline=%y%{GetStatusEx()}%{fugitive#statusline()}\ 0x%B(%b)%F%m%r%=<%c:%l>
 set list
 set listchars=tab:✓\ 
+
+" ハイライト on
+syntax enable
+set background=dark
+colorscheme solarized
+
 
 command! Nginx : call Nginx()
 
@@ -167,10 +178,21 @@ unlet s:bundle
 " ** syntastic
 let s:bundle = neobundle#get('syntastic')
 function! s:bundle.hooks.on_source(bundle)
- let g:syntastic_mode_map = {
-               \ 'mode': 'passive',
-               \ 'active_filetypes': ['ruby', 'perl'] }
- let g:syntastic_ruby_checkers  = ['rubocop']
+  let g:syntastic_always_populate_loc_list = 1
+  let g:syntastic_auto_loc_list = 1
+  let g:syntastic_check_on_open = 1
+  let g:syntastic_check_on_wq = 0
+  " 3.4.0
+  " Syntax checker changes:
+  " Disable the perl checker by default, for security reasons (lcd047)
+  let g:syntastic_enable_perl_checker = 1
+  let g:syntastic_perl_checkers = ["perl", "podchecker", "perlcritic"]
+
+  let g:syntastic_mode_map = {
+               \ "mode": "active",
+               \ "active_filetypes": ["ruby", "perl"],
+               \ "passive_filetypes": [] }
+  let g:syntastic_ruby_checkers  = ['rubocop']
  " let g:syntastic_quiet_warnings = 0
 endfunction
 unlet s:bundle
@@ -571,8 +593,6 @@ endif
 "hi PmenuSel guibg=#8cd0d3 guifg=#666666
 "hi PmenuSbar guibg=#333333
 
-" ハイライト on
-syntax enable
 " 補完候補の色づけ for vim7
 " hi Pmenu ctermbg=255 ctermfg=0 guifg=#000000 guibg=#999999
 " hi PmenuSel ctermbg=blue ctermfg=black

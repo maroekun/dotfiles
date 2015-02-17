@@ -3,7 +3,7 @@
   logo = log --oneline
   loggg = log --pretty=format:'%h %s' --graph
   log2 = log --graph --branches --pretty=format:'%d [%h] \"%s\"'
-  log3 = log --graph --oneline --pretty=format:'%d [%h] \"%s\"'
+  log3 = log --graph --oneline --pretty=format:'%d [%h] %s'
   logog = log --oneline --graph
   st = status
   sh = show
