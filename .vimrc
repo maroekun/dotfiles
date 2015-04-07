@@ -35,7 +35,7 @@ NeoBundle 'majutsushi/tagbar'
 NeoBundle 'szw/vim-tags'
 NeoBundle 'airblade/vim-rooter'
 NeoBundle 'thinca/vim-localrc'
-NeoBundle 'vim-script/Align'
+NeoBundle 'vim-scripts/Align'
 
 NeoBundleLazy 'hotchpotch/perldoc-vim', {
             \ 'autoload': {
@@ -414,8 +414,8 @@ au FileType unite nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vspli
 au FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
-call unite#custom#profile('source/buffer', 'ignorecase', 1)
-call unite#custom#profile('source/file', 'ignorecase', 1)
+call unite#custom#profile('source/buffer', 'context.ignorecase', 1)
+call unite#custom#profile('source/file', 'context.ignorecase', 1)
 
 " ** syntastic
 nnoremap <silent> ,sc :<C-u>SyntasticReset<CR>
