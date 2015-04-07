@@ -35,6 +35,7 @@ NeoBundle 'majutsushi/tagbar'
 NeoBundle 'szw/vim-tags'
 NeoBundle 'airblade/vim-rooter'
 NeoBundle 'thinca/vim-localrc'
+NeoBundle 'vim-script/Align'
 
 NeoBundleLazy 'hotchpotch/perldoc-vim', {
             \ 'autoload': {
@@ -63,9 +64,6 @@ NeoBundleLazy 'tpope/vim-endwise', { 'autoload': { 'filetypes': ['ruby'] } }
 
 NeoBundleLazy 'groenewege/vim-less', { 'autoload': { 'filetypes': ['less'] } }
 
-NeoBundleLazy 'vim-scripts/Align', {
-            \ 'autoload': {
-            \     'commands': ['Align'] } }
 
 NeoBundleLazy 'Shougo/vimfiler.vim', {
             \ 'autoload': {
@@ -127,6 +125,8 @@ augroup END
 " }}}
 
 set nobackup
+set noundofile
+set noswapfile
 set modelines=5
 set number
 set tabstop=4
@@ -424,8 +424,7 @@ nnoremap <silent> ,sc :<C-u>SyntasticReset<CR>
 " filse setting
 "********************
 
-autocmd FileType perl colorscheme hybrid
-autocmd BufRead,BufNewFile *.pl,*.pm call PerlSetting()
+autocmd BufRead,BufNewFile *.psgi,*.pl,*.pm call PerlSetting()
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 
@@ -441,9 +440,16 @@ function! YAMLSetting()
     set sw=2
 endfunction
 
-autocmd BufRead,BufNewFile *.tt call HtmlSetting()
+autocmd BufRead,BufNewFile *.tt,**html call HtmlSetting()
 function! HtmlSetting()
     set ft=html
+    set ts=2
+    set sw=2
+endfunction
+
+" ** Xslate
+autocmd BufRead,BufNewFile *.tx call XslateSetting()
+function! XslateSetting()
     set ts=2
     set sw=2
 endfunction

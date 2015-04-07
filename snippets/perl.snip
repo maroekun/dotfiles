@@ -7,7 +7,7 @@ snippet envperl
 alias   #!
     #!/usr/bin/env perl
 
-    use 5.${1:20}.0;
+    use 5.${1:20}.${2:0};
     use strict;
     use warnings;
     use utf8;
@@ -38,7 +38,7 @@ abbr    constructor subroutine
         my $class = shift;
         my $args = ref $_[0] ? $_[0] : +{@_};
 
-        ${1:awesome code}
+        ${1:# awesome code}
 
         bless $args, $class;
     }
@@ -51,12 +51,12 @@ snippet self
 snippet package
     package ${1:#:package name};
 
-    use v5.${2:20}.0;
+    use v5.${2:20}.${3:0};
     use strict;
     use warnings;
     use utf8;
 
-    ${3}
+    ${4}
 
     1;
 
