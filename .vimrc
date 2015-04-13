@@ -414,8 +414,8 @@ au FileType unite nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vspli
 au FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
-call unite#custom#profile('source/buffer', 'context.ignorecase', 1)
-call unite#custom#profile('source/file', 'context.ignorecase', 1)
+call unite#custom#profile('source/buffer', 'context', {'ignorecase': 1})
+call unite#custom#profile('source/file', 'context', {'ignorecase': 1})
 
 " ** syntastic
 nnoremap <silent> ,sc :<C-u>SyntasticReset<CR>
