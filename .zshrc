@@ -62,9 +62,6 @@ alias ss='screen -U'
 alias sl='screen -ls'
 alias sr='screen -r'
 alias be='bundle exec '
-alias gs='git status .'
-alias gdi='git diff '
-alias gadd='git add '
 
 alias -g G='| grep -v grep | grep --color=auto '
 alias -g V='| vim -'
@@ -177,3 +174,8 @@ fi
 
 # aws_completion
 [[ -e $(which aws_zsh_completer.sh) ]] && source $(which aws_zsh_completer.sh)
+
+###
+# git alias and function
+###
+[ -f ~/.zshrc.git ] && source ~/.zshrc.git
