@@ -36,6 +36,11 @@ NeoBundle 'szw/vim-tags'
 NeoBundle 'airblade/vim-rooter'
 NeoBundle 'thinca/vim-localrc'
 NeoBundle 'vim-scripts/Align'
+NeoBundle 'fatih/vim-go'
+NeoBundle 'ywatase/mdt.vim'
+
+" NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'tyru/open-browser.vim'
 
 NeoBundleLazy 'hotchpotch/perldoc-vim', {
             \ 'autoload': {
@@ -80,6 +85,8 @@ NeoBundleLazy 'dag/vim2hs', {
 NeoBundleLazy 'osyo-manga/vim-over', {
             \ 'autoload': {
             \     'commands': ['OverCommandLine'] } }
+NeoBundleLazy 'chase/vim-ansible-yaml', { 'autoload': { 'filetypes': ['ansible'] } }
+NeoBundleLazy 'kannokanno/previm', { 'autoload': { 'filetypes': ['markdown'] } }
 
 " Color syntax {{{
 NeoBundle 'yuroyoro/yuroyoro256.vim'
@@ -104,11 +111,13 @@ NeoBundleLazy 'tpope/vim-markdown', { 'autoload': { 'filetypes': ['markdown'] } 
 NeoBundleLazy 'jelera/vim-javascript-syntax', { 'autoload': { 'filetypes': ['javascript'] } }
 
 " for golang {{{
+filetype off
+filetype plugin indent off
 set rtp^=$GOPATH/src/github.com/nsf/gocode/vim
-" }}}
-
 filetype plugin indent on
 syntax on
+" }}}
+
 NeoBundleCheck
 " }}}
 
@@ -160,6 +169,15 @@ hi Comment ctermfg=lightcyan
 "********************
 " variables
 "********************
+
+" ** vim-go
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+au FileType go nmap <Leader>b  <Plug>(go-build)
+au FileType go nmap <Leader>r  <Plug>(go-run)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 
 " ** VimFiler
 let s:bundle = neobundle#get("vimfiler.vim")
@@ -337,6 +355,8 @@ onoremap ( t(
 vnoremap ) t)
 vnoremap ( t(
 map ,ptv :! perltidy
+" Require: https://github.com/monochromegane/mdt
+map ,mdt :! mdt
 
 " ** swithc.vim
 nmap <silent> ,s :<C-u>:Switch<CR>
@@ -427,6 +447,9 @@ nnoremap <silent> ,sc :<C-u>SyntasticReset<CR>
 autocmd BufRead,BufNewFile *.psgi,*.pl,*.pm call PerlSetting()
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+
+au BufRead,BufNewFile *.md set filetype=markdown
+let g:previm_open_cmd = 'open -a "Google Chrome"'
 
 function! PerlSetting()
     set ts=4
