@@ -1,0 +1,12 @@
+# ----------------------
+# Docker Aliases
+# ----------------------
+alias drminone='docker rmi `docker images | grep "<none>" | awk '"'"'{print $3}'"'"'`'
+alias drmps='docker rm `docker ps -a -q`'
+
+# ----------------------
+# Docker Function
+# ----------------------
+# Docker exec with bash
+function dexecbash() { docker exec -it "$1" /bin/bash; }
+function dlog() { docker logs -t "$1"; } 

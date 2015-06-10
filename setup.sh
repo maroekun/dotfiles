@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 
 CURRENT=$(cd $(dirname $0); pwd)
-DOT_FILES=(.zshrc .vimrc .screenrc .bashrc .tmux.conf .perltidyrc .railsrc .gitconfig.local .gemrc zsh.d .zshrc.osx .zshrc.linux .zshrc.git)
+DOT_FILES=(.zshrc .vimrc .screenrc .bashrc .tmux.conf .perltidyrc .railsrc .gitconfig.local .gemrc zsh.d .zshrc.osx .zshrc.linux .zshrc.git .zshrc.docker)
 DOTT_FILES=(perlcriticrc replyrc rubocop.yml)
 DOT_DIRS=(zsh.d .selfvim)
 

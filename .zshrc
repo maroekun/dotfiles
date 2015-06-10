@@ -179,3 +179,4 @@ fi
 # git alias and function
 ###
 [ -f ~/.zshrc.git ] && source ~/.zshrc.git
+[ -f ~/.zshrc.docker ] && source ~/.zshrc.docker
