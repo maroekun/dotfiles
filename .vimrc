@@ -37,7 +37,6 @@ NeoBundle 'airblade/vim-rooter'
 NeoBundle 'thinca/vim-localrc'
 NeoBundle 'vim-scripts/Align'
 NeoBundle 'fatih/vim-go'
-NeoBundle 'ywatase/mdt.vim'
 
 " NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'tyru/open-browser.vim'
@@ -86,7 +85,11 @@ NeoBundleLazy 'osyo-manga/vim-over', {
             \ 'autoload': {
             \     'commands': ['OverCommandLine'] } }
 NeoBundleLazy 'chase/vim-ansible-yaml', { 'autoload': { 'filetypes': ['ansible'] } }
+NeoBundleLazy 'ywatase/mdt.vim', { 'autoload': { 'filetypes' : ['markdown'] } }
 NeoBundleLazy 'kannokanno/previm', { 'autoload': { 'filetypes': ['markdown'] } }
+" Require md2fswiki
+" cpanm -n git@github.com:ywatase/md2fswiki.git
+NeoBundleLazy 'ywatase/md2fswiki.vim', { 'autoload' : { 'filetypes' : ['markdown'] } }
 
 " Color syntax {{{
 NeoBundle 'yuroyoro/yuroyoro256.vim'
@@ -208,8 +211,8 @@ function! s:bundle.hooks.on_source(bundle)
 
   let g:syntastic_mode_map = {
                \ "mode": "active",
-               \ "active_filetypes": ["ruby", "perl"],
-               \ "passive_filetypes": [] }
+               \ "active_filetypes": ["ruby"],
+               \ "passive_filetypes": ["perl"] }
   let g:syntastic_ruby_checkers  = ['rubocop']
  " let g:syntastic_quiet_warnings = 0
 endfunction
