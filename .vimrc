@@ -428,7 +428,7 @@ nmap <Space>j <Plug>(quickhl-cword-toggle)
 " ** perldoc-vim
 setlocal iskeyword-=/
 setlocal iskeyword+=:
-au FileType perl let g:perldoc_program='/Users/maroekun/perl5/perlbrew/perls/current/bin/perldoc'
+au FileType perl let g:perldoc_program=$HOME . '/.plenv/shims/perldoc'
 
 " ** unite
 au FileType unite nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
