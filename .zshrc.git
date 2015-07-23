@@ -8,6 +8,7 @@ alias gaaa='git add -A'
 alias gb='git branch'
 alias gbd='git branch -d '
 alias gba='git branch -a'
+alias gbmv='_git_rename_branch '
 alias gc='git commit'
 alias gcm='git commit -m'
 alias gco='git checkout'
@@ -33,3 +34,5 @@ alias gstd='git stash drop'
 # ----------------------
 # Git log find by commit message
 function glf() { git log --all --grep="$1"; }
+function _git_cur_branch { git rev-parse --abbrev-ref HEAD }
+function _git_rename_branch { git branch -m `_git_cur_branch` $1 }
