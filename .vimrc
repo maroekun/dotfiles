@@ -473,6 +473,13 @@ function! HtmlSetting()
     set sw=2
 endfunction
 
+autocmd BufRead,BufNewFile *.tt2 call TT2Setting()
+function! TT2Setting()
+    set ft=tt2html
+    set ts=2
+    set sw=2
+endfunction
+
 " ** Xslate
 autocmd BufRead,BufNewFile *.tx call XslateSetting()
 function! XslateSetting()
