@@ -173,4 +173,4 @@ fi
 ###
 [ -f ~/.zshrc.git ] && source ~/.zshrc.git
 [ -f ~/.zshrc.docker ] && source ~/.zshrc.docker
-[ -f ~/.zshrc.local] && source ~/.zshrc.local
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
