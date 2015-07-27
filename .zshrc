@@ -37,13 +37,6 @@ setopt extended_history
 setopt hist_ignore_dups
 function history-all { history -E 1 }
 
-#####
-# Set aliases
-#####
-if [ -e ~/.zshrc.local ]; then
-    source ~/.zshrc.local
-fi
-
 case ${OSTYPE} in
     darwin*)
         [ -f ~/.zshrc.osx ] && source ~/.zshrc.osx
@@ -180,3 +173,4 @@ fi
 ###
 [ -f ~/.zshrc.git ] && source ~/.zshrc.git
 [ -f ~/.zshrc.docker ] && source ~/.zshrc.docker
+[ -f ~/.zshrc.local] && source ~/.zshrc.local
