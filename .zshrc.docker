@@ -3,6 +3,8 @@
 # ----------------------
 alias drminone='docker rmi `docker images | grep "<none>" | awk '"'"'{print $3}'"'"'`'
 alias drmps='docker rm `docker ps -a -q`'
+alias di='docker images'
+alias dp='docker ps'
 
 # ----------------------
 # Docker Function

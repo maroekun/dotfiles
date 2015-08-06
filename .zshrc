@@ -143,10 +143,6 @@ cpan-uninstall() {
     done
 }
 
-git-diff-summary() {
-    git log $1 --stat G insertions | awk '{ins+=$4;del+=$6} END{print "Insertions: "ins, "Deletions: "del}'
-}
-
 ###
 # ssh setting 
 ###

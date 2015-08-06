@@ -35,5 +35,9 @@ alias gstd='git stash drop'
 # ----------------------
 # Git log find by commit message
 function glf() { git log --all --grep="$1"; }
+function git-diff-summary () {
+    git log $1 --stat G insertions | awk '{ins+=$4;del+=$6} END{print "Insertions: "ins, "Deletions: "del}'
+}
+
 function _git_cur_branch { git rev-parse --abbrev-ref HEAD }
 function _git_rename_branch { git branch -m `_git_cur_branch` $1 }
