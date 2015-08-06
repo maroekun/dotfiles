@@ -13,7 +13,7 @@ export MANPATH=/opt/local/man:$MANPATH
 # gnu manpath
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
-export LSCOLORS="DxGxcxdxCxegedabagacad"
+# export LSCOLORS="DxGxcxdxCxegedabagacad"
 export PAGER="less -q -R"
 
 # if [ -n "$DYLD_LIBRARY_PATH" ]; then
@@ -23,10 +23,21 @@ export PAGER="less -q -R"
 # fi
 # export DYLD_LIBRARY_PATH
 
-alias ls='/bin/ls -F   -G'
-alias ll='/bin/ls -laF -G'
-alias la='/bin/ls -a   -G'
-alias l='/bin/ls -lF   -G'
+functions set-ls() {
+  local gls
+  if which gls > /dev/null; then
+    gls="$(which gls)"
+  else
+    gls='/bin/ls'
+  fi
+
+  alias ls="$gls --color -F   -G"
+  alias ll="$gls --color -laF -G"
+  alias la="$gls --color -a   -G"
+  alias l="$gls  --color -lF  -G"
+}
+set-ls
+
 alias netstat_osx='lsof -iTCP -sTCP:LISTEN -P'
 
 dashboad-off() {

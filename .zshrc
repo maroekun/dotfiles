@@ -81,6 +81,11 @@ function mscreen() {
 [ -f ~/zsh.d/.zshrc.prompt ] && source ~/zsh.d/.zshrc.prompt
 
 ###
+# dircolors
+###
+eval $(gdircolors ~/zsh.d/dircolors/dircolors.256dark)
+
+###
 # Set compinit 
 ###
 zstyle ':completion:*' verbose yes
