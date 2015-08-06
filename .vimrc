@@ -61,7 +61,7 @@ NeoBundleLazy 'scrooloose/syntastic',     { 'autoload': { 'filetypes': ['ruby', 
 
 NeoBundleLazy 'Shougo/neosnippet',        { 'autoload': { 'insert': 1 } }
 
-NeoBundleLazy 'mattn/emmet-vim', { 'autoload': { 'filetypes': ['html', 'tt2', 'xslate'] } }
+NeoBundleLazy 'mattn/emmet-vim', { 'autoload': { 'filetypes': ['html', 'tt2', 'tt2html', 'xslate'] } }
 
 NeoBundleLazy 'vim-scripts/ruby-matchit', { 'autoload': { 'filetypes': ['ruby'] } }
 
