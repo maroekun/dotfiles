@@ -1,17 +1,27 @@
-Encoding:
-  Enabled: true
+# for rubocop version 0.32.1
+---
+Style/Encoding:
+  EnforcedStyle: always
+  SupportedStyles:
+    - when_needed
 LineLength:
-    Enabled: false
-    Max: 100
-MethodLength:
-    Enabled: true
-    Max: 50
-MethodAndVariableSnakeCase:
   Enabled: false
+  Max: 100
+MethodLength:
+  Enabled: true
+  Max: 50
+Style/VariableName:
+  EnforcedStyle: snake_case
+  SupportedStyles:
+    - snake_case
+Style/MethodName:
+  EnforcedStyle: snake_case
+  SupportedStyles:
+    - snake_case
 Documentation:
   Enabled: false
 Style/ClassAndModuleChildren:
   EnforcedStyle: nested
-    SupportedStyles:
-      - nested
-      - compact
+  SupportedStyles:
+    - nested
+    - compact

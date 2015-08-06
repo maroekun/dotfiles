@@ -38,3 +38,11 @@ snippet rloggerd
 alias   rlogd
 abbr    Rails.logger.debug(...)
   Rails.logger.debug(${1:#:message})
+
+snippet     ife
+abbr        if ... else ... end
+    if ${1:#:condition}
+        ${2:TARGET}
+    else
+        ${3:TARGET}
+    end
