@@ -175,3 +175,8 @@ fi
 [ -f ~/.zshrc.git ] && source ~/.zshrc.git
 [ -f ~/.zshrc.docker ] && source ~/.zshrc.docker
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+###
+# source zsh-syntax-highlighting
+###
+[ -f ~/zsh.d/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source ~/zsh.d/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

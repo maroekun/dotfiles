@@ -56,6 +56,15 @@ else
   echo Skip: $CURRENT/dot.vim/neobundle.vim already initialize.
 fi
 
+file_num=`expr $(/bin/ls $CURRENT/zsh.d/zsh-syntax-highlighting | wc -l)`
+if [ $file_num -eq 0 ] ; then
+  echo $CURRENT/zsh.d/zsh-syntax-highlighting is empty
+  cd $CURRENT
+  git submodule update --init
+else
+  echo Skip: $CURRENT/zsh.d/zsh-syntax-highlighting already initialize.
+fi
+
 cat <<END
 
 + ----------------------------------------------- +
