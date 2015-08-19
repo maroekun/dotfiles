@@ -42,6 +42,7 @@ NeoBundle 'thinca/vim-localrc'
 NeoBundle 'vim-scripts/Align'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'bronson/vim-trailing-whitespace'
+NeoBundle 'Shougo/neosnippet-snippets'
 
 " NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'tyru/open-browser.vim'
