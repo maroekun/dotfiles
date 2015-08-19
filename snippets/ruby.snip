@@ -46,3 +46,9 @@ abbr        if ... else ... end
     else
         ${3:TARGET}
     end
+
+snippet gemg
+abbr    gem_group ... end
+  gem_group ${1::development} do
+    gem "${2:#:gem-name}"
+  end
