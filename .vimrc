@@ -1,10 +1,14 @@
 " for Neobundle {{{
 if has('vim_starting')
+
+   if &compatible
+     set nocomatible
+   endif
+
    set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
-set nocompatible
-call neobundle#rc(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/.vim/bundle/'))
 
 NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/vimproc', {
@@ -113,6 +117,8 @@ NeoBundleLazy 'motemen/xslate-vim', { 'autoload': {'filetypes': ['xslate']} }
 NeoBundleLazy 'tpope/vim-haml',     { 'autoload': {'filetypes': ['haml']} }
 NeoBundleLazy 'tpope/vim-markdown', { 'autoload': { 'filetypes': ['markdown'] } }
 NeoBundleLazy 'jelera/vim-javascript-syntax', { 'autoload': { 'filetypes': ['javascript'] } }
+
+call neobundle#end()
 
 " for golang {{{
 filetype off
