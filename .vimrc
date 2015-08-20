@@ -32,7 +32,6 @@ NeoBundle 'AndrewRadev/switch.vim'
 NeoBundle 'vim-scripts/taglist.vim'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'vim-jp/vim-go-extra'
 NeoBundle 'google/vim-ft-go'
 NeoBundle 'majutsushi/tagbar'
@@ -46,6 +45,11 @@ NeoBundle 'Shougo/neosnippet-snippets'
 
 " NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'tyru/open-browser.vim'
+
+NeoBundleLazy 'scrooloose/nerdcommenter', {
+            \ 'autoload': {
+            \   'mappings': ['<Plug>NERDCommenterToggle']
+            \ } }
 
 NeoBundleLazy 'hotchpotch/perldoc-vim', {
             \ 'autoload': {
