@@ -136,7 +136,6 @@ syntax on
 NeoBundleCheck
 " }}}
 
-
 " for golang {{{
 set path+=$GOPATH/src/**
 let g:gofmt_command = 'goimports'
@@ -175,7 +174,6 @@ set listchars=tab:✓\
 syntax enable
 set background=dark
 colorscheme solarized
-
 
 command! Nginx : call Nginx()
 
@@ -311,31 +309,6 @@ endfunction
 unlet s:bundle
 
 
-" color roller
-let ColorRoller = {}
-let ColorRoller.colors = [
-            \'default',
-            \'adaryn',
-            \'anotherdark',
-            \'solarized',
-            \'moss',
-            \'dante',
-            \'golden',
-            \'ironman',
-            \'jellybeans',
-            \'mustang',
-            \'softblue',
-            \'tir_black',
-            \'wombat256',
-            \'yuroyoro256',
-            \'molokai',
-            \'desert256',
-            \'mrkn256',
-            \'wuye',
-            \'lucius',
-            \'twilight',
-            \ ]
-
 " tagbar
 nnoremap <silent><F7> :TagbarToggle<CR>
 let g:tagbar_ctags_bin  = '/usr/local/bin/ctags'
@@ -414,7 +387,7 @@ nmap <silent> <c-e> :VimFiler<CR>
 " ** perldoc-vim
 noremap K :Perldoc<CR>
 
-" ** unite
+" unite: "{{{
 nnoremap [unite] <Nop>
 nmap ,u [unite]
 nnoremap <silent> [unite]b :<C-u>Unite buffer<CR>
@@ -426,39 +399,84 @@ nnoremap <silent> [unite]a :<C-u>UniteWithBufferDir -buffer-name=files file buff
 nnoremap <silent> [unite]c :<C-u>Unite bookmark<CR>
 nnoremap <silent> [unite]A :<C-u>UniteBookmarkAdd<CR>
 
-" ** color roller
-nnoremap <silent><F9> : <C-u>call ColorRoller.roll()<CR>
-nnoremap <silent><F8> : <C-u>call ColorRoller.unroll()<CR>
-
-" ** quickhl.vim
-nmap <Space>m <Plug>(quickhl-manual-this)
-xmap <Space>m <Plug>(quickhl-manual-this)
-nmap <Space>M <Plug>(quickhl-manual-reset)
-xmap <Space>M <Plug>(quickhl-manual-reset)
-nmap <Space>j <Plug>(quickhl-cword-toggle)
-
-" ** perldoc-vim
-setlocal iskeyword-=/
-setlocal iskeyword+=:
-au FileType perl let g:perldoc_program=$HOME . '/.plenv/shims/perldoc'
-
-" ** unite
 au FileType unite nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
 au FileType unite inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
 au FileType unite nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
 au FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
+
 call unite#custom#profile('source/buffer', 'context', {'ignorecase': 1})
 call unite#custom#profile('source/file', 'context', {'ignorecase': 1})
+"}}}
 
-" ** syntastic
+" color roller: "{{{
+let ColorRoller = {}
+let ColorRoller.colors = [
+            \'default',
+            \'adaryn',
+            \'anotherdark',
+            \'solarized',
+            \'moss',
+            \'dante',
+            \'golden',
+            \'ironman',
+            \'jellybeans',
+            \'mustang',
+            \'softblue',
+            \'tir_black',
+            \'wombat256',
+            \'yuroyoro256',
+            \'molokai',
+            \'desert256',
+            \'mrkn256',
+            \'wuye',
+            \'lucius',
+            \'twilight',
+            \ ]
+
+function! ColorRoller.change()
+    let color = get(self.colors, 0)
+    silent exe "colorscheme " . color
+    redraw
+    echo self.colors
+endfunction
+
+function! ColorRoller.roll()
+    let item = remove(self.colors, 0)
+    call insert(self.colors, item, len(self.colors))
+    call self.change()
+endfunction
+
+function! ColorRoller.unroll()
+    let item = remove(self.colors, -1)
+    call insert(self.colors, item, 0)
+    call self.change()
+endfunction
+
+nnoremap <silent><F9> : <C-u>call ColorRoller.roll()<CR>
+nnoremap <silent><F8> : <C-u>call ColorRoller.unroll()<CR>
+"}}}
+
+" quickhl.vim: "{{{
+nmap <Space>m <Plug>(quickhl-manual-this)
+xmap <Space>m <Plug>(quickhl-manual-this)
+nmap <Space>M <Plug>(quickhl-manual-reset)
+xmap <Space>M <Plug>(quickhl-manual-reset)
+nmap <Space>j <Plug>(quickhl-cword-toggle)
+"}}}
+
+" ** perldoc-vim
+setlocal iskeyword-=/
+setlocal iskeyword+=:
+au FileType perl let g:perldoc_program=$HOME . '/.plenv/shims/perldoc'
+
+" syntastic: "{{{
 nnoremap <silent> ,sc :<C-u>SyntasticReset<CR>
+"}}}
 
-"********************
-" filse setting
-"********************
-
+" filse setting: "{{{
+"
 autocmd BufRead,BufNewFile *.psgi,*.pl,*.pm call PerlSetting()
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -531,10 +549,10 @@ function! JsonSetting()
     set list
     set listchars=trail:-,eol:↲
 endfunction
+"}}}
 
-"********************
-" functions
-"********************
+" Functions: "{{{
+"
 function! GetStatusEx()
     let str=''
     let str = str . '' . &fileformat. ']'
@@ -573,25 +591,6 @@ function! MyFilename()
                 \ ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
 
-function! ColorRoller.change()
-    let color = get(self.colors, 0)
-    silent exe "colorscheme " . color
-    redraw
-    echo self.colors
-endfunction
-
-function! ColorRoller.roll()
-    let item = remove(self.colors, 0)
-    call insert(self.colors, item, len(self.colors))
-    call self.change()
-endfunction
-
-function! ColorRoller.unroll()
-    let item = remove(self.colors, -1)
-    call insert(self.colors, item, 0)
-    call self.change()
-endfunction
-
 function! Nginx()
     ec "set filetype to nginx!"
     set filetype=nginx
@@ -602,25 +601,27 @@ function! s:my_cr_function()
     return neocomplete#smart_close_popup() . "\<CR>"
     " return neocomplete#smart_close_popup() . "\<C-h>"   "# 前はこの設定で使ってた
 endfunction
+"}}}
 
-"-------------------------------------------------------------------------------
-" Tab
-"-------------------------------------------------------------------------------
-nnoremap <silent> ,sc :<C-u>SyntasticReset<CR>
+" Tab: "{{{
+"
+nnoremap [tab] <Nop>
+nmap ,<Tab> [tab]
+
 " tc 新しいタブを一番右に作る
-nnoremap <silent> ,tc :tablast <bar> tabnew<CR>
+nnoremap <silent> [tab]c :tablast <bar> tabnew<CR>
 " tx タブを閉じる
-nnoremap <silent> ,tx :tabclose<CR>
+nnoremap <silent> [tab]x :tabclose<CR>
 " tn 次のタブ
-nnoremap <silent> ,tn :tabnext<CR>
+nnoremap <silent> [tab]n :tabnext<CR>
 " tp 前のタブ
-nnoremap <silent> ,tp :tabprevious<CR>
+nnoremap <silent> [tab]p :tabprevious<CR>
+" tp 最後のタブ
+nnoremap <silent> [tab]l :tablast<CR>
+"}}}
 
-"-------------------------------------------------------------------------------
-" カラー関連 Colors
-"-------------------------------------------------------------------------------
-" colorscheme mrkn256
-"colorscheme yuroyoro256
+" Colors: "{{{
+"
 
 " ターミナルタイプによるカラー設定
 if &term =~ "xterm-256color" || "screen-256color"
@@ -638,6 +639,7 @@ elseif &term =~ "xterm-color"
   set t_Sf=[3%dm
   set t_Sb=[4%dm
 endif
+"}}}
 
 "ポップアップメニューのカラーを設定
 "hi Pmenu guibg=#666666
@@ -654,3 +656,6 @@ hi PmenuSel cterm=reverse ctermfg=33 ctermbg=222 gui=reverse guifg=#3399ff guibg
 " - - - - -
 
 source $HOME/.selfvim/perlbrew.vim
+
+" See :help folding
+" vim: foldmethod=marker
