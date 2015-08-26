@@ -606,7 +606,7 @@ endfunction
 " Tab: "{{{
 "
 nnoremap [tab] <Nop>
-nmap ,<Tab> [tab]
+nmap ,t [tab]
 
 " tc 新しいタブを一番右に作る
 nnoremap <silent> [tab]c :tablast <bar> tabnew<CR>
