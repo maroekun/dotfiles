@@ -32,16 +32,16 @@ NeoBundle 'AndrewRadev/switch.vim'
 NeoBundle 'vim-scripts/taglist.vim'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'vim-jp/vim-go-extra'
 NeoBundle 'google/vim-ft-go'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'szw/vim-tags'
 NeoBundle 'airblade/vim-rooter'
 NeoBundle 'thinca/vim-localrc'
 NeoBundle 'vim-scripts/Align'
-NeoBundle 'fatih/vim-go'
 NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'Shougo/neosnippet-snippets'
+" NeoBundle 'vim-jp/vim-go-extra'
+NeoBundle 'fatih/vim-go'
 
 " NeoBundle 'plasticboy/vim-markdown'
 NeoBundle 'tyru/open-browser.vim'
@@ -66,7 +66,7 @@ NeoBundleLazy 'vim-scripts/quickhl.vim', {
 
 NeoBundleLazy 'rking/ag.vim', { 'autoload': { 'commands': ['Ag'] } }
 
-NeoBundleLazy 'scrooloose/syntastic',     { 'autoload': { 'filetypes': ['ruby', 'perl'] } }
+NeoBundleLazy 'scrooloose/syntastic',     { 'autoload': { 'filetypes': ['ruby', 'perl', 'go'] } }
 
 NeoBundleLazy 'Shougo/neosnippet',        { 'autoload': { 'insert': 1 } }
 
@@ -114,6 +114,7 @@ NeoBundle 'jonathanfilip/vim-lucius'
 NeoBundle 'slim-template/vim-slim'
 NeoBundle '29decibel/codeschool-vim-theme'
 NeoBundle 'derekwyatt/vim-scala'
+NeoBundle 'rhysd/vim-color-splatoon'
 " }}}
 
 NeoBundleLazy 'elzr/vim-json',            { 'autoload': { 'filetypes': ['json'] } }
@@ -125,26 +126,7 @@ NeoBundleLazy 'jelera/vim-javascript-syntax', { 'autoload': { 'filetypes': ['jav
 
 call neobundle#end()
 
-" for golang {{{
-filetype off
-filetype plugin indent off
-set rtp^=$GOPATH/src/github.com/nsf/gocode/vim
-filetype plugin indent on
-syntax on
-" }}}
-
 NeoBundleCheck
-" }}}
-
-" for golang {{{
-set path+=$GOPATH/src/**
-let g:gofmt_command = 'goimports'
-augroup _golang
-    autocmd!
-    autocmd BufWritePre *.go Fmt
-    autocmd BufNewFile,BufRead *.go set sw=4 noexpandtab ts=4 completeopt=menu,preview
-    autocmd FileType go compiler go
-augroup END
 " }}}
 
 set nobackup
@@ -220,10 +202,11 @@ function! s:bundle.hooks.on_source(bundle)
   let g:syntastic_perl_checkers = ["perl", "podchecker", "perlcritic"]
 
   let g:syntastic_mode_map = {
-               \ "mode": "active",
-               \ "active_filetypes": ["ruby"],
+               \ "mode": "passive",
+               \ "active_filetypes": ["ruby", "go"],
                \ "passive_filetypes": ["perl"] }
   let g:syntastic_ruby_checkers  = ['rubocop']
+  let g:syntastic_go_checkers = ['go', 'golint']
  " let g:syntastic_quiet_warnings = 0
 endfunction
 unlet s:bundle
@@ -283,7 +266,7 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
 endif
 " }}}
 
-" ** lightline
+" lightline {{{
 let g:lightline = {
             \ 'colorscheme': 'wombat',
             \ 'active': {
@@ -299,6 +282,7 @@ let g:lightline = {
             \ 'separator': { 'left': '⮀', 'right': '⮂' },
             \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
             \ }
+" }}}
 
 " ** vim-gitgutter
 let s:bundle = neobundle#get('vim-gitgutter')
@@ -475,8 +459,7 @@ au FileType perl let g:perldoc_program=$HOME . '/.plenv/shims/perldoc'
 nnoremap <silent> ,sc :<C-u>SyntasticReset<CR>
 "}}}
 
-" filse setting: "{{{
-"
+" file setting: "{{{
 autocmd BufRead,BufNewFile *.psgi,*.pl,*.pm call PerlSetting()
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -484,63 +467,84 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 au BufRead,BufNewFile *.md set filetype=markdown
 let g:previm_open_cmd = 'open -a "Google Chrome"'
 
+" golang {{{
+autocmd BufRead,BufNewFile *go call GoSetting()
+function! GoSetting()
+    set noexpandtab
+    set ts=4
+    set sw=4
+endfunction
+" }}}
+
+" perl {{{
 function! PerlSetting()
     set ts=4
     set sw=4
 endfunction
+" }}}
 
-autocmd BufREad,BufNewFile *.yml,*.yaml call YAMLSetting()
+" yaml {{{
+autocmd BufRead,BufNewFile *.yml,*.yaml call YAMLSetting()
 function! YAMLSetting()
     set ft=yaml
     set ts=2
     set sw=2
 endfunction
+" }}}
 
+" html {{{
 autocmd BufRead,BufNewFile *.tt,**html call HtmlSetting()
 function! HtmlSetting()
     set ft=html
     set ts=2
     set sw=2
 endfunction
+" }}}
 
+" tt2 {{{
 autocmd BufRead,BufNewFile *.tt2 call TT2Setting()
 function! TT2Setting()
     set ft=tt2html
     set ts=2
     set sw=2
 endfunction
+" }}}
 
-" ** Xslate
+" Xslate {{{
 autocmd BufRead,BufNewFile *.tx call XslateSetting()
 function! XslateSetting()
     set ts=2
     set sw=2
 endfunction
+" }}}
 
-" ** slim
+" slim {{{
 autocmd BufRead,BufNewFile *.slim call SlimSetting()
 function! SlimSetting()
   set ft=slim
   set ts=2
   set sw=2
 endfunction
+" }}}
 
-" ** ruby
+" ruby {{{
 autocmd BufRead,BufNewFile *.rb,Gemfile,Vagrantfile call RubySetting()
 function! RubySetting()
     set tabstop=2
     set shiftwidth=2
 endfunction
+" }}}
 
-" ** slim
+" slim {{{
 autocmd BufRead,BufNewFile *.slim call SlimSetting()
 function! SlimSetting()
     set ft=slim
     set ts=2
     set sw=2
 endfunction
+" }}}
 
-" ** json
+" json {{{
 autocmd BufRead,BufNewFile *.json call JsonSetting()
 function! JsonSetting()
     set ft=json
@@ -549,7 +553,9 @@ function! JsonSetting()
     set list
     set listchars=trail:-,eol:↲
 endfunction
-"}}}
+" }}}
+
+" }}}
 
 " Functions: "{{{
 "
