@@ -43,8 +43,6 @@ NeoBundle 'Shougo/neosnippet-snippets'
 " NeoBundle 'vim-jp/vim-go-extra'
 NeoBundle 'fatih/vim-go'
 
-" NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'tyru/open-browser.vim'
 
 NeoBundleLazy 'scrooloose/nerdcommenter', {
             \ 'autoload': {
@@ -95,11 +93,18 @@ NeoBundleLazy 'osyo-manga/vim-over', {
             \ 'autoload': {
             \     'commands': ['OverCommandLine'] } }
 NeoBundleLazy 'chase/vim-ansible-yaml', { 'autoload': { 'filetypes': ['ansible'] } }
+
+
+" for markdown {{{
+NeoBundle 'tyru/open-browser.vim'
 NeoBundleLazy 'ywatase/mdt.vim', { 'autoload': { 'filetypes' : ['markdown'] } }
 NeoBundleLazy 'kannokanno/previm', { 'autoload': { 'filetypes': ['markdown'] } }
+NeoBundleLazy 'hallison/vim-markdown', { 'autoload': { 'filetypes': ['markdown'] } }
+NeoBundleLazy 'thinca/vim-ft-markdown_fold', { 'autoload': { 'filetypes': ['markdown'] } }
 " Require md2fswiki
 " cpanm -n git@github.com:ywatase/md2fswiki.git
 NeoBundleLazy 'ywatase/md2fswiki.vim', { 'autoload' : { 'filetypes' : ['markdown'] } }
+" }}}
 
 " Color syntax {{{
 NeoBundle 'yuroyoro/yuroyoro256.vim'
@@ -121,7 +126,6 @@ NeoBundleLazy 'elzr/vim-json',            { 'autoload': { 'filetypes': ['json'] 
 NeoBundleLazy 'kchmck/vim-coffee-script', { 'autoload': {'filetypes': ['coffee']} }
 NeoBundleLazy 'motemen/xslate-vim', { 'autoload': {'filetypes': ['xslate']} }
 NeoBundleLazy 'tpope/vim-haml',     { 'autoload': {'filetypes': ['haml']} }
-NeoBundleLazy 'tpope/vim-markdown', { 'autoload': { 'filetypes': ['markdown'] } }
 NeoBundleLazy 'jelera/vim-javascript-syntax', { 'autoload': { 'filetypes': ['javascript'] } }
 
 call neobundle#end()
@@ -193,7 +197,7 @@ let s:bundle = neobundle#get('syntastic')
 function! s:bundle.hooks.on_source(bundle)
   let g:syntastic_always_populate_loc_list = 1
   let g:syntastic_auto_loc_list = 1
-  let g:syntastic_check_on_open = 1
+  let g:syntastic_check_on_open = 0
   let g:syntastic_check_on_wq = 0
   " 3.4.0
   " Syntax checker changes:
@@ -218,6 +222,23 @@ function! s:bundle.hooks.on_source(bundle)
   let g:indent_guides_guide_size  = 1
 endfunction
 unlet s:bundle
+
+
+" 見た目改善 {{{
+set fillchars=vert:\|
+hi Folded gui=bold term=standout ctermbg=LightGrey ctermfg=DarkBlue guibg=Grey30 guifg=Grey80
+hi FoldColumn gui=bold term=standout ctermbg=LightGrey ctermfg=DarkBlue guibg=Grey guifg=DarkBlue
+
+func! MyFoldingSettingOn ()
+	set foldtext=FoldCCtext()
+	set foldcolumn=5
+endf
+
+func! MyFoldingSettingOff ()
+	set foldcolumn=0
+	set foldtext=foldtext()
+endf
+" }}}
 
 " ** quickhl
 let s:bundle = neobundle#get('quickhl.vim')
@@ -440,6 +461,7 @@ endfunction
 
 nnoremap <silent><F9> : <C-u>call ColorRoller.roll()<CR>
 nnoremap <silent><F8> : <C-u>call ColorRoller.unroll()<CR>
+nnoremap <silent><F10> : colorscheme splatoon<CR>
 "}}}
 
 " quickhl.vim: "{{{
@@ -465,6 +487,7 @@ autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 
 au BufRead,BufNewFile *.md set filetype=markdown
+autocmd FileType markdown call MyFoldingSettingOn()
 let g:previm_open_cmd = 'open -a "Google Chrome"'
 
 " golang {{{
