@@ -501,6 +501,7 @@ endfunction
 
 " perl {{{
 function! PerlSetting()
+    set ft=perl
     set ts=4
     set sw=4
 endfunction
@@ -538,6 +539,15 @@ autocmd BufRead,BufNewFile *.tx call XslateSetting()
 function! XslateSetting()
     set ts=2
     set sw=2
+endfunction
+" }}}
+
+" haml {{{
+autocmd BufRead,BufNewFile *.haml call HamlSetting()
+function! HamlSetting()
+  set ft=haml
+  set ts=2
+  set sw=2
 endfunction
 " }}}
 
