@@ -16,3 +16,5 @@
   su = submodule
   suu = submodule update
   sua = submodule add
+[rebase]
+  autosquash = true
