@@ -18,3 +18,4 @@
   sua = submodule add
 [rebase]
   autosquash = true
+  autostash = true
