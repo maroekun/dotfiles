@@ -94,6 +94,8 @@ NeoBundleLazy 'osyo-manga/vim-over', {
             \     'commands': ['OverCommandLine'] } }
 NeoBundleLazy 'chase/vim-ansible-yaml', { 'autoload': { 'filetypes': ['ansible'] } }
 
+NeoBundleLazy 'Glench/Vim-Jinja2-Syntax', { 'autoload': { 'filetypes': ['jinja'] } }
+
 
 " for markdown {{{
 NeoBundle 'tyru/open-browser.vim'
@@ -585,6 +587,13 @@ function! JsonSetting()
     set sw=2
     set list
     set listchars=trail:-,eol:↲
+endfunction
+" }}}
+
+" jinja2 {{{
+autocmd BufRead, BufNewFile *.j2 call JinjaSetting()
+function! JinjaSetting()
+    set ft=jinja
 endfunction
 " }}}
 
