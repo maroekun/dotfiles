@@ -97,10 +97,12 @@ zstyle ':completion:*' group-name ''
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' use-cache true
 
-fpath=($HOME/zsh.d/functions(N-/) $fpath)
-fpath=(/usr/local/share/zsh-completions $fpath)
-typeset -U FPATH
-typeset -U PATH
+typeset -U path fpath
+fpath=(
+  $HOME/zsh.d/functions(N-/)
+  /usr/local/share/zsh-completions
+  $fpath
+)
 
 autoload -U compinit
 if [ "$CYGWIN" ] ; then
