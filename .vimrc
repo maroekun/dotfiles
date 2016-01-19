@@ -460,10 +460,33 @@ function! ColorRoller.unroll()
     call insert(self.colors, item, 0)
     call self.change()
 endfunction
+"}}}
+
+" background roller: "{{{
+let BGRoller = {}
+let BGRoller.bg = ['light', 'dark']
+function! BGRoller.change()
+    let bg = get(self.bg, 0)
+    silent exe "set background=" . bg
+    redraw
+    echo "set background to " . bg
+endfunction
+function! BGRoller.roll()
+    let bg = remove(self.bg, 0)
+    call insert(self.bg, bg, len(self.bg))
+    call self.change()
+endfunction
+
+function! BGRoller.unroll()
+    let bg = remove(self.bg, -1)
+    call insert(self.bg, bg, 0)
+    call self.change()
+endfunction
 
 nnoremap <silent><F9> : <C-u>call ColorRoller.roll()<CR>
 nnoremap <silent><F8> : <C-u>call ColorRoller.unroll()<CR>
 nnoremap <silent><F10> : colorscheme splatoon<CR>
+nnoremap <silent><F6> : <C-u>call BGRoller.roll()<CR>
 "}}}
 
 " quickhl.vim: "{{{
