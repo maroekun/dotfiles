@@ -2,6 +2,7 @@
 # ----------------------
 # Git Aliases
 # ----------------------
+alias gf='git fetch'
 alias ga='git add'
 alias gaa='git add .'
 alias gaaa='git add -A'
@@ -29,7 +30,7 @@ alias gst='git stash'
 alias gstl='git stash list'
 alias gstp='git stash pop'
 alias gstd='git stash drop'
- 
+
 # ----------------------
 # Git Function
 # ----------------------
