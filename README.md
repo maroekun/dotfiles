@@ -1,8 +1,10 @@
+```shell
 $ export DOTPATH="/path/to/dotfiles"
 $ export GITHUB_DOTFILE='https://github.com/...'
 $ bash -c "$(curl -L https://raw.githubusercontent.com/maroekun/dotfiles/master/install.sh)"
+```
 
-```
-DOTPATH ... ~/dotfiles
-GITHUB_DOTFILE ... maroekun/dotfiles
-```
+## default value
+
+* DOTPATH: _~/dotfiles_
+* GITHUB_DOTFILE: _maroekun/dotfiles_
