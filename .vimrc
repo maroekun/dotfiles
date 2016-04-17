@@ -161,7 +161,7 @@ set listchars=tab:✓\
 " ハイライト on
 syntax enable
 set background=dark
-colorscheme solarized
+colorscheme molokai
 
 command! Nginx : call Nginx()
 
@@ -213,7 +213,6 @@ function! s:bundle.hooks.on_source(bundle)
                \ "passive_filetypes": ["perl"] }
   let g:syntastic_ruby_checkers  = ['rubocop']
   let g:syntastic_go_checkers = ['go', 'golint']
- " let g:syntastic_quiet_warnings = 0
 endfunction
 unlet s:bundle
 
@@ -310,7 +309,7 @@ let g:lightline = {
 " ** vim-gitgutter
 let s:bundle = neobundle#get('vim-gitgutter')
 function! s:bundle.hooks.on_source(bundle)
-    let g:gitgutter_enabled         = 0
+    let g:gitgutter_enabled         = 1
     let g:gitgutter_highlight_lines = 0
 endfunction
 unlet s:bundle
