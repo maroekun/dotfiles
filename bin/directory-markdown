@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# use Plack::App::Directory::Markdown;
+# my $app = Plack::App::Directory::Markdown->new({root => '.'})->to_app;
+# return $app;
+
+_port=5000
+
+usage_exit() {
+    echo "Usage $0 [-p port]" 1>&2
+    exit 1
+}
+
+while getopts p:h OPT
+do
+    case $OPT in
+        p) _port=$OPTARG
+        ;;
+        h) usage_exit
+        ;;
+        \?) usage_exit
+        ;;
+    esac
+done
+
+plackup -MPlack::App::Directory::Markdown -e "Plack::App::Directory::Markdown->new({root => '.'})->to_app" --port $_port
