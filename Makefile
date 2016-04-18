@@ -23,4 +23,5 @@ update:
 	git submodule foreach git pull origin master
 clean:
 	@echo "---> Run make clearn"
-	@echo "---> !!! NOT IMPLEMENT !!!"
+	@-$(foreach val, $(DOTFILES), rm -vrf $(HOME)/$(val);)
+	-rm -rf $(DOTPATH)
