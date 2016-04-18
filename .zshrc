@@ -108,7 +108,7 @@ autoload -U compinit
 if [ "$CYGWIN" ] ; then
     compinit -u
 else
-    compinit
+    compinit -u
 fi
 
 r() {
