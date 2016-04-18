@@ -1,8 +1,127 @@
 #/bin/bash
 
-source ./etc/log.sh
-source ./etc/util.sh
+# utility
+error() {
+   echo "$@" 1>&2
+}
 
+abort() {
+  echo "$@" 1>&2
+  exit 1;
+}
+
+has() {
+  which "$1" > /dev/null 2>&1
+  return $?
+}
+
+is_bash() {
+    [ -n "$BASH_VERSION" ]
+}
+
+is_zsh() {
+    [ -n "$ZSH_VERSION" ]
+}
+
+ostype() {
+    uname | tr "[:upper:]" "[:lower:]"
+}
+
+# os_detect() {
+#     case $(ostype) in
+#         *'linux'*)  PLATFORM='linux'   ;;
+#         *'darwin'*) PLATFORM='osx'     ;;
+#         *'bsd'*)    PLATFORM='bsd'     ;;
+#         *)          PLATFORM='unknown' ;;
+#     esac
+#     export PLATFORM
+# }
+
+# is_osx() {
+#     os_detect
+#     if [ $PLATFORM = 'osx' ]; then
+#         return 0
+#     else
+#         return 1
+#     fi
+# }
+
+# is_linux() {
+#     echo "yeah"
+# }
+
+# paint utility
+p_color() {
+  local open="\033["
+  local close="${open}0m"
+  local red="1;31m"
+  local yellow="1;33m"
+  local green="1;32m"
+  local gray="0;37m"
+
+  local text=$2
+  local color="$close"
+  case "$1" in
+    red | gray | yellow | green)
+    eval color="\$$1"
+    ;;
+  esac
+
+  printf "${open}${color}${text}${close}"
+}
+
+e_newline() {
+  printf "\n"
+}
+
+e_header() {
+  printf " \033[37;1m%s\033[m\n" "$*"
+  # p_color gray " $*"
+  # e_newline
+}
+e_warning() {
+  printf " \033[31m%s\033[m\n" "$*"
+  # p_color red " $*"
+  # e_newline
+}
+
+e_done() {
+  printf " \033[37;1m%s\033[m...\033[32mOK\033[m\n" "✔ $*"
+  # p_color gray " ✔ $*";
+  # printf "...";
+  # p_color green "OK"
+  # e_newline
+}
+
+logg() {
+  case "$1" in
+    SUCCESS)
+      color=green
+      ;;
+    ERROR | WARN)
+      color=red
+      ;;
+    *)
+      echo "hoge"
+  esac
+
+  ts() {
+    p_color gray "["
+    p_color gray "$(date +%H:%M:%S)"
+    p_color gray "] "
+  }
+  ts; p_color "$color" "$2"; echo
+}
+
+log_f() {
+  logg ERROR "$1" 1>&2
+}
+
+log_s() {
+  logg SUCCESS "$1"
+}
+
+# process
 # Set default $DOTPATH
 var_init() {
   e_newline && e_header "Setup variables..."
