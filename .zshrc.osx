@@ -1,7 +1,7 @@
 # macports
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 export PATH=$HOME/bin:$PATH
-export PATH=$HOME/dotbin/:$PATH
+export PATH=$HOME/dotbin:$PATH
 
 # gnu coreutils
 # ---------------------------------
