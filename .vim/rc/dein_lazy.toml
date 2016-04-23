@@ -1,0 +1,11 @@
+# [[plugins]]
+# repo = 'scrooloose/nerdcommenter'
+# on_map = [['n', '<Plug>']]
+# on_map = ['<Plug>NERDCommenterToggle']
+# hook_add = '''
+#   nmap <Leader>x <Plug>NERDCommenterToggle
+#   vmap <Leader>x <Plug>NERDCommenterToggle
+# '''
+# hook_source = '''
+#   let g:NERDSpaceDelims = 1
+# '''
