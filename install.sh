@@ -134,8 +134,12 @@ var_init() {
   if [ -z "${GITHUB_DOTFILE:-}" ]; then
     GITHUB_DOTFILE="https://github.com/maroekun/dotfiles"
   fi
+  if [ -z "${GITHUB_BRANCH:-}" ]; then
+    GITHUB_BRANCH="master"
+  fi
   GITHUB_DOTFILE_REPO="${GITHUB_DOTFILE}.git"; export GITHUB_DOTFILE_REPO
-  GITHUB_DOTFILE_ARCHIVE="${GITHUB_DOTFILE}/archive/master.tar.gz" export GITHUB_DOTFILE_ARCHIVE
+  GITHUB_DOTFILE_BRANCH="${GITHUB_BRANCH}"; export GITHUB_DOTFILE_BRANCH
+  GITHUB_DOTFILE_ARCHIVE="${GITHUB_DOTFILE}/archive/${GITHUB_REPO}.tar.gz" export GITHUB_DOTFILE_ARCHIVE
   e_header "... Github REPO is ${GITHUB_DOTFILE_REPO}"
   e_header "... Github repository ARCHIVE is ${GITHUB_DOTFILE_ARCHIVE}"
 

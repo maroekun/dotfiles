@@ -18,28 +18,11 @@ if dein#load_state(s:dein_dir)
   "# let s:toml      = g:rc_dir . '/dein.toml'
   "# let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
 
+  " https://github.com/Shougo/vimproc.vim
+  call dein#add('Shougo/vimproc.vim', {'build': 'make -f make_mac.mak'})
+
   call dein#load_toml(s:toml, {'lazy': 0})
   call dein#load_toml(s:lazy_toml, {'lazy': 1})
-
-  call dein#add('Shougo/vimproc.vim', {
-  \ 'hook_post_update': "
-  \   if dein#util#_is_windows()
-  \     let cmd = 'tools\\update-dll-mingw'
-  \   elseif dein#util#_is_cygwin()
-  \     let cmd = 'make -f make_cygwin.mak'
-  \   elseif dein#util#_is_mac()
-  \     let cmd = 'make -f make_mac.mak'
-  \   elseif executable('gmake')
-  \     let cmd = 'gmake'
-  \   else
-  \     let cmd = 'make'
-  \   endif
-  \   let g:dein#plugin.build = cmd
-  \ "})
-
-  call dein#add('scrooloose/nerdcommenter', {
-    \ 'hook_add': 'let g:NERDSpaceDelims = 1'
-    \ })
 
   call dein#end()
   call dein#save_state()
@@ -74,6 +57,8 @@ set laststatus=2
 set statusline=%y%{GetStatusEx()}%{fugitive#statusline()}\ 0x%B(%b)%F%m%r%=<%c:%l>
 set list
 set listchars=tab:✓\ 
+
+let g:quickhl_manual_keywords = [ "HOGE", "TODO", "CAUTION", "DELETED" ]
 
 " Functions: "{{{
 function! GetStatusEx()

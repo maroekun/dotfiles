@@ -1,13 +1,16 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
-# [[plugins]]
-# repo = 'Shougo/vimproc.vim'
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+build = 'make -f make_mac.mak'
 # hook_post_update = '''
 #   if dein#util#_is_windows()
 #     let cmd = 'tools\\update-dll-mingw'
 #   elseif dein#util#_is_cygwin()
 #     let cmd = 'make -f make_cygwin.mak'
+#   elseif dein#util#_is_mac()
+#     let cmd = 'make -f make_mac.mak'
 #   elseif executable('gmake')
 #     let cmd = 'gmake'
 #   else
@@ -17,13 +20,24 @@ repo = 'Shougo/dein.vim'
 # '''
 
 [[plugins]]
-repo = 'Shougo/unite.vim'
+repo = 'vim-scripts/quickhl.vim'
+# hook_add = '''
+# let g:quickhl_manual_keywords = [ "HOGE", "TODO", "CAUTION", "DELETED" ]
+# '''
+
+
+# [[plugins]]
+# repo = 'Shougo/unite.vim'
 
 [[plugins]]
 repo = 'ujihisa/unite-colorscheme'
 
 [[plugins]]
 repo = 'kana/vim-smartword'
+
+[[plugins]]
+repo = 'scrooloose/nerdcommenter'
+hook_add = 'let g:NERDSpaceDelims = 1'
 
 # [[plugins]]
 # repo        = 'scrooloose/nerdcommenter'
@@ -60,7 +74,8 @@ repo = 'kana/vim-smartword'
 #  }
 # '''
 
-[[plugins]] # toml syntax
+# toml syntax
+[[plugins]]
 repo = 'cespare/vim-toml'
 on_ft = 'toml'
 
