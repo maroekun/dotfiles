@@ -59,6 +59,26 @@ nnoremap <silent> [unite]c :<C-u>Unite bookmark<CR>
 nnoremap <silent> [unite]A :<C-u>UniteBookmarkAdd<CR>
 '''
 
+# NOTE: ここで定義しにくいので .vimrc に直接書いた
+# [[plugins]]
+# repo = 'itchyny/lightline.vim'
+# hook_add = '''
+# let g:lightline = {
+#   "colorscheme": "wombat",
+#   "active": {
+#     "left": [ [ "mode", "paste" ], [ "fugitive", "filename"] ]
+#   },
+#   "component_function": {
+#     "fugitive": "%{exists(\"*fugitive#head\") && strlen(fugitive#head()) ? \"⭠ \".fugitive#head() : \"\"}",
+#     "readonly": "%{&filetype == \"help\" ? \"\" : &readonly ? \"⭤\" : \"\"}",
+#     "modified": "%{&filetype == \"help\" ? \"\" : &modified ? \"+\" : \"\"}",
+#     "filename": "%{\"HOGE\"}"
+#   },
+#   "separator": { "left": "⮀", "right": "⮂" },
+#   "subseparator": { "left": "⮁", "right": "⮃" }
+# }
+# '''
+
 # - - - まだ - - -
 
 # [[plugins]] # awesome status line

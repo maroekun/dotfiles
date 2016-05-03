@@ -13,13 +13,31 @@ endif
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-  " let s:toml      = '~/.vim/rc' . '/dein.toml'
-  " let s:lazy_toml = '~/.vim/rc' . '/dein_lazy.toml'
   let s:toml      = g:rc_dir . '/dein.toml'
   let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
 
   call dein#load_toml(s:toml, {'lazy': 0})
   call dein#load_toml(s:lazy_toml, {'lazy': 1})
+
+  " NOTE: TOMLにうまいこと移植できんかった
+  call dein#add('itchyny/lightline.vim', {
+            \ 'hook_add': "
+            \   let g:lightline = {
+            \     'colorscheme': 'wombat',
+            \     'active': {
+            \       'left': [ [ 'mode', 'paste' ],
+            \                 [ 'fugitive', 'filename'] ]
+            \     },
+            \     'component_function': {
+            \       'fugitive': 'MyFugitive',
+            \       'readonly': 'MyReadonly',
+            \       'modified': 'MyModified',
+            \       'filename': 'MyFilename'
+            \     },
+            \     'separator': { 'left': '⮀', 'right': '⮂' },
+            \     'subseparator': { 'left': '⮁', 'right': '⮃' }
+            \   }
+            \ " })
 
   call dein#end()
   call dein#save_state()
@@ -89,7 +107,7 @@ map ,mdt :! mdt
 
 " }}}
 
-" Functions: "{{{
+" Functions for lightline.vim: "{{{
 function! GetStatusEx()
   let str=''
   let str = str . '' . &fileformat. ']'
@@ -129,4 +147,5 @@ function! MyFilename()
 endfunction
 "}}}
 
+" See :help folding
 " vim: foldmethod=marker
