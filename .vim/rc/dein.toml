@@ -1,3 +1,4 @@
+# - - - OK - - -
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
@@ -41,10 +42,24 @@ repo = 'ujihisa/unite-colorscheme'
 repo = 'kana/vim-smartword'
 
 
-# - - - OK - - -
+# - - - 途中 - - -
 
-# [[plugins]]
-# repo = 'Shougo/unite.vim'
+[[plugins]]
+repo = 'Shougo/unite.vim'
+hook_add = '''
+nnoremap [unite] <Nop>
+nmap ,u [unite]
+nnoremap <silent> [unite]b :<C-u>Unite buffer<CR>
+nnoremap <silent> [unite]f :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
+nnoremap <silent> [unite]m :<C-u>Unite file_mru<CR>
+nnoremap <silent> [unite]u :<C-u>Unite buffer file_mru<CR>
+nnoremap <silent> [unite]a :<C-u>UniteWithBufferDir -buffer-name=files file buffer file_mru bookmark<CR>
+nnoremap <silent> [unite]c :<C-u>Unite bookmark<CR>
+nnoremap <silent> [unite]A :<C-u>UniteBookmarkAdd<CR>
+'''
+
+# - - - まだ - - -
 
 # [[plugins]] # awesome status line
 # repo = 'itchyny/lightline.vim'
@@ -73,7 +88,7 @@ repo = 'kana/vim-smartword'
 #  }
 # '''
 
-# toml syntax
+# lang
 [[plugins]]
 repo = 'cespare/vim-toml'
 on_ft = 'toml'
