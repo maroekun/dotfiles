@@ -3,6 +3,9 @@ export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 export PATH=$HOME/bin:$PATH
 export PATH=$HOME/dotbin:$PATH
 
+# opt-out homoebrew google-analytics
+export HOMEBREW_NO_ANALYTICS=1
+
 # gnu coreutils
 # ---------------------------------
 # brew install coreutils findutils gnu-tar
