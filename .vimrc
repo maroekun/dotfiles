@@ -13,13 +13,10 @@ endif
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-  let s:toml      = '~/.vim/rc' . '/dein.toml'
-  let s:lazy_toml = '~/.vim/rc' . '/dein_lazy.toml'
-  "# let s:toml      = g:rc_dir . '/dein.toml'
-  "# let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
-
-  " https://github.com/Shougo/vimproc.vim
-  call dein#add('Shougo/vimproc.vim', {'build': 'make -f make_mac.mak'})
+  " let s:toml      = '~/.vim/rc' . '/dein.toml'
+  " let s:lazy_toml = '~/.vim/rc' . '/dein_lazy.toml'
+  let s:toml      = g:rc_dir . '/dein.toml'
+  let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
 
   call dein#load_toml(s:toml, {'lazy': 0})
   call dein#load_toml(s:lazy_toml, {'lazy': 1})
@@ -33,6 +30,7 @@ if dein#check_install()
 endif
 " }}}
 
+" Setting {{{
 syntax enable
 filetype plugin on
 
@@ -57,8 +55,39 @@ set laststatus=2
 set statusline=%y%{GetStatusEx()}%{fugitive#statusline()}\ 0x%B(%b)%F%m%r%=<%c:%l>
 set list
 set listchars=tab:✓\ 
+" }}}
 
-let g:quickhl_manual_keywords = [ "HOGE", "TODO", "CAUTION", "DELETED" ]
+" mapping {{{
+" General {{{
+imap <c-j> <ESC>
+nmap <silent> <ESC><ESC> :noh<CR><ESC>
+imap <silent> <c-d><c-d> <c-r>=strftime("%Y-%m-%d")<CR>
+imap <silent> <c-d><c-f> <c-r>=strftime("%Y/%m/%d")<CR>
+" }}}
+
+" Tab {{{
+nnoremap [tab] <Nop>
+nmap ,t [tab]
+" tc 新しいタブを一番右に作る
+nnoremap <silent> [tab]c :tablast <bar> tabnew<CR>
+" tx タブを閉じる
+nnoremap <silent> [tab]x :tabclose<CR>
+" tn 次のタブ
+nnoremap <silent> [tab]n :tabnext<CR>
+" tp 前のタブ
+nnoremap <silent> [tab]p :tabprevious<CR>
+" tp 最後のタブ
+nnoremap <silent> [tab]l :tablast<CR>
+" }}}
+
+" Command {{{
+map ,ptv :! perltidy
+" Require: https://github.com/monochromegane/mdt
+" NOTE: autoCMD あたりでいける？
+map ,mdt :! mdt
+" }}}
+
+" }}}
 
 " Functions: "{{{
 function! GetStatusEx()
@@ -100,3 +129,4 @@ function! MyFilename()
 endfunction
 "}}}
 
+" vim: foldmethod=marker

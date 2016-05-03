@@ -20,14 +20,19 @@ build = 'make -f make_mac.mak'
 # '''
 
 [[plugins]]
+repo = 'scrooloose/nerdcommenter'
+hook_add = '''
+let g:NERDSpaceDelims = 1
+'''
+
+[[plugins]]
 repo = 'vim-scripts/quickhl.vim'
-# hook_add = '''
-# let g:quickhl_manual_keywords = [ "HOGE", "TODO", "CAUTION", "DELETED" ]
-# '''
-
-
-# [[plugins]]
-# repo = 'Shougo/unite.vim'
+hook_add = '''
+let g:quickhl_manual_enable_at_startup = 1
+let g:quickhl_manual_keywords = [ "TODO", "CAUTION", "DELETED" ]
+nmap <Leader>x <plug>NERDCommenterToggle
+vmap <Leader>x <plug>NERDCommenterToggle
+'''
 
 [[plugins]]
 repo = 'ujihisa/unite-colorscheme'
@@ -35,17 +40,11 @@ repo = 'ujihisa/unite-colorscheme'
 [[plugins]]
 repo = 'kana/vim-smartword'
 
-[[plugins]]
-repo = 'scrooloose/nerdcommenter'
-hook_add = 'let g:NERDSpaceDelims = 1'
+
+# - - - OK - - -
 
 # [[plugins]]
-# repo        = 'scrooloose/nerdcommenter'
-# hook_add = '''
-#   let g:NERDSpaceDelims = 1
-# '''
-# nmap <Leader>x <Plug>NERDCommenterToggle
-# vmap <Leader>x <Plug>NERDCommenterToggle
+# repo = 'Shougo/unite.vim'
 
 # [[plugins]] # awesome status line
 # repo = 'itchyny/lightline.vim'
