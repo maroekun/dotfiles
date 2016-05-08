@@ -47,6 +47,9 @@ hook_add = '''
 nmap <silent> ,s :<C-u>:Switch<CR>
 '''
 
+[[plugins]]
+repo = 'vim-scripts/Align'
+
 # - - - 途中 - - -
 
 [[plugins]]
@@ -126,9 +129,6 @@ repo = 'airblade/vim-rooter'
 
 [[plugins]]
 repo = 'thinca/vim-localrc'
-
-[[plugins]]
-repo = 'vim-scripts/Align'
 
 [[plugins]]
 repo = 'bronson/vim-trailing-whitespace'
