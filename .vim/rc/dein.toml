@@ -41,6 +41,11 @@ repo = 'ujihisa/unite-colorscheme'
 [[plugins]]
 repo = 'kana/vim-smartword'
 
+[[plugins]]
+repo = 'AndrewRadev/switch.vim'
+hook_add = '''
+nmap <silent> ,s :<C-u>:Switch<CR>
+'''
 
 # - - - 途中 - - -
 
@@ -81,33 +86,6 @@ nnoremap <silent> [unite]A :<C-u>UniteBookmarkAdd<CR>
 
 # - - - まだ - - -
 
-# [[plugins]] # awesome status line
-# repo = 'itchyny/lightline.vim'
-# hook_source = '''
-#   let g:lightline = {
-#     'colorscheme': 'landscape',
-#   }
-# '''
-# hook_add = '''
-#  let g:lightline = {
-#    'colorscheme': 'wombat',
-#    'active': {
-#      'left': [ [ 'mode', 'paste' ],
-#                [ 'fugitive', 'filename'] ]
-#    },
-#    'component_function': {
-#      'fugitive': 'MyFugitive',
-#      # 'readonly': 'MyReadonly',
-#      'readonly': '%{&filetype == "help" ? "" : &readonly ? "⭤" : ""}'
-#
-#      'modified': 'MyModified',
-#      'filename': 'MyFilename'
-#    },
-#    'separator': { 'left': '⮀', 'right': '⮂' },
-#    'subseparator': { 'left': '⮁', 'right': '⮃' }
-#  }
-# '''
-
 # lang
 [[plugins]]
 repo = 'cespare/vim-toml'
@@ -124,9 +102,6 @@ repo = 'tpope/vim-rails'
 
 [[plugins]]
 repo = 'thinca/vim-ref'
-
-[[plugins]]
-repo = 'AndrewRadev/switch.vim'
 
 [[plugins]]
 repo = 'vim-scripts/taglist.vim'
