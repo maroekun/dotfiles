@@ -24,6 +24,8 @@ build = 'make -f make_mac.mak'
 repo = 'scrooloose/nerdcommenter'
 hook_add = '''
 let g:NERDSpaceDelims = 1
+nmap <Leader>x <plug>NERDCommenterToggle
+vmap <Leader>x <plug>NERDCommenterToggle
 '''
 
 [[plugins]]
@@ -31,8 +33,11 @@ repo = 'vim-scripts/quickhl.vim'
 hook_add = '''
 let g:quickhl_manual_enable_at_startup = 1
 let g:quickhl_manual_keywords = [ "TODO", "CAUTION", "DELETED" ]
-nmap <Leader>x <plug>NERDCommenterToggle
-vmap <Leader>x <plug>NERDCommenterToggle
+nmap <Space>m <Plug>(quickhl-manual-this)
+xmap <Space>m <Plug>(quickhl-manual-this)
+nmap <Space>M <Plug>(quickhl-manual-reset)
+xmap <Space>M <Plug>(quickhl-manual-reset)
+nmap <Space>j <Plug>(quickhl-cword-toggle)
 '''
 
 [[plugins]]
