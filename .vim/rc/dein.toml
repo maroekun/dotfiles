@@ -32,7 +32,7 @@ vmap <Leader>x <plug>NERDCommenterToggle
 repo = 'vim-scripts/quickhl.vim'
 hook_add = '''
 let g:quickhl_manual_enable_at_startup = 1
-let g:quickhl_manual_keywords = [ "TODO", "CAUTION", "DELETED" ]
+let g:quickhl_manual_keywords = [ "TODO", "CAUTION", "DELETED", "NOTE" ]
 nmap <Space>m <Plug>(quickhl-manual-this)
 xmap <Space>m <Plug>(quickhl-manual-this)
 nmap <Space>M <Plug>(quickhl-manual-reset)
@@ -53,7 +53,26 @@ nmap <silent> ,s :<C-u>:Switch<CR>
 '''
 
 [[plugins]]
+repo = 'nathanaelkane/vim-indent-guides'
+hook_add = '''
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size  = 1
+'''
+
+[[plugins]]
 repo = 'vim-scripts/Align'
+
+[[plugins]]
+repo = 'airblade/vim-rooter'
+
+[[plugins]]
+repo = 'thinca/vim-localrc'
+
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+
+[[plugins]]
+repo = 'vim-scripts/Colour-Sampler-Pack'
 
 # - - - 途中 - - -
 
@@ -118,9 +137,6 @@ repo = 'vim-scripts/taglist.vim'
 repo = 'Shougo/neocomplete.vim'
 
 [[plugins]]
-repo = 'nathanaelkane/vim-indent-guides'
-
-[[plugins]]
 repo = 'google/vim-ft-go'
 
 [[plugins]]
@@ -128,15 +144,6 @@ repo = 'majutsushi/tagbar'
 
 [[plugins]]
 repo = 'szw/vim-tags'
-
-[[plugins]]
-repo = 'airblade/vim-rooter'
-
-[[plugins]]
-repo = 'thinca/vim-localrc'
-
-[[plugins]]
-repo = 'bronson/vim-trailing-whitespace'
 
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
