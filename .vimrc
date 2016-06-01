@@ -98,6 +98,11 @@ nnoremap <silent> [tab]p :tabprevious<CR>
 nnoremap <silent> [tab]l :tablast<CR>
 " }}}
 
+" ColorRoller {{{
+nnoremap <silent><F9> : <C-u>call ColorRoller.roll()<CR>
+nnoremap <silent><F8> : <C-u>call ColorRoller.unroll()<CR>
+" }}}
+
 " Command {{{
 map ,ptv :! perltidy
 " Require: https://github.com/monochromegane/mdt
@@ -146,6 +151,70 @@ function! MyFilename()
                 \ ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
 "}}}
+
+" color roller: "{{{
+let ColorRoller = {}
+let ColorRoller.colors = [
+            \'default',
+            \'adaryn',
+            \'anotherdark',
+            \'solarized',
+            \'moss',
+            \'dante',
+            \'golden',
+            \'ironman',
+            \'jellybeans',
+            \'mustang',
+            \'softblue',
+            \'tir_black',
+            \'wombat256',
+            \'yuroyoro256',
+            \'molokai',
+            \'desert256',
+            \'mrkn256',
+            \'wuye',
+            \'lucius',
+            \'twilight',
+            \ ]
+
+function! ColorRoller.change()
+    let color = get(self.colors, 0)
+    silent exe "colorscheme " . color
+    redraw
+    echo self.colors
+endfunction
+
+function! ColorRoller.roll()
+    let item = remove(self.colors, 0)
+    call insert(self.colors, item, len(self.colors))
+    call self.change()
+endfunction
+
+function! ColorRoller.unroll()
+    let item = remove(self.colors, -1)
+    call insert(self.colors, item, 0)
+    call self.change()
+endfunction
+"}}}
+
+" Colors: {{{
+" ターミナルタイプによるカラー設定
+if &term =~ "xterm-256color" || "screen-256color"
+  " 256色
+  set t_ut=
+  set t_Co=256
+  set t_Sf=[3%dm
+  set t_Sb=[4%dm
+elseif &term =~ "xterm-debian" || &term =~ "xterm-xfree86"
+  set t_Co=16
+  set t_Sf=[3%dm
+  set t_Sb=[4%dm
+elseif &term =~ "xterm-color"
+  set t_Co=8
+  set t_Sf=[3%dm
+  set t_Sb=[4%dm
+endif
+" }}}
 
 " See :help folding
 " vim: foldmethod=marker
