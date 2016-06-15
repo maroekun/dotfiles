@@ -1,19 +1,12 @@
 [alias]
-  logg = log --graph
-  logo = log --oneline
-  loggg = log --pretty=format:'%h %s' --graph
-  log2 = log --graph --branches --pretty=format:'%d [%h] \"%s\"'
-  log3 = log --graph --oneline --pretty=format:'%d [%h] %s'
-  log4 = log --oneline --graph --decorate
-  logog = log --oneline --graph
-  st = status
-  sh = show
-  di = diff
-  dic = diff --cached
-  ci = commit -a
-  co = checkout
-  b = branch
-  ba = branch -a
+  branches = branch -a
+  stashes = stash list
+  summary = status -u -s
+  amend = commit --amend
+  graph = log --graph --oneline --decorate
+  fullgraph = log --graph --oneline --decorate --all
+  history = log -10 --format=format:'%Cgreen%h %Creset• %s (%cN, %ar)'
+
   su = submodule
   suu = submodule update
   sua = submodule add
