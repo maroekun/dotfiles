@@ -1,4 +1,5 @@
 [alias]
+  remotes = remote -v
   branches = branch -a
   stashes = stash list
   summary = status -u -s
