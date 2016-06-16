@@ -4,7 +4,8 @@ repo = 'Shougo/dein.vim'
 
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
-build = 'make -f make_mac.mak'
+build = 'make'
+# build = 'make -f make_mac.mak'
 # hook_post_update = '''
 #   if dein#util#_is_windows()
 #     let cmd = 'tools\\update-dll-mingw'
