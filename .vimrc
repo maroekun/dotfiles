@@ -51,6 +51,7 @@ endif
 " Setting {{{
 syntax enable
 filetype plugin on
+colorscheme molokai
 
 set nobackup
 set noundofile
