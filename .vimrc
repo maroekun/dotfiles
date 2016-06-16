@@ -51,7 +51,6 @@ endif
 " Setting {{{
 syntax enable
 filetype plugin on
-colorscheme molokai
 
 set nobackup
 set noundofile
@@ -216,6 +215,7 @@ elseif &term =~ "xterm-color"
   set t_Sb=[4%dm
 endif
 " }}}
+colorscheme molokai
 
 " See :help folding
 " vim: foldmethod=marker
