@@ -75,6 +75,9 @@ repo = 'bronson/vim-trailing-whitespace'
 [[plugins]]
 repo = 'vim-scripts/Colour-Sampler-Pack'
 
+[[plugins]]
+repo = 'tomasr/molokai'
+
 # - - - 途中 - - -
 
 [[plugins]]
