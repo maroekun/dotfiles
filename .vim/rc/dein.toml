@@ -78,6 +78,9 @@ repo = 'vim-scripts/Colour-Sampler-Pack'
 [[plugins]]
 repo = 'tomasr/molokai'
 
+[[plugins]]
+repo = 'kchmck/vim-coffee-script'
+
 # - - - 途中 - - -
 
 [[plugins]]
@@ -156,6 +159,9 @@ repo = 'majutsushi/tagbar'
 
 [[plugins]]
 repo = 'szw/vim-tags'
+
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
 
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
