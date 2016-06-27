@@ -30,6 +30,13 @@ vmap <Leader>x <plug>NERDCommenterToggle
 '''
 
 [[plugins]]
+repo = 'nathanaelkane/vim-indent-guides'
+hook_add = '''
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size  = 1
+'''
+
+[[plugins]]
 repo = 'vim-scripts/quickhl.vim'
 hook_add = '''
 let g:quickhl_manual_enable_at_startup = 1
@@ -54,13 +61,6 @@ nmap <silent> ,s :<C-u>:Switch<CR>
 '''
 
 [[plugins]]
-repo = 'nathanaelkane/vim-indent-guides'
-hook_add = '''
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size  = 1
-'''
-
-[[plugins]]
 repo = 'vim-scripts/Align'
 
 [[plugins]]
@@ -77,9 +77,6 @@ repo = 'vim-scripts/Colour-Sampler-Pack'
 
 [[plugins]]
 repo = 'tomasr/molokai'
-
-[[plugins]]
-repo = 'kchmck/vim-coffee-script'
 
 # - - - 途中 - - -
 
@@ -126,10 +123,6 @@ call unite#custom#source('file', 'matchers', ['matcher_default', 'matcher_hide_c
 # - - - まだ - - -
 
 # lang
-[[plugins]]
-repo = 'cespare/vim-toml'
-on_ft = 'toml'
-
 [[plugins]]
 repo = 'tpope/vim-surround'
 
