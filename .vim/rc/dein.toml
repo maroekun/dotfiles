@@ -145,9 +145,6 @@ repo = 'vim-scripts/taglist.vim'
 repo = 'Shougo/neocomplete.vim'
 
 [[plugins]]
-repo = 'google/vim-ft-go'
-
-[[plugins]]
 repo = 'majutsushi/tagbar'
 
 [[plugins]]
@@ -158,6 +155,3 @@ repo = 'Shougo/neosnippet.vim'
 
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
-
-[[plugins]]
-repo = 'fatih/vim-go'

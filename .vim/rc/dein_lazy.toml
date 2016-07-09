@@ -1,22 +1,39 @@
 [[plugins]]
-repo = 'cespare/vim-toml'
-on_ft = ['toml']
-
-[[plugins]]
 repo = 'rking/ag.vim'
 on_cmd = ['Ag']
 
+# filetyps {{{
+# toml {{{
 [[plugins]]
-repo = 'tpope/vim-haml'
-on_ft = ['haml']
+repo = 'cespare/vim-toml'
+on_ft = ['toml']
+# }}}
 
+# coffee {{{
 [[plugins]]
 repo = 'kchmck/vim-coffee-script'
 on_ft = ['coffee']
+# }}}
 
+# haml {{{
+[[plugins]]
+repo = 'tpope/vim-haml'
+on_ft = ['haml']
+# }}}
+
+# dockerfile {{{
 [[plugins]]
 repo = 'ekalinin/Dockerfile.vim'
 on_ft = ['dockerfile']
+# }}}
+
+# golang {{{
+[[plugins]]
+repo = 'vim-jp/vim-go-extra'
+on_ft = ['go']
+# }}}
+
+# }}}
 
 # [[plugins]]
 # repo = 'scrooloose/nerdcommenter'
@@ -29,3 +46,5 @@ on_ft = ['dockerfile']
 # hook_source = '''
 #   let g:NERDSpaceDelims = 1
 # '''
+
+# vim: foldmethod=marker
