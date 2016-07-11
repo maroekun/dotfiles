@@ -66,3 +66,6 @@ dashboard-toggle() {
 alias ctags_rails='ctags --langmap=RUBY:.rb --exclude="*.js"  --exclude=".git*" -R .'
 
 . `brew --prefix`/etc/profile.d/z.sh
+
+# load zsh completions for awscli
+source /usr/local/share/zsh/site-functions/_aws

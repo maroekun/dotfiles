@@ -37,15 +37,6 @@ setopt extended_history
 setopt hist_ignore_dups
 function history-all { history -E 1 }
 
-case ${OSTYPE} in
-    darwin*)
-        [ -f ~/.zshrc.osx ] && source ~/.zshrc.osx
-        ;;
-    linux*)
-        [ -f ~/.zshrc.linux ] && source ~/.zshrc.linux
-        ;;
-esac
-
 alias ..='cd ..'
 alias ...='cd ~'
 alias vi='vim'
@@ -168,15 +159,20 @@ if whence -p peco >/dev/null ; then
     for f (~/zsh.d/peco/*.zsh) source ${f}
 fi
 
-# aws_completion
-[[ -e $(which aws_zsh_completer.sh) ]] && source $(which aws_zsh_completer.sh)
-
 ###
 # git alias and function
 ###
 [ -f ~/.zshrc.git ] && source ~/.zshrc.git
 [ -f ~/.zshrc.docker ] && source ~/.zshrc.docker
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+case ${OSTYPE} in
+    darwin*)
+        [ -f ~/.zshrc.osx ] && source ~/.zshrc.osx
+        ;;
+    linux*)
+        [ -f ~/.zshrc.linux ] && source ~/.zshrc.linux
+        ;;
+esac
 
 ###
 # source zsh-syntax-highlighting
