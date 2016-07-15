@@ -153,13 +153,6 @@ else
 fi
 
 ###
-# peco setting
-###
-if whence -p peco >/dev/null ; then
-    for f (~/zsh.d/peco/*.zsh) source ${f}
-fi
-
-###
 # git alias and function
 ###
 [ -f ~/.zshrc.git ] && source ~/.zshrc.git
@@ -173,6 +166,13 @@ case ${OSTYPE} in
         [ -f ~/.zshrc.linux ] && source ~/.zshrc.linux
         ;;
 esac
+
+###
+# peco setting
+###
+if whence -p peco >/dev/null ; then
+    for f (~/zsh.d/peco/*.zsh) source ${f}
+fi
 
 ###
 # source zsh-syntax-highlighting
