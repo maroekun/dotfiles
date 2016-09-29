@@ -1,4 +1,5 @@
 [alias]
+  tags = tag --list
   remotes = remote -v
   branches = branch -a
   stashes = stash list
