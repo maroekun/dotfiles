@@ -158,3 +158,6 @@ repo = 'Shougo/neosnippet-snippets'
 
 [[plugins]]
 repo = 'yuroyoro/yuroyoro256.vim'
+
+[[plugins]]
+repo = 'mrkn/mrkn256.vim'
