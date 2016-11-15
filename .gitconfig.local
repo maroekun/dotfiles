@@ -4,6 +4,7 @@
   branches = branch -a
   stashes = stash list
   summary = status -u -s
+  worktrees = worktree list
   amend = commit --amend
   graph = log --graph --oneline --decorate
   fullgraph = log --graph --oneline --decorate --all
