@@ -14,8 +14,8 @@ zstyle ':vcs_info:*' formats '(%s)-[%b]'
 zstyle ':vcs_info:*' actionformats '(%s)-[%b]' '%m' '<!%a>'
 zstyle ':vcs_info:svn:*' branchformat '%b:r%r'
 
-zstyle ':vcs_info:git:*' formats '%s ⭠ %b' '%c%u %m'
-zstyle ':vcs_info:git:*' actionformats '%s ⭠ %b' '%c%u %m' '<!%a>'
+zstyle ':vcs_info:git:*' formats '%s \U2b60 %b' '%c%u %m'
+zstyle ':vcs_info:git:*' actionformats '%s \U2b60 %b' '%c%u %m' '<!%a>'
 zstyle ':vcs_info:git:*' check-for-changes true
 # zstyle ':vcs_info:git:*' stagedstr "+"
 # zstyle ':vcs_info:git:*' unstagedstr "-"
@@ -130,7 +130,7 @@ prompt_awsenv() {
     aws_profile=$AWS_PROFILE
   fi
 
-  prompt_segment blue black "AWS: ${aws_profile}"
+  prompt_segment blue black "AWS \U00a6 ${aws_profile}"
 }
 
 prompt_vcs() {
