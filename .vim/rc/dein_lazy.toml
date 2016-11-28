@@ -33,6 +33,12 @@ repo = 'vim-jp/vim-go-extra'
 on_ft = ['go']
 # }}}
 
+# jinja2 {{{
+[[plugins]]
+repo = 'Glench/Vim-Jinja2-Syntax'
+on_ft = ['jinja']
+# }}}
+
 # }}}
 
 # [[plugins]]
