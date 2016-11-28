@@ -122,6 +122,17 @@ prompt_dir() {
   prompt_segment blue black '%~'
 }
 
+prompt_awsenv() {
+  local aws_profile
+  if test -z $AWS_PROFILE; then
+    aws_profile='\U2716'
+  else
+    aws_profile=$AWS_PROFILE
+  fi
+
+  prompt_segment blue black "AWS: ${aws_profile}"
+}
+
 prompt_vcs() {
   local -a messages
   local prompt fg bg
@@ -142,7 +153,7 @@ prompt_vcs() {
 
 prompt_clock() {
   now=`date +"%x %T"`
-  prompt_segment cyan black "⌚ $now"
+  prompt_segment yellow black "\U23f3 $now"
 }
 
 prompt_status() {
@@ -175,6 +186,7 @@ build_prompt() {
   prompt_dir
   prompt_clock
   prompt_vcs
+  prompt_awsenv
   prompt_end
   p_init
   echo -n $'\n'
