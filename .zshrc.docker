@@ -4,11 +4,12 @@
 alias drminone='docker rmi `docker images | grep "<none>" | awk '"'"'{print $3}'"'"'`'
 alias drmps='docker rm `docker ps -a -q`'
 alias di='docker images'
-alias dp='docker ps'
+alias dp='_docker_ps_name'
 
 # ----------------------
 # Docker Function
 # ----------------------
 # Docker exec with bash
 function dexecbash() { docker exec -it "$1" /bin/bash; }
-function dlog() { docker logs -t "$1"; } 
+function dlog() { docker logs -t "$1"; }
+function _docker_ps_name() { docker ps | awk '{print $1 "\t" $2}' }

@@ -3,6 +3,12 @@ repo = 'rking/ag.vim'
 on_cmd = ['Ag']
 
 # filetyps {{{
+# html {{{
+[[plugins]]
+repo = 'mattn/emmet-vim'
+on_ft = ['html', 'tt2', 'eruby']
+# }}}
+
 # toml {{{
 [[plugins]]
 repo = 'cespare/vim-toml'
