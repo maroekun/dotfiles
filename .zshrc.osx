@@ -63,6 +63,10 @@ dashboard-toggle() {
   killall Dock
 }
 
+reset-launchpad() {
+  defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock
+}
+
 alias ctags_rails='ctags --langmap=RUBY:.rb --exclude="*.js"  --exclude=".git*" -R .'
 
 . `brew --prefix`/etc/profile.d/z.sh
