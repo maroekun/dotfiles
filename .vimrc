@@ -224,6 +224,7 @@ augroup fileTypeIndent
     autocmd BufNewFile,BufRead *.py setlocal tabstop=4 softtabstop=4 shiftwidth=4
     autocmd BufNewFile,BufRead *.rb setlocal tabstop=2 softtabstop=2 shiftwidth=2
     autocmd BufNewFile,BufRead *.scss,*.css setlocal ts=2 sts=2 sw=2
+    autocmd BufNewFile,BufRead *.rb,*.rake setlocal tabstop=2 softtabstop=2 shiftwidth=2
     autocmd BufNewFile,BufRead *.jinja2,*.j2,*.jinja set ft=jinja
 augroup END
 
