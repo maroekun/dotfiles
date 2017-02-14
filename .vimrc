@@ -176,6 +176,7 @@ let ColorRoller.colors = [
             \'wuye',
             \'lucius',
             \'twilight',
+            \'onedark',
             \ ]
 
 function! ColorRoller.change()
@@ -216,7 +217,7 @@ elseif &term =~ "xterm-color"
   set t_Sb=[4%dm
 endif
 " }}}
-colorscheme molokai
+colorscheme onedark
 
 " FileTypes {{{
 augroup fileTypeIndent
@@ -226,6 +227,7 @@ augroup fileTypeIndent
     autocmd BufNewFile,BufRead *.scss,*.css setlocal ts=2 sts=2 sw=2
     autocmd BufNewFile,BufRead *.rb,*.rake setlocal tabstop=2 softtabstop=2 shiftwidth=2
     autocmd BufNewFile,BufRead *.jinja2,*.j2,*.jinja set ft=jinja
+    autocmd BufNewFile,BufRead *.html,*.erb setlocal ts=2 sts=2 sw=2
 augroup END
 
 " }}}

@@ -161,3 +161,6 @@ repo = 'yuroyoro/yuroyoro256.vim'
 
 [[plugins]]
 repo = 'mrkn/mrkn256.vim'
+
+[[plugins]]
+repo = 'joshdick/onedark.vim'
