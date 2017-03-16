@@ -228,6 +228,7 @@ augroup fileTypeIndent
     autocmd BufNewFile,BufRead *.rb,*.rake setlocal tabstop=2 softtabstop=2 shiftwidth=2
     autocmd BufNewFile,BufRead *.jinja2,*.j2,*.jinja set ft=jinja
     autocmd BufNewFile,BufRead *.html,*.erb setlocal ts=2 sts=2 sw=2
+    autocmd BufNewFile,BufRead *.js setlocal ts=2 sts=2 sw=2
 augroup END
 
 " }}}
