@@ -26,6 +26,7 @@ alias gstp='git stash pop'
 alias gstd='git stash drop'
 alias gc-empty='git commit --allow-empty -m'
 alias gc-fixup='git commit --fixup=HEAD'
+alias gw='_git_worktree'
 
 # ----------------------
 # Git Function
@@ -41,3 +42,4 @@ function gwtb() {
 
 function _git_cur_branch { git rev-parse --abbrev-ref HEAD }
 function _git_rename_branch { git branch -m `_git_cur_branch` $1 }
+function _git_worktree { git worktree add -b $1 worktree-$1 }
