@@ -1,0 +1,30 @@
+snippet envnode
+abbr    shebang envnode
+alias   #!
+  #!/usr/bin/env node
+
+snippet strict
+abbr    insret 'use strict'
+  'use strict';
+  ${1}
+
+snippet afe
+abbr    allow function expression
+  (${1}) => ${2}
+
+snippet afb
+abbr    allow function body
+  (${1}) => {
+    ${2}
+  }${3}
+
+snippet forof
+  for (let ${1:elem} of ${2:obj}) {
+    ${0}
+  }
+
+snippet cl
+  console.log(${1:obj});
+
+snippet ci
+  console.info(${1:obj});

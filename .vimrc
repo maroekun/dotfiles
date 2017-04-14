@@ -26,13 +26,17 @@ if dein#load_state(s:dein_dir)
             \     'colorscheme': 'wombat',
             \     'active': {
             \       'left': [ [ 'mode', 'paste' ],
-            \                 [ 'fugitive', 'filename'] ]
+            \                 [ 'fugitive', 'filename'] ],
+            \       'right': [ [ 'lineinfo' ],
+            \                  [ 'percent' ],
+            \                  [ 'hoge', 'fileformat', 'fileencoding', 'filetype' ] ]
             \     },
             \     'component_function': {
             \       'fugitive': 'MyFugitive',
             \       'readonly': 'MyReadonly',
             \       'modified': 'MyModified',
-            \       'filename': 'MyFilename'
+            \       'filename': 'MyFilename',
+            \       'hoge':     'ShowCurTag'
             \     },
             \     'separator': { 'left': '⮀', 'right': '⮂' },
             \     'subseparator': { 'left': '⮁', 'right': '⮃' }
@@ -71,7 +75,7 @@ set formatoptions+=mM
 set backspace=indent,eol,start
 set scrolloff=5
 set laststatus=2
-set statusline=%y%{GetStatusEx()}%{fugitive#statusline()}\ 0x%B(%b)%F%m%r%=<%c:%l>
+" set statusline=%y%{GetStatusEx()}%{fugitive#statusline()}\ 0x%B(%b)%F%m%r%=<%c:%l>
 set list
 set listchars=tab:>-,extends:<,trail:-
 " }}}
@@ -144,6 +148,10 @@ function! MyModified()
     else
         return ""
     endif
+endfunction
+
+function! ShowCurTag()
+    return strlen(tagbar#currenttag('%s', '')) ? tagbar#currenttag('%s', '') : '??'
 endfunction
 
 function! MyFilename()
@@ -222,15 +230,22 @@ colorscheme onedark
 " FileTypes {{{
 augroup fileTypeIndent
     autocmd!
-    autocmd BufNewFile,BufRead *.py setlocal tabstop=4 softtabstop=4 shiftwidth=4
-    autocmd BufNewFile,BufRead *.rb setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    " tabstop: ts, softtabstop: sts, shiftwidth: sw
+    autocmd BufNewFile,BufRead *.py setlocal ts=4 sts=4 sw=4
+    autocmd BufNewFile,BufRead *.rb setlocal ts=2 sts=2 sw=2
     autocmd BufNewFile,BufRead *.scss,*.css setlocal ts=2 sts=2 sw=2
-    autocmd BufNewFile,BufRead *.rb,*.rake setlocal tabstop=2 softtabstop=2 shiftwidth=2
-    autocmd BufNewFile,BufRead *.jinja2,*.j2,*.jinja set ft=jinja
+    autocmd BufNewFile,BufRead *.rb,*.rake setlocal ts=2 sts=2 sw=2
+    autocmd BufNewFile,BufRead *.jinja2,*.j2,*.jinja setlocal ft=jinja
     autocmd BufNewFile,BufRead *.html,*.erb setlocal ts=2 sts=2 sw=2
     autocmd BufNewFile,BufRead *.js setlocal ts=2 sts=2 sw=2
 augroup END
 
+" }}}
+
+" For conceal markers. {{{
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
 " }}}
 
 " See :help folding

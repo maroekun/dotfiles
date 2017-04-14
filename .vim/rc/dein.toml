@@ -131,6 +131,10 @@ repo = 'tpope/vim-fugitive'
 
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
+hook_add = '''
+nnoremap <silent> ,gg :<C-u>GitGutterToggle<CR>
+nnoremap <silent> ,gh :<C-u>GitGutterLineHighlightsToggle<CR>
+'''
 
 [[plugins]]
 repo = 'tpope/vim-rails'
@@ -142,24 +146,39 @@ repo = 'thinca/vim-ref'
 repo = 'vim-scripts/taglist.vim'
 
 [[plugins]]
-repo = 'Shougo/neocomplete.vim'
-
-[[plugins]]
 repo = 'majutsushi/tagbar'
 
 [[plugins]]
 repo = 'szw/vim-tags'
 
 [[plugins]]
-repo = 'Shougo/neosnippet.vim'
+repo = 'ctrlpvim/ctrlp.vim'
 
 [[plugins]]
-repo = 'Shougo/neosnippet-snippets'
+repo = 'Shougo/neocomplete.vim'
+hook_add = '''
+let g:acp_enableAtStartup = 0
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#auto_completion_start_length = 2
+let g:neocomplete#manual_completion_start_length = 0
+let g:neocomplete#min_keyword_length = 3
+let g:neocomplete#enable_auto_select = 1
+
+inoremap <expr> <C-h> neocomplete#smart_close_popup()."\<C-h>"
+'''
+
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
 hook_add = '''
 let g:neosnippet#snippets_directory='~/dotfiles/snippets/'
+nnoremap <silent> ,ne :<C-u>NeoSnippetEdit<CR>
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 '''
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
 
 [[plugins]]
 repo = 'yuroyoro/yuroyoro256.vim'
