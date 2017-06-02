@@ -30,7 +30,7 @@ on_ft = ['haml']
 # dockerfile {{{
 [[plugins]]
 repo = 'ekalinin/Dockerfile.vim'
-on_ft = ['dockerfile']
+on_ft = ['Dockerfile']
 # }}}
 
 # markdown {{{
