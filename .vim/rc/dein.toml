@@ -78,6 +78,9 @@ repo = 'vim-scripts/Colour-Sampler-Pack'
 [[plugins]]
 repo = 'tomasr/molokai'
 
+[[plugins]]
+repo = 'rhysd/vim-color-spring-night'
+
 # - - - 途中 - - -
 
 [[plugins]]
