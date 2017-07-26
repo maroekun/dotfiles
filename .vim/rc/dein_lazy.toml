@@ -33,6 +33,12 @@ repo = 'ekalinin/Dockerfile.vim'
 on_ft = ['Dockerfile']
 # }}}
 
+# dockerfile {{{
+[[plugins]]
+repo = 'slim-template/vim-slim'
+on_ft = ['slim']
+#}}}
+
 # markdown {{{
 [[plugins]]
 repo = 'kannokanno/previm'
@@ -43,8 +49,11 @@ let g:previm_open_cmd = 'open -a "Google Chrome"'
 # }}}
 
 # golang {{{
+# [[plugins]]
+# repo = 'vim-jp/vim-go-extra'
+# on_ft = ['go']
 [[plugins]]
-repo = 'vim-jp/vim-go-extra'
+repo = 'fatih/vim-go'
 on_ft = ['go']
 # }}}
 

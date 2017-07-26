@@ -238,7 +238,26 @@ augroup fileTypeIndent
     autocmd BufNewFile,BufRead *.jinja2,*.j2,*.jinja setlocal ft=jinja
     autocmd BufNewFile,BufRead *.html,*.erb setlocal ts=2 sts=2 sw=2
     autocmd BufNewFile,BufRead *.js setlocal ts=2 sts=2 sw=2
+    autocmd BufNewFile,BufRead *.slim setlocal ts=2 sts=2 sw=2 ft=slim
 augroup END
+
+autocmd BufEnter * if exists("b:rails_root") | call s:LoadRailsSnippet() | endif
+
+function! s:LoadRailsSnippet()
+ " カレントディレクトリのディレクトリパス（絶対パス）取得
+  let s:current_file_path = expand("%:p:h")
+
+  " appフォルダ内でなければ無視
+  if ( s:current_file_path !~ "app/" ) | return | endif
+
+  if ( s:current_file_path =~ "app/controllers" )
+    let l:hoge = g:neosnippet#snippets_directory . 'rails.snip'
+
+    " NOTE: どうやって変数展開で渡せるんや...
+	NeoSnippetSource ~/dotfiles/snippets/rails.snip
+  endif
+
+endfunction
 
 " }}}
 
