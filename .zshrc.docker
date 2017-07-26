@@ -7,6 +7,11 @@ alias di='docker images'
 alias dp='_docker_ps_name'
 
 # ----------------------
+# Docker Compose Alias
+# ----------------------
+alias fig='docker-compose'
+
+# ----------------------
 # Docker Function
 # ----------------------
 # Docker exec with bash
