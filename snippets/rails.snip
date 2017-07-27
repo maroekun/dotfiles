@@ -348,12 +348,12 @@ abbr redirect_to (path)
 
 # alias afta afterall
 
-# snippet con
-#     context "${1}" do
-#         ${2}
-#     end
+snippet con
+    context "${1}" do
+        ${2}
+    end
 
-# alias con context
+alias con context
 
 # snippet cona
 # abbr context after callback
@@ -370,14 +370,21 @@ abbr redirect_to (path)
 # snippet subjb
 #     subject { ${1:FactoryGirl.build(:${2:name\})} }
 
-# snippet it
-#     it "${1}" do
-#         ${2}
-#     end
+snippet example
+    example "${1}" do
+      ${2}
+    end
 
-# snippet itb
-# abbr        it {}
-#         it { ${1} }
+alias exa example
+
+snippet it
+    it "${1}" do
+        ${2}
+    end
+
+snippet itb
+abbr        it {}
+        it { ${1} }
 
 # snippet its
 #     it "should ${1:work correctly}" do
@@ -402,10 +409,10 @@ abbr redirect_to (path)
 #     should satisfy { |${1:obj}| ${2} }
 #     ${3}
 
-# snippet shp
-#     should be_${1:predicate}
+snippet shp
+    should${1:_not} be_${2:predicate}
 
-# alias shp shbe
+alias shp shbe
 
 # snippet shh
 #     should have(${1:num}).${2:things}
