@@ -31,11 +31,3 @@ bind w windowlist -b
 
 defscrollback 5000
 
-screen
-screen
-screen
-screen
-screen
-screen
-screen
-select 0
