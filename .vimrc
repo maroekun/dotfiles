@@ -261,6 +261,10 @@ endfunction
 
 " }}}
 
+if has('nvim')
+  set termguicolors
+endif
+
 " For conceal markers. {{{
 if has('conceal')
   set conceallevel=2 concealcursor=niv
