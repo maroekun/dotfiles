@@ -37,7 +37,7 @@ let g:indent_guides_guide_size  = 1
 '''
 
 [[plugins]]
-repo = 'vim-scripts/quickhl.vim'
+repo = 't9md/vim-quickhl'
 hook_add = '''
 let g:quickhl_manual_enable_at_startup = 1
 let g:quickhl_manual_keywords = [ "TODO", "CAUTION", "DELETED", "NOTE" ]
