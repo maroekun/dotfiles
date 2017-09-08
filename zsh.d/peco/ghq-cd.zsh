@@ -7,7 +7,6 @@ function peco-ghq-cd() {
       echo 'ghq command required'
       return 1
   fi
-  echo $ghq
 
   local t_dir=$(ghq list | peco)
   if [ -n "$t_dir" ] ; then
