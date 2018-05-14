@@ -17,7 +17,6 @@ export MANPATH=/opt/local/man:$MANPATH
 # gnu manpath
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
-# export LSCOLORS="DxGxcxdxCxegedabagacad"
 export PAGER="less -q -R"
 
 # if [ -n "$DYLD_LIBRARY_PATH" ]; then
@@ -32,6 +31,7 @@ functions set-ls() {
   if which gls > /dev/null; then
     gls="$(which gls)"
   else
+    export LSCOLORS="DxGxcxdxCxegedabagacad"
     gls='/bin/ls'
   fi
 
@@ -81,3 +81,4 @@ alias ctags_rails='ctags --langmap=RUBY:.rb --exclude="*.js"  --exclude=".git*" 
 
 # load zsh completions for awscli
 [ -f /usr/local/share/zsh/site-functions/_aws ] && source /usr/local/share/zsh/site-functions/_aws
+# [ -f /usr/local/share/zsh/site-functions/_the_silver_searcher ] && source /usr/local/share/zsh/site-functions/_the_silver_searcher
