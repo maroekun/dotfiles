@@ -42,6 +42,14 @@ functions set-ls() {
 }
 set-ls
 
+# BEGIN: git-foresta - - - - - - - - - - - - - - - - - - - -
+#   https://qiita.com/takaakikasai/items/fc684d95c9841069889b
+functions gifo() { git-foresta --style=10 "$@" | less -RSX }
+functions gifa() { git-foresta --all --style=10 "$@" | less -RSX }
+compdef _git gifo=git-log
+compdef _git gifa=git-log
+# END: git-foresta - - - - - - - - - - - - - - - - - - - -
+
 alias netstat_osx='lsof -iTCP -sTCP:LISTEN -P'
 
 dashboad-off() {
