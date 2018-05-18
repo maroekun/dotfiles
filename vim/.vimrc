@@ -24,6 +24,10 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'itchyny/lightline.vim'
 Plug 'majutsushi/tagbar'
+Plug 'kana/vim-smartword'
+Plug 'tpope/vim-rails'
+Plug 'szw/vim-tags'
+Plug 'kannokanno/previm', { 'for': 'markdown' }
 
 " change directory and load rc "{{{
 Plug 'airblade/vim-rooter'
@@ -38,6 +42,7 @@ Plug 'joshdick/onedark.vim'
 Plug 'mrkn/mrkn256.vim'
 Plug 'tomasr/molokai'
 Plug 'yuroyoro/yuroyoro256.vim'
+Plug 'rhysd/vim-color-spring-night'
 
 " fzf "{{{
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -109,6 +114,10 @@ command! FZFFileList call fzf#run({
             \ 'source': 'find . -type d -name .git -prune -o ! -name .DS_Store',
             \ 'sink': 'e'})
 
+" }}}
+
+" previm "{{{
+let g:previm_open_cmd = 'open -a "Google Chrome"'
 " }}}
 
 " quickhl
