@@ -39,6 +39,11 @@ Plug 'mrkn/mrkn256.vim'
 Plug 'tomasr/molokai'
 Plug 'yuroyoro/yuroyoro256.vim'
 
+" fzf "{{{
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+" }}}
+
 " ag
 Plug 'rking/ag.vim', { 'on' : 'Ag' }
 
@@ -67,6 +72,41 @@ Plug 'Glench/Vim-Jinja2-Syntax', { 'for': 'jinja' }
 Plug 'fatih/vim-go', { 'for': 'go' }
 
 call plug#end()
+
+" fzf "{{{
+nnoremap [fzf] <Nop>
+nmap ,f [fzf]
+nnoremap <silent> [fzf]f :<C-u>Files<CR>
+nnoremap <silent> [fzf]T :<C-u>Filetypes<CR>
+nnoremap <silent> [fzf]g :<C-u>GFiles<CR>
+nnoremap <silent> [fzf]b :<C-u>Buffers<CR>
+nnoremap <silent> [fzf]c :<C-u>Colors<CR>
+nnoremap <silent> [fzf]m :<C-u>Fmru<CR>
+
+" See: https://github.com/junegunn/fzf.vim#advanced-customization
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+
+" See: https://qiita.com/kmszk/items/aa9920f07487559c0c7e#vim%E3%81%A7%E4%BD%BF%E3%81%86
+command! Fmru FZFMru
+command! FZFMru call fzf#run({
+            \  'source':  v:oldfiles,
+            \  'sink':    'tabe',
+            \  'options': '-m -x +s',
+            \  'down':    '40%'})
+
+
+nnoremap <C-p> :FZFFileList<CR>
+command! FZFFileList call fzf#run({
+            \ 'source': 'find . -type d -name .git -prune -o ! -name .DS_Store',
+            \ 'sink': 'e'})
+
+" }}}
 
 " quickhl
 let g:quickhl_manual_enable_at_startup = 1
