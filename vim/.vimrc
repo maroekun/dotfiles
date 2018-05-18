@@ -10,22 +10,25 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-" utility
+" utility "{{{
 Plug 'bronson/vim-trailing-whitespace'
 Plug 't9md/vim-quickhl'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/Align'
+" }}}
 
-" git
+" git "{{{
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+" }}}
 
 Plug 'itchyny/lightline.vim'
 Plug 'majutsushi/tagbar'
 
-" change directory and load rc
+" change directory and load rc "{{{
 Plug 'airblade/vim-rooter'
 Plug 'thinca/vim-localrc'
+" }}}
 
 " commenter
 Plug 'scrooloose/nerdcommenter'
