@@ -44,6 +44,9 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 " }}}
 
+" ale
+Plug 'w0rp/ale'
+
 " ag
 Plug 'rking/ag.vim', { 'on' : 'Ag' }
 
