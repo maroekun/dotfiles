@@ -178,3 +178,5 @@ fi
 # source zsh-syntax-highlighting
 ###
 [ -f ~/zsh.d/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source ~/zsh.d/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -19,3 +19,5 @@ alias s='screen'
 alias sl='screen -list'
 alias sr='screen -r'
 alias pmversion='perl -le '"'"'for $module (@ARGV) { eval "use $module"; print "$module ", ${"$module\::VERSION"} || "not found" }'"'"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
