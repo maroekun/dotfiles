@@ -44,6 +44,21 @@ Plug 'tomasr/molokai'
 Plug 'yuroyoro/yuroyoro256.vim'
 Plug 'rhysd/vim-color-spring-night'
 
+" neosnippet
+Plug 'Shougo/neosnippet-snippets'
+  \ | Plug 'Shougo/neosnippet.vim'
+
+if has("nvim")
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+" filer
+Plug 'cocopon/vaffle.vim'
+
 " fzf "{{{
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -116,8 +131,28 @@ command! FZFFileList call fzf#run({
 
 " }}}
 
+" deoplete {{{
+let g:deoplete#enable_at_startup = 1
+inoremap <expr><tab> pumvisible() ? "\<C-n>" :
+      \ neosnippet#expandable_or_jumpable() ?
+      \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
+" }}}
+
 " previm "{{{
 let g:previm_open_cmd = 'open -a "Google Chrome"'
+" }}}
+
+" neosnippet {{{
+let g:neosnippet#enable_snipmate_compatibility = 1
+let g:neosnippet#snippets_directory='~/dotfiles/snippets'
+
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
 " }}}
 
 " quickhl
@@ -257,6 +292,12 @@ nnoremap <silent> [tab]p :tabprevious<CR>
 " tp 最後のタブ
 nnoremap <silent> [tab]l :tablast<CR>
 " }}}
+
+
+" FileTypes {{{
+" autocmd BufNewFile,BufRead *.es6 setlocal ts=2 sts=2 sw=2 ft=javascript
+" }}}
+
 
 " See :help folding
 " vim: foldmethod=marker
