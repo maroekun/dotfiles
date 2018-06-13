@@ -1,8 +1,29 @@
 set runtimepath+=$HOME/dotfiles/vim
 
+augroup MyAugroup
+  autocmd!
+augroup end
+
 runtime! rc/plug.vim
 runtime! rc/set-mapping.vim
 runtime! rc/plug-mapping.vim
+
+augroup MyAugroup
+  autocmd FileType ruby setlocal sw=2 ts=2 sts=2
+  autocmd FileType perl setlocal sw=4 ts=4 sts=4
+  autocmd FileType javascript setlocal sw=2 ts=2 sts=2
+
+  autocmd BufNewFile, BufRead *.slim setlocal sw=2 ts=2 sts=2 ft=slim
+
+  " autocmd BufNewFile,BufRead *.py setlocal ts=4 sts=4 sw=4
+  " autocmd BufNewFile,BufRead *.rb setlocal ts=2 sts=2 sw=2
+  " autocmd BufNewFile,BufRead *.scss,*.css setlocal ts=2 sts=2 sw=2
+  " autocmd BufNewFile,BufRead *.rb,*.rake setlocal ts=2 sts=2 sw=2
+  " autocmd BufNewFile,BufRead *.jinja2,*.j2,*.jinja setlocal ft=jinja
+  " autocmd BufNewFile,BufRead *.html,*.erb setlocal ts=2 sts=2 sw=2
+  " autocmd BufNewFile,BufRead *.js setlocal ts=2 sts=2 sw=2
+  " autocmd BufNewFile,BufRead *.slim setlocal ts=2 sts=2 sw=2 ft=slim
+augroup end
 
 " NOTE: 要検討
 " "{{{
