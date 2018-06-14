@@ -16,6 +16,13 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 
+command! -bang -nargs=* Rgc
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>). ' '. expand('%:h'), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
 
 " See: https://qiita.com/kmszk/items/aa9920f07487559c0c7e#vim%E3%81%A7%E4%BD%BF%E3%81%86
 command! Fmru FZFMru
@@ -134,3 +141,5 @@ function! MyFilename()
                 \ ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
 " }}}
+
+" vim: foldmethod=marker
