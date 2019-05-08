@@ -28,6 +28,8 @@ Plug 'kana/vim-smartword'
 Plug 'tpope/vim-rails'
 Plug 'szw/vim-tags'
 Plug 'kannokanno/previm', { 'for': 'markdown' }
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'ywatase/mdt.vim', { 'for': 'markdown' }
 
 " change directory and load rc "{{{
 Plug 'airblade/vim-rooter'
@@ -43,6 +45,7 @@ Plug 'mrkn/mrkn256.vim'
 Plug 'tomasr/molokai'
 Plug 'yuroyoro/yuroyoro256.vim'
 Plug 'rhysd/vim-color-spring-night'
+Plug 'kaicataldo/material.vim'
 
 " neosnippet
 Plug 'Shougo/neosnippet-snippets'

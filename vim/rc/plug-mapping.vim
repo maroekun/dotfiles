@@ -8,6 +8,10 @@ nnoremap <silent> [fzf]b :<C-u>Buffers<CR>
 nnoremap <silent> [fzf]c :<C-u>Colors<CR>
 nnoremap <silent> [fzf]m :<C-u>Fmru<CR>
 
+" Vaffle {{{
+nnoremap <silent> [fzf]v :<C-u>Vaffle %:h<CR>
+" }}}
+
 " See: https://github.com/junegunn/fzf.vim#advanced-customization
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
@@ -50,6 +54,9 @@ inoremap <expr><tab> pumvisible() ? "\<C-n>" :
 
 " previm "{{{
 let g:previm_open_cmd = 'open -a "Google Chrome"'
+" }}}
+" vim-markdown "{{{
+let g:vim_markdown_folding_disabled=1
 " }}}
 
 " neosnippet {{{
