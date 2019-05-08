@@ -1,4 +1,5 @@
 set runtimepath+=$HOME/dotfiles/vim
+set rtp+=/usr/local/opt/fzf
 
 augroup MyAugroup
   autocmd!
@@ -25,23 +26,33 @@ augroup MyAugroup
   " autocmd BufNewFile,BufRead *.slim setlocal ts=2 sts=2 sw=2 ft=slim
 augroup end
 
+set background=dark
+colorscheme material
+
+if (has("termguicolors"))
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
 " NOTE: 要検討
 " "{{{
 " " ターミナルタイプによるカラー設定
-" if &term =~ "xterm-256color" || "screen-256color"
-"   " 256色
-"   set t_ut=
-"   set t_Co=256
-"   set t_Sf=[3%dm set t_Sb=[4%dm
-" elseif &term =~ "xterm-debian" || &term =~ "xterm-xfree86"
-"   set t_Co=16
-"   set t_Sf=[3%dm
-"   set t_Sb=[4%dm
-" elseif &term =~ "xterm-color"
-"   set t_Co=8
-"   set t_Sf=[3%dm
-"   set t_Sb=[4%dm
-" endif
+if &term =~ "xterm-256color" || "screen-256color"
+  " 256色
+  set t_ut=
+  set t_Co=256
+  set t_Sf=[3%dm
+  set t_Sb=[4%dm
+elseif &term =~ "xterm-debian" || &term =~ "xterm-xfree86"
+  set t_Co=16
+  set t_Sf=[3%dm
+  set t_Sb=[4%dm
+elseif &term =~ "xterm-color"
+  set t_Co=8
+  set t_Sf=[3%dm
+  set t_Sb=[4%dm
+endif
 " "}}}
 
 " See :help folding
