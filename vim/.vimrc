@@ -1,5 +1,8 @@
-set runtimepath+=$HOME/dotfiles/vim
-set rtp+=$(brew --prefix)/opt/fzf
+let g:resolved_path = fnamemodify(resolve(expand('~/.vimrc')), ':h')
+execute 'set runtimepath+=' . g:resolved_path
+
+let g:brew_prefix = trim(system('brew --prefix'))
+execute 'set rtp+=' . g:brew_prefix . '/opt/fzf'
 
 augroup MyAugroup
   autocmd!
