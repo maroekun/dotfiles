@@ -1,5 +1,5 @@
 set runtimepath+=$HOME/dotfiles/vim
-set rtp+=/usr/local/opt/fzf
+set rtp+=$(brew --prefix)/opt/fzf
 
 augroup MyAugroup
   autocmd!
