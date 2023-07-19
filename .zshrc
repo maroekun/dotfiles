@@ -69,7 +69,8 @@ function mscreen() {
 # Set prompt
 ###
 
-[ -f ~/zsh.d/.zshrc.prompt ] && source ~/zsh.d/.zshrc.prompt
+# NOTE: starthipと入れ替え
+# [ -f ~/zsh.d/.zshrc.prompt ] && source ~/zsh.d/.zshrc.prompt
 
 ###
 # dircolors
@@ -188,3 +189,8 @@ fi
 [ -f ~/zsh.d/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source ~/zsh.d/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+###
+# NOTE: starship: プロンプトカスタマイズ
+###
+eval "$(starship init zsh)"
