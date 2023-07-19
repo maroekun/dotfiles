@@ -91,11 +91,17 @@ zstyle ':completion:*' use-cache true
 typeset -U path fpath
 fpath=(
   $HOME/zsh.d/functions(N-/)
-  /usr/local/share/zsh-completions
   $fpath
 )
-
 autoload -U compinit
+
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+fi
+
 if [ "$CYGWIN" ] ; then
     compinit -u
 else
