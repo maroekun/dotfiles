@@ -100,6 +100,8 @@ if type brew &>/dev/null; then
 
   autoload -Uz compinit
   compinit
+
+  source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
 if [ "$CYGWIN" ] ; then
