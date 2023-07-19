@@ -13,6 +13,8 @@ deploy:
 	@echo "---> Create symbol 'dotfiles/.??' files to HOME directory "
 	@echo ""
 	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
+	@ln -sfnv $(abspath vim/.vimrc) $(HOME)/.vimrc
+	@ln -sfnv $(abspath vim/.vim) $(HOME)/.vim
 init:
 	@echo "---> Run initialized"
 	@echo "---> !!! NOT IMPLEMENT !!!"
@@ -24,4 +26,6 @@ update:
 clean:
 	@echo "---> Run make clearn"
 	@-$(foreach val, $(DOTFILES), rm -vrf $(HOME)/$(val);)
+	@rm -v $(HOME)/.vimrc
+	@rm -v $(HOME)/.vim
 	-rm -rf $(DOTPATH)
