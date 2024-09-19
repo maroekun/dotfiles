@@ -1,5 +1,6 @@
 export _Z_CMD=z
-function peco-frequently-visited-directory(){
+
+function fzf-z-cd(){
     local tac
     if which tac > /dev/null; then
         tac="tac"
@@ -7,7 +8,7 @@ function peco-frequently-visited-directory(){
         tac="tail -r"
     fi
 
-    local selected_dir=$(z | eval $tac | awk '{print $2}' | peco)
+    local selected_dir=$(z | eval $tac | awk '{print $2}' | fzf +m)
 
     if [ -n "$selected_dir" ]; then
         BUFFER="cd ${selected_dir}"
@@ -15,5 +16,8 @@ function peco-frequently-visited-directory(){
     fi
     zle clear-screen
 }
-zle -N peco-frequently-visited-directory
-bindkey '^]^f' peco-frequently-visited-directory
+
+zle -N fzf-z-cd
+bindkey '^]^f' fzf-z-cd
+
+# vim: ft=bash

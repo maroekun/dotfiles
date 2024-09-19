@@ -177,10 +177,10 @@ case ${OSTYPE} in
 esac
 
 ###
-# peco setting
+# fzf setting
 ###
-if whence -p peco >/dev/null ; then
-    for f (~/zsh.d/peco/*.zsh) source ${f}
+if whence -p fzf >/dev/null ; then
+    for f (~/zsh.d/fzf/*.zsh) source ${f}
 fi
 
 ###

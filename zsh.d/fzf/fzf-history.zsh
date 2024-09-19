@@ -1,4 +1,4 @@
-function peco-select-history() {
+function fzf-history() {
     local tac
     if which tac > /dev/null; then
         tac="tac"
@@ -7,9 +7,9 @@ function peco-select-history() {
     fi
     BUFFER=$(\history -n 1 | sort -u | \
         eval $tac | \
-        peco --query "$LBUFFER")
+        fzf --query "$LBUFFER")
     CURSOR=$#BUFFER
-    # zle clear-screen
 }
-zle -N peco-select-history
-bindkey '^r' peco-select-history
+
+zle -N fzf-history
+bindkey '^r' fzf-history
