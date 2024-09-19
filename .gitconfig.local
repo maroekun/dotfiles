@@ -6,6 +6,8 @@
   summary = status -u -s
   worktrees = worktree list
   amend = commit --amend
+  amend-cancel = reset --soft HEAD@{1}
+  bgraph = log --graph --branches --oneline --decorate
   graph = log --graph --oneline --decorate
   fullgraph = log --graph --oneline --decorate --all
   history = log -10 --format=format:'%Cgreen%h %Creset• %s (%cN, %ar)'
@@ -23,3 +25,12 @@
 [rebase]
   autosquash = true
   autostash = true
+
+[tig "bind"]
+  diff = F ?!git commit --fixup %(commit)
+  main = F ?!git commit --fixup %(commit)
+  main = B ?!git rebase -i %(commit)
+  main = + ?!git commit --amend
+  status = D ?!rm %(file)
+
+# vim: ft=gitconfig
